@@ -1446,6 +1446,55 @@ section[id]{ scroll-margin-top:24px; }
   transition:color .4s var(--ease), transform .4s var(--ease), padding-left .4s var(--ease);
   cursor:pointer;
 }
+.ind-item:hover, .ind-item:focus-visible, .ind-item.is-active{ color:var(--ink); padding-left:14px; }
+.ind-item.is-active::before{
+  content:""; position:absolute; left:0; top:50%; width:6px; height:1px;
+  background:var(--warm); transform:translateY(-50%);
+}
+.ind-panel{
+  position:relative;
+  min-height:340px;
+  padding:clamp(28px,3vw,40px);
+  border:1px solid var(--line);
+  background:var(--surface);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+}
+/* top accent glow bar */
+.ind-panel::before{
+  content:"";
+  position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg, transparent, var(--warm) 30%, var(--warm) 70%, transparent);
+  opacity:.6;
+  transition:opacity .5s var(--ease);
+}
+.ind-panel:hover::before{ opacity:1; }
+/* subtle grid overlay */
+.ind-vis{
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+  background-size:28px 28px;
+  transform:rotate(var(--rot, 0deg));
+  transition:transform .8s var(--ease);
+  pointer-events:none;
+}
+/* animated gradient orb */
+.ind-orb{
+  position:absolute;
+  width:220px; height:220px;
+  top:10%; right:5%;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(201,162,116,.18) 0%, rgba(201,162,116,.06) 45%, transparent 70%);
+  filter:blur(40px);
+  pointer-events:none;
+  transition:transform .8s var(--ease), opacity .6s var(--ease);
+}
+@media (prefers-reduced-motion: no-preference){
+  .ind-orb{ animation:indOrbFloat 6s ease-in-out infinite; }
 
 </style>
 </head>
