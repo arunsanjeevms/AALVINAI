@@ -783,6 +783,56 @@ body.is-loading {
     padding-right:max(calc(24 * var(--m)), env(safe-area-inset-right));
     flex:0 0 auto;
   }
+  .brand{
+    position:relative;
+    left:auto; top:auto;
+    width:max(22px, calc(28 * var(--m)));
+    height:max(34px, calc(43 * var(--m)));
+  }
+  .links,.pill-nav{ display:none; }
+  .burger{
+    position:relative;
+    display:grid;
+    width:max(42px, calc(48 * var(--m)));
+    height:max(42px, calc(48 * var(--m)));
+  }
+  .burger i{ width:max(15px, calc(18 * var(--m))); }
+
+  /* hero */
+  .hero{
+    position:relative;
+    inset:auto;
+    flex:1 1 auto;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    padding:0 calc(24 * var(--m)) calc(30 * var(--m));
+    padding-left:max(calc(24 * var(--m)), env(safe-area-inset-left));
+    padding-right:max(calc(24 * var(--m)), env(safe-area-inset-right));
+    min-height:0;
+  }
+  .headline{
+    position:relative;
+    left:auto; top:auto;
+    font-size:max(34px, calc(46 * var(--m)));
+    line-height:1.1;
+    letter-spacing:-.01em;
+    white-space:normal;
+    max-width:calc(360 * var(--m));
+  }
+  .headline > span{ display:inline; }
+  .sub{
+    position:relative;
+    left:auto; top:auto;
+    margin-top:calc(18 * var(--m));
+    height:auto;
+    overflow:visible;
+    font-size:max(14px, calc(16.5 * var(--m)));
+    line-height:1.5;
+    word-spacing:normal;
+    max-width:calc(350 * var(--m));
+  }
+  .sub span{ display:inline; white-space:normal; }
 
 </style>
 </head>
