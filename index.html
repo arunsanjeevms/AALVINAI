@@ -1191,6 +1191,56 @@ section[id]{ scroll-margin-top:24px; }
 }
 
 /* ── 01 · MANIFESTO ──────────────────────────────────────────── */
+.sec-manifesto{
+  border-top:0;
+  position:relative;
+  display:flex;
+  align-items:center;
+  min-height:clamp(460px, 46vw, 700px);
+  overflow:visible;
+}
+.sec-manifesto > .wrap{ flex:1 1 auto; width:100%; }
+.sec-manifesto .sec-h1{ margin-top:22px; }
+.sec-manifesto .sec-p{ margin-top:22px; }
+.sec-manifesto .kural{ margin-top:40px; }
+.sec-manifesto .kural-cite{ margin-top:14px; }
+.beam{
+  position:absolute; right:9%; top:0; bottom:0; width:1px;
+  background:linear-gradient(to bottom, transparent, var(--warm-dim) 45%, transparent 85%);
+  filter:blur(1px);
+  opacity:.7;
+  pointer-events:none;
+}
+.manifesto-figure-slot{
+  position:absolute;
+  right:12%;
+  top:0; bottom:0;
+  width:clamp(160px, 24vw, 310px);
+  max-width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+  z-index:0;
+}
+.manifesto-figure-wrap{
+  width:100%;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.manifesto-figure-wrap.is-in{ opacity:.78; }
+.manifesto-figure{
+  position:relative;
+  z-index:1;
+  display:block;
+  width:100%;
+  height:auto;
+  filter:drop-shadow(0 4px 18px rgba(201, 162, 116, 0.22));
+}
+@media (prefers-reduced-motion: no-preference){
+  .manifesto-figure{ animation:figureFloat 7s ease-in-out infinite; }
 
 </style>
 </head>
