@@ -533,6 +533,54 @@ button{ font:inherit; color:inherit; background:none; border:0; }
   color:var(--ink);
   border-bottom:1px solid rgba(255,255,255,.08);
 }
+.menu-list a::after{
+  content:"";
+  width:.34em;
+  height:.34em;
+  border-right:1.6px solid var(--nav);
+  border-top:1.6px solid var(--nav);
+  transform:rotate(45deg);
+  opacity:.7;
+}
+.menu-foot{
+  display:flex;
+  align-items:center;
+  gap:calc(26 * var(--u));
+  margin-top:calc(38 * var(--u));
+  flex-wrap:wrap;
+}
+.menu-foot .pill{
+  width:calc(176 * var(--u));
+  height:calc(50 * var(--u));
+  font-size:max(15px, calc(19 * var(--u)));
+}
+.menu-foot .ghost{ font-size:max(15px, calc(19 * var(--u))); }
+
+/* ======================================
+   OPENING SPLASH & SCROLL LOCK
+   ====================================== */
+html.is-loading,
+body.is-loading {
+  overflow: hidden !important;
+  height: 100vh !important;
+  max-height: 100vh !important;
+  touch-action: none !important;
+  -webkit-overflow-scrolling: auto !important;
+  overscroll-behavior: none !important;
+}
+
+.splash{
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#050505;
+  overflow:hidden;
+  transition:opacity .65s cubic-bezier(.22,1,.36,1), transform .65s cubic-bezier(.22,1,.36,1), visibility .65s cubic-bezier(.22,1,.36,1);
+  will-change:opacity, transform;
+}
 
 </style>
 </head>
