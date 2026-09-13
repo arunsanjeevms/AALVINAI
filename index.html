@@ -634,6 +634,55 @@ body.is-loading {
   opacity:0;
   animation:splashRise .5s var(--ease) .28s forwards;
 }
+.splash-loader-fill{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg, #9a774f 0%, #c9a274 60%, #e6cfb3 100%);
+  transform:translateX(-100%);
+  animation:splashFillProgress 2s cubic-bezier(.22,1,.36,1) .3s forwards;
+  border-radius:999px;
+}
+.splash-kural{
+  margin:6px 0 0;
+  font-family:'Kavivanar','Noto Sans Tamil',cursive,sans-serif;
+  font-weight:400;
+  font-size:clamp(15px, 1.8vw, 18px);
+  line-height:2;
+  color:var(--nav);
+  opacity:0;
+  transform:translateY(8px);
+  animation:splashRise .7s var(--ease) .38s forwards;
+}
+.splash-cite{
+  margin:0;
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--warm);
+  font-weight:500;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  opacity:0;
+  transform:translateY(8px);
+  animation:splashRise .7s var(--ease) .46s forwards;
+}
+.splash-cite::before, .splash-cite::after{
+  content:'';
+  display:inline-block;
+  width:12px;
+  height:1px;
+  background:rgba(201,162,116,.4);
+}
+
+@keyframes splashRise{
+  from{ opacity:0; transform:translateY(8px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+@keyframes splashFillProgress{
+  0%{ transform:translateX(-100%); }
+  55%{ transform:translateX(-20%); }
+  100%{ transform:translateX(0%); }
 
 </style>
 </head>
