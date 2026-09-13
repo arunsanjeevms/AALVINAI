@@ -1241,6 +1241,60 @@ section[id]{ scroll-margin-top:24px; }
 }
 @media (prefers-reduced-motion: no-preference){
   .manifesto-figure{ animation:figureFloat 7s ease-in-out infinite; }
+}
+@keyframes figureFloat{
+  0%,100%{ transform:translateY(0) rotate(0deg); }
+  50%{ transform:translateY(-14px) rotate(-.4deg); }
+}
+@media (max-width:900px){
+  .manifesto-figure-slot{ right:8%; width:clamp(140px, 22vw, 240px); }
+  .manifesto-figure-wrap.is-in{ opacity:.7; }
+}
+@media (max-width:760px){
+  .sec-manifesto{ display:block; min-height:0; }
+  .manifesto-figure-slot{
+    position:relative;
+    right:auto; top:auto; bottom:auto; left:auto;
+    display:block;
+    width:min(160px, 42vw);
+    margin:32px auto 0;
+  }
+  .manifesto-figure-wrap.is-in{ opacity:.75; }
+}
+.cred-row{ display:flex; flex-wrap:wrap; gap:12px; margin-top:24px; }
+.cred-badge{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:8px 16px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  font-size:12.5px;
+  font-weight:500;
+  letter-spacing:.01em;
+  color:var(--nav);
+  background:rgba(255,255,255,.02);
+}
+.cred-icon{ width:15px; height:15px; flex:none; color:var(--warm); }
+.kural{
+  margin-top:32px;
+  padding-left:22px;
+  max-width:540px;
+  border-left:2px solid var(--warm-dim);
+}
+.kural-tamil{
+  margin:0;
+  font-family:'Kavivanar','Noto Sans Tamil',cursive,sans-serif;
+  font-weight:400;
+  font-size:clamp(16px, 1.7vw, 19px);
+  line-height:2.1;
+  color:var(--nav);
+}
+.kural-cite{
+  margin:10px 0 0;
+  font-size:11.5px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--strip);
+}
 
 </style>
 </head>
