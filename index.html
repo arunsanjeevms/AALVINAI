@@ -1,9 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="is-loading">
 <head>
 <meta charset="utf-8">
+<script>
+// Prevent scroll restoration and lock to top immediately
+if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+if (window.location.hash) {
+  try { history.replaceState(null, document.title, window.location.pathname + window.location.search); } catch (e) {}
+}
+window.scrollTo(0, 0);
+if (document.documentElement) { document.documentElement.scrollTop = 0; }
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>AALVINAI TECHNOLOGIES - Technology That Moves Business Forward</title>
+<meta name="description" content="AALVINAI Technologies builds intelligent AI, ERP, CRM and FinTech systems engineered with determination, precision and purpose.">
+<meta name="theme-color" content="#050505">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 31.5 48.5'><path d='M21.5 0L21.5 19.5L31.5 19.5L31.5 29L10 48.5L10 28.5L0.5 28.5L0.5 18.5Z' fill='%23b4b4b4'/><rect x='0.5' y='18.5' width='9' height='10' fill='%23fdfdfd'/><rect x='22' y='19.5' width='9.5' height='9.5' fill='%23fdfdfd'/></svg>">
 </head>
 <body>
 </body>
