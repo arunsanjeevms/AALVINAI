@@ -683,6 +683,58 @@ body.is-loading {
   0%{ transform:translateX(-100%); }
   55%{ transform:translateX(-20%); }
   100%{ transform:translateX(0%); }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .splash{ transition:none; }
+  .splash-mark, .splash-name, .splash-kural, .splash-cite, .splash-loader-bar{
+    animation:none; opacity:1; transform:none;
+  }
+  .splash-loader-fill{ transform:none; }
+}
+
+/* ======================================
+   ENTRANCE ANIMATIONS
+   ====================================== */
+@keyframes rise{
+  from{ opacity:0; transform:translateY(calc(14 * var(--u))); }
+  to{ opacity:1; transform:translateY(0); }
+}
+@keyframes riseNav{
+  from{ opacity:0; transform:translate(-50%, calc(-50% + 14 * var(--u))); }
+  to{ opacity:1; transform:translate(-50%,-50%); }
+}
+@keyframes fade{
+  from{ opacity:0; }
+  to{ opacity:1; }
+}
+
+@media (prefers-reduced-motion: no-preference){
+  .brand,.pill-nav{ animation:rise .8s var(--ease) both; }
+  .links{ animation:riseNav .8s var(--ease) both; }
+  .headline{ animation:rise .9s var(--ease) .06s both; }
+  .sub{ animation:rise .9s var(--ease) .14s both; }
+  .pill-cta,.hero .ghost{ animation:rise .9s var(--ease) .22s both; }
+  .logos{ animation:fade 1.1s var(--ease) .34s both; }
+  .burger{ animation:rise .8s var(--ease) both; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .menu,.burger i,.menu-eyebrow,.menu-list li,.menu-foot{
+    transition-duration:.001s !important;
+  }
+  *{ animation:none !important; }
+}
+
+/* ======================================
+   PORTRAIT / NARROW - flow layout
+   ====================================== */
+@media (max-aspect-ratio: 11/10){
+  :root{
+    --m:min(calc(100vw / 430), 1.34px);
+    --u:var(--m);
+    --h:var(--m);
+  }
 
 </style>
 </head>
