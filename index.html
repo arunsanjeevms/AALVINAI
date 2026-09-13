@@ -833,6 +833,52 @@ body.is-loading {
     max-width:calc(350 * var(--m));
   }
   .sub span{ display:inline; white-space:normal; }
+  .actions{
+    display:flex;
+    align-items:center;
+    gap:calc(26 * var(--m));
+    margin-top:calc(30 * var(--m));
+    flex-wrap:wrap;
+  }
+  .pill-cta,.hero .ghost{ position:relative; left:auto; top:auto; }
+  .pill-cta{
+    width:max(150px, calc(172 * var(--m)));
+    height:max(46px, calc(52 * var(--m)));
+    font-size:max(15px, calc(18 * var(--m)));
+  }
+  .pill-cta span{ transform:translateY(1px); }
+  .hero .ghost{ font-size:max(15px, calc(18 * var(--m))); letter-spacing:0; }
+
+  /* logos: scrolling carousel, full-bleed */
+  .logos{
+    position:relative;
+    left:auto; right:auto; bottom:auto;
+    width:auto;
+    height:max(30px, calc(32 * var(--m)));
+    flex:0 0 auto;
+    margin:calc(20 * var(--m)) calc(-24 * var(--m)) calc(28 * var(--m));
+  }
+  .lg-set{ gap:calc(46 * var(--m)); padding-right:calc(46 * var(--m)); }
+  .lg{ gap:max(7px, calc(8 * var(--m))); }
+  .lg .w{ font-size:max(14px, calc(16 * var(--m))) !important; }
+  .lg1 svg{ width:max(23px,calc(26 * var(--m))); height:max(23px,calc(26.4 * var(--m))); }
+  .lg2 svg{ width:max(19px,calc(21 * var(--m))); height:max(23px,calc(25.7 * var(--m))); }
+  .lg3 svg{ width:max(22px,calc(24.4 * var(--m))); height:max(22px,calc(24 * var(--m))); }
+  .lg4 svg{ width:max(22px,calc(24.4 * var(--m))); height:max(20px,calc(21.8 * var(--m))); }
+  .lg5 svg{ width:max(20px,calc(23 * var(--m))); height:max(20px,calc(23 * var(--m))); }
+  .lg6 svg{ width:max(22px,calc(25.3 * var(--m))); height:max(16px,calc(18.1 * var(--m))); }
+  .lg7 svg{ width:max(22px,calc(25.3 * var(--m))); height:max(17px,calc(19.9 * var(--m))); }
+  .lg8 svg{ width:max(20px,calc(23.5 * var(--m))); height:max(20px,calc(23.5 * var(--m))); }
+}
+
+/* ======================================
+   TABLET BAND (>=600px, portrait-ish)
+   ====================================== */
+@media (min-width:600px) and (max-aspect-ratio: 11/10){
+  :root{
+    --m:min(calc(100vw / 860), calc(100vh / 760), 1.25px);
+  }
+  .plate-video{ object-position:44% center; }
 
 </style>
 </head>
