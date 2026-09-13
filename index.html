@@ -430,6 +430,52 @@ button{ font:inherit; color:inherit; background:none; border:0; }
 .lg3 svg{ width:calc(25.3 * var(--u)); height:calc(24.8 * var(--u)); }
 .lg3 .w{ font-size:calc(16.15 * var(--u)); }
 
+.lg4 svg{ width:calc(25.3 * var(--u)); height:calc(22.6 * var(--u)); }
+.lg4 .w{ font-size:calc(15.3 * var(--u)); }
+
+.lg5 svg{ width:calc(23 * var(--u)); height:calc(23 * var(--u)); }
+.lg5 .w{ font-size:calc(16.5 * var(--u)); }
+
+.lg6 svg{ width:calc(25.3 * var(--u)); height:calc(18.1 * var(--u)); }
+.lg6 .w{ font-size:calc(15.8 * var(--u)); }
+
+.lg7 svg{ width:calc(25.3 * var(--u)); height:calc(19.9 * var(--u)); }
+.lg7 .w{ font-size:calc(15.3 * var(--u)); }
+
+.lg8 svg{ width:calc(23.5 * var(--u)); height:calc(23.5 * var(--u)); }
+.lg8 .w{ font-size:calc(14.6 * var(--u)); }
+
+/* ======================================
+   BURGER + MOBILE MENU
+   ====================================== */
+.burger{
+  position:absolute;
+  display:none;
+  place-items:center;
+  width:calc(46 * var(--u));
+  height:calc(46 * var(--u));
+  border-radius:999px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.14);
+  -webkit-backdrop-filter:blur(14px);
+  backdrop-filter:blur(14px);
+  cursor:pointer;
+  z-index:6;
+}
+.burger i{
+  position:absolute;
+  display:block;
+  width:calc(17 * var(--u));
+  height:1.5px;
+  background:#fff;
+  border-radius:2px;
+  transition:transform .42s var(--ease), opacity .3s var(--ease);
+}
+.burger i:nth-child(1){ transform:translateY(calc(-4.3 * var(--u))); }
+.burger i:nth-child(2){ transform:translateY(calc(4.3 * var(--u))); }
+.is-open .burger i:nth-child(1){ transform:translateY(0) rotate(45deg); }
+.is-open .burger i:nth-child(2){ transform:translateY(0) rotate(-45deg); }
+
 </style>
 </head>
 <body>
