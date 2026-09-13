@@ -176,6 +176,57 @@ button{ font:inherit; color:inherit; background:none; border:0; }
 }
 .topbar > *{ pointer-events:auto; }
 
+.brand{
+  position:absolute;
+  left:calc(75 * var(--u));
+  top:calc(27 * var(--u));
+  width:calc(31.5 * var(--u));
+  height:calc(48.5 * var(--u));
+  display:block;
+}
+.brand svg{ width:100%; height:100%; display:block; }
+
+.links{
+  position:absolute;
+  left:50%;
+  top:calc(51 * var(--u));
+  transform:translate(-50%,-50%);
+  display:flex;
+  align-items:center;
+  white-space:nowrap;
+  font-size:calc(19.0 * var(--u));
+  font-weight:400;
+  color:var(--nav);
+  line-height:1;
+}
+.links a{ color:var(--nav); transition:color .28s var(--ease); }
+.links a:hover,.links a:focus-visible{ color:#fff; }
+.links a + a{ margin-left:calc(36 * var(--u)); }
+
+/* ======================================
+   PILLS + GHOST
+   ====================================== */
+.pill{
+  display:grid;
+  place-items:center;
+  background:var(--pill);
+  color:var(--pill-ink);
+  border-radius:999px;
+  font-weight:500;
+  line-height:1;
+  white-space:nowrap;
+  box-shadow:0 0 0 1px rgba(201,162,116,.32) inset;
+  transition:transform .35s var(--ease), background-color .35s var(--ease), box-shadow .35s var(--ease);
+  will-change:transform;
+}
+.pill:hover{
+  background:#f4eee3;
+  box-shadow:0 0 0 1px var(--warm) inset, 0 10px 28px -8px rgba(201,162,116,.55);
+  transform:translateY(calc(-1 * var(--u)));
+}
+.pill:active{ transform:translateY(0); }
+.pill span{ display:block; transform:translateY(calc(1 * var(--u))); }
+
 </style>
 </head>
 <body>
