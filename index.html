@@ -227,6 +227,60 @@ button{ font:inherit; color:inherit; background:none; border:0; }
 .pill:active{ transform:translateY(0); }
 .pill span{ display:block; transform:translateY(calc(1 * var(--u))); }
 
+.pill-nav{
+  position:absolute;
+  right:calc(75.4 * var(--u));
+  top:calc(27 * var(--u));
+  width:calc(175 * var(--u));
+  height:calc(49 * var(--u));
+  font-size:calc(20.6 * var(--u));
+}
+
+.ghost{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-weight:500;
+  color:#fff;
+  white-space:nowrap;
+  line-height:1;
+  transition:color .3s var(--ease);
+}
+.ghost::after{
+  content:"→";
+  display:inline-block;
+  transition:transform .35s var(--ease), color .3s var(--ease);
+}
+.ghost:hover{ color:var(--warm); }
+.ghost:hover::after{ transform:translateX(4px); }
+
+/* ======================================
+   HERO
+   ====================================== */
+.hero{
+  position:absolute;
+  inset:0;
+  z-index:2;
+  pointer-events:none;
+  margin:0;
+}
+.hero > *{ pointer-events:auto; }
+
+.headline{
+  position:absolute;
+  left:calc(75.5 * var(--u));
+  top:calc(230.5 * var(--u));
+  margin:0;
+  font-family:'Space Grotesk','Manrope',sans-serif;
+  font-size:calc(71.6 * var(--h));
+  line-height:calc(80.5 * var(--h));
+  font-weight:600;
+  letter-spacing:calc(-1.2 * var(--h));
+  color:var(--ink);
+  white-space:nowrap;
+  text-shadow:0 2px 20px rgba(5,5,5,.6), 0 0 40px rgba(5,5,5,.4);
+}
+
 </style>
 </head>
 <body>
