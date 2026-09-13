@@ -1042,6 +1042,55 @@ section[id]{ scroll-margin-top:24px; }
   z-index:0;
 }
 
+/* 07 · Industries — angular geometric overlay + deep gradient */
+.sec-industries{
+  background:
+    linear-gradient(165deg, #080808 0%, #050505 40%, #070708 100%);
+}
+.sec-industries::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse 55% 70% at 10% 50%, rgba(100,130,180,.05) 0%, transparent 60%),
+    repeating-linear-gradient(
+      120deg,
+      transparent,
+      transparent 120px,
+      rgba(255,255,255,.01) 120px,
+      rgba(255,255,255,.01) 121px
+    ),
+    repeating-linear-gradient(
+      60deg,
+      transparent,
+      transparent 120px,
+      rgba(255,255,255,.008) 120px,
+      rgba(255,255,255,.008) 121px
+    );
+  pointer-events:none;
+  z-index:0;
+}
+
+/* 08 · Approach — radial starburst + warm gradient */
+.sec-approach{
+  background:
+    linear-gradient(180deg, #060606 0%, #050505 50%, #070707 100%);
+}
+.sec-approach::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse 60% 60% at 50% 0%, rgba(201,162,116,.06) 0%, transparent 60%),
+    conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(255,255,255,.008) 30deg, transparent 60deg, rgba(255,255,255,.006) 90deg, transparent 120deg, rgba(255,255,255,.008) 150deg, transparent 180deg, rgba(255,255,255,.006) 210deg, transparent 240deg, rgba(255,255,255,.008) 270deg, transparent 300deg, rgba(255,255,255,.006) 330deg, transparent 360deg);
+  pointer-events:none;
+  z-index:0;
+}
+
+/* 08b · Standards — carbon fiber crosshatch */
+.sec-standards{
+  background:
+    linear-gradient(180deg, #070707 0%, #050505 50%, #060606 100%);
+}
+
 </style>
 </head>
 <body>
