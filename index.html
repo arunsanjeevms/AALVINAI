@@ -280,6 +280,56 @@ button{ font:inherit; color:inherit; background:none; border:0; }
   white-space:nowrap;
   text-shadow:0 2px 20px rgba(5,5,5,.6), 0 0 40px rgba(5,5,5,.4);
 }
+.headline > span{ display:block; }
+.hero-typing-wrap{
+  display:inline-block;
+  vertical-align:baseline;
+  white-space:nowrap;
+  position:relative;
+}
+.hero-rotating-word{
+  display:inline-block;
+  vertical-align:baseline;
+  font-family:'Instrument Serif', Georgia, serif;
+  font-style:italic;
+  font-weight:400;
+  font-size:1.06em;
+  color:#dfb37c;
+  letter-spacing:calc(0.5 * var(--h));
+  text-shadow:0 0 28px rgba(223, 179, 124, 0.45), 0 2px 18px rgba(5,5,5,.7);
+}
+.type-cursor{
+  display:inline-block;
+  width:max(3px, calc(3.5 * var(--h)));
+  height:0.86em;
+  background:#dfb37c;
+  box-shadow:0 0 14px rgba(223, 179, 124, 0.8);
+  margin-left:max(3px, calc(3 * var(--h)));
+  vertical-align:-0.03em;
+  border-radius:1px;
+  animation:typeCursorBlink .8s steps(2, start) infinite;
+}
+@keyframes typeCursorBlink{
+  0%, 100%{ opacity:1; }
+  50%{ opacity:0; }
+}
+
+.sub{
+  position:absolute;
+  left:calc(75.5 * var(--u));
+  top:calc(230.5 * var(--u) + 269.5 * var(--h));
+  margin:0;
+  height:calc(23.5 * var(--h));
+  overflow:hidden;
+  font-family:'Space Grotesk','Manrope',sans-serif;
+  font-size:calc(20.7 * var(--h));
+  line-height:calc(23.5 * var(--h));
+  font-weight:500;
+  letter-spacing:calc(-0.2 * var(--h));
+  word-spacing:calc(1.8 * var(--h));
+  color:var(--muted);
+  text-shadow:0 1px 12px rgba(5,5,5,.7);
+}
 
 </style>
 </head>
