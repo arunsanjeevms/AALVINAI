@@ -121,6 +121,61 @@ button{ font:inherit; color:inherit; background:none; border:0; }
   background:var(--stage);
 }
 
+.plate-video{
+  position:absolute;
+  left:50%;
+  top:calc(1 * var(--u));
+  width:calc(1492 * var(--u));
+  height:calc(1054 * var(--u));
+  transform:translateX(calc(-50% - calc(0.5 * var(--u))));
+  object-fit:cover;
+  pointer-events:none;
+  border:0;
+  display:block;
+}
+
+.plate::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(to right,
+      rgba(5,5,5,.92) 0%,
+      rgba(5,5,5,.78) 18%,
+      rgba(5,5,5,.52) 34%,
+      rgba(5,5,5,.18) 50%,
+      transparent 62%),
+    linear-gradient(to bottom,
+      rgba(5,5,5,.3) 0%,
+      rgba(5,5,5,0) 15%,
+      rgba(5,5,5,0) 72%,
+      rgba(5,5,5,.23) 79.6%,
+      rgba(5,5,5,.45) 81.4%,
+      rgba(5,5,5,.75) 83.3%,
+      rgba(5,5,5,.84) 85.2%,
+      rgba(5,5,5,.888) 88%,
+      rgba(5,5,5,.905) 91%,
+      rgba(5,5,5,.96) 95%,
+      #050505 100%),
+    linear-gradient(to right,
+      #050505 calc(50% - 746 * var(--u)),
+      transparent calc(50% - 676 * var(--u)),
+      transparent calc(50% + 676 * var(--u)),
+      #050505 calc(50% + 746 * var(--u)));
+}
+
+/* ======================================
+   HEADER
+   ====================================== */
+.topbar{
+  position:absolute;
+  inset:0;
+  z-index:3;
+  pointer-events:none;
+}
+.topbar > *{ pointer-events:auto; }
+
 </style>
 </head>
 <body>
