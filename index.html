@@ -22,7 +22,6 @@ if (document.documentElement) { document.documentElement.scrollTop = 0; }
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@200..800&family=Kavivanar&family=Noto+Sans+Tamil:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
-<style>
 /* ======================================
    TOKENS + RESPONSIVE UNIT SYSTEM
    Reference canvas: 1487 x 1058
@@ -2154,9 +2153,39 @@ section[id]{ scroll-margin-top:24px; }
 @media (prefers-reduced-motion: reduce){
   .modal, .modal-panel{ transition:none; }
 }
+</style>
 
 </style>
 </head>
-<body>
+<body class="is-loading">
+
+<div class="splash" id="splash" role="status" aria-live="polite">
+  <div class="splash-inner">
+    <div class="splash-mark-wrapper">
+      <svg class="splash-mark" viewBox="0 0 31.5 48.5" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="gold-splash-grad" x1="4" y1="0" x2="30" y2="48" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#f0dfc8"/>
+            <stop offset="35%" stop-color="#c9a274"/>
+            <stop offset="70%" stop-color="#9a774f"/>
+            <stop offset="100%" stop-color="#c9a274"/>
+          </linearGradient>
+        </defs>
+        <path d="M21.5 0 L21.5 19.5 L31.5 19.5 L31.5 29 L10 48.5 L10 28.5 L0.5 28.5 L0.5 18.5 Z" fill="url(#gold-splash-grad)"/>
+        <rect x="0.5" y="18.5" width="9" height="10" fill="#fdfdfd"/>
+        <rect x="22" y="19.5" width="9.5" height="9.5" fill="#fdfdfd"/>
+      </svg>
+    </div>
+    <p class="splash-name">AALVINAI TECHNOLOGIES</p>
+    <div class="splash-loader-bar" aria-hidden="true">
+      <div class="splash-loader-fill"></div>
+    </div>
+    <p class="splash-kural" lang="ta">தெய்வத்தான் ஆகா தெனினும் முயற்சிதன்<br>மெய்வருத்தக் கூலி தரும்.</p>
+    <p class="splash-cite">Thirukkural &middot; Verse 619</p>
+  </div>
+</div>
+
+<script>
+
 </body>
 </html>
