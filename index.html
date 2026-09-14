@@ -2676,6 +2676,43 @@ section[id]{ scroll-margin-top:24px; }
       <h2 class="sec-h1 rv" style="--d:.05s">Technology that adapts<br>to the world it enters.</h2>
 
       <div class="ind-grid rv" style="--d:.12s">
+        <div class="ind-list" role="tablist" aria-label="Industries" id="indList">
+          <button class="ind-item is-active" role="tab" aria-selected="true" data-i="0" data-desc="Secure platforms for payments, lending and compliance at scale.">Finance</button>
+          <button class="ind-item" role="tab" aria-selected="false" data-i="1" data-desc="Unified commerce across inventory, POS and customer experience.">Retail</button>
+          <button class="ind-item" role="tab" aria-selected="false" data-i="2" data-desc="Operational systems that connect every department into one system of record.">Enterprise</button>
+          <button class="ind-item" role="tab" aria-selected="false" data-i="3" data-desc="Reliable systems for patient data, scheduling and compliance.">Healthcare</button>
+          <button class="ind-item" role="tab" aria-selected="false" data-i="4" data-desc="Platforms that manage learners, records and operations with ease.">Education</button>
+          <button class="ind-item" role="tab" aria-selected="false" data-i="5" data-desc="Real-time visibility across fleets, inventory and delivery.">Logistics</button>
+          <button class="ind-item" role="tab" aria-selected="false" data-i="6" data-desc="Production, inventory and supply chain, engineered together.">Manufacturing</button>
+          <button class="ind-item" role="tab" aria-selected="false" data-i="7" data-desc="Client, billing and delivery workflows in a single system.">Services</button>
+          <button class="ind-item" role="tab" aria-selected="false" data-i="8" data-desc="Lean, scalable infrastructure built to move as fast as you do.">Startups</button>
+        </div>
+
+        <div class="ind-panel" id="indPanel">
+          <span class="marks" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <div class="ind-vis" id="indVis" aria-hidden="true"></div>
+          <div class="ind-orb" aria-hidden="true"></div>
+          <div class="ind-icon-wrap" id="indIcon" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="8" y="14" width="48" height="40" rx="4"/>
+              <path d="M8 24h48"/>
+              <path d="M22 34h20M22 42h12"/>
+              <circle cx="44" cy="8" r="6"/>
+              <path d="M42 8h4M44 6v4"/>
+            </svg>
+          </div>
+          <span class="ind-watermark" id="indWatermark" aria-hidden="true">01</span>
+          <div class="ind-info" id="indInfo">
+            <span class="ind-num" id="indNum">01</span>
+            <h3 class="ind-name" id="indName">Finance</h3>
+            <p class="ind-desc" id="indDesc">Secure platforms for payments, lending and compliance at scale.</p>
+            <div class="ind-metrics" id="indMetrics">
+              <span class="ind-metric"><span class="ind-metric-dot"></span>Payments</span>
+              <span class="ind-metric"><span class="ind-metric-dot"></span>Compliance</span>
+              <span class="ind-metric"><span class="ind-metric-dot"></span>Lending</span>
+            </div>
+          </div>
+        </div>
 
 </body>
 </html>
