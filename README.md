@@ -2,4 +2,7 @@
 
 Technology That Moves Business Forward.
 
-AALVINAI Technologies builds intelligent AI, ERP, CRM and FinTech systems.
+## Architecture
+- Core tokens: ink, stage, muted, strip
+- Fluid units: --u, --uw, --h
+- Zero framework pure vanilla CSS
