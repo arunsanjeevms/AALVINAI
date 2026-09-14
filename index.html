@@ -2972,6 +2972,43 @@ section[id]{ scroll-margin-top:24px; }
 </div>
 
 <!-- ── CONTACT MODAL ─────────────────────────────────────────── -->
+<div class="modal" id="contactModal" aria-hidden="true">
+  <div class="modal-backdrop" data-modal-close></div>
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
+    <button type="button" class="modal-close" data-modal-close aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 5L19 19M19 5L5 19"/></svg>
+    </button>
+    <p class="eyebrow">Get in touch</p>
+    <h2 id="contactModalTitle" class="modal-title">Contact Us</h2>
+    <p class="modal-sub">Have a project in mind? Let's talk about how we can help.</p>
+
+    <div class="modal-body">
+      <form class="contact-form" action="mailto:hello@aalvinai.com" method="post" enctype="text/plain">
+        <div class="contact-field">
+          <label for="cf-name">Name</label>
+          <input id="cf-name" name="Name" type="text" placeholder="Your full name" required>
+        </div>
+        <div class="contact-field">
+          <label for="cf-email">Email</label>
+          <input id="cf-email" name="Email" type="email" placeholder="your@email.com" required>
+        </div>
+        <div class="contact-field">
+          <label for="cf-message">Message</label>
+          <textarea id="cf-message" name="Message" rows="5" placeholder="Tell us about your project…" required></textarea>
+        </div>
+        <button type="submit" class="pill">
+          <span>Send Message &nbsp;→</span>
+        </button>
+      </form>
+
+      <div class="contact-info">
+        <div class="info-row">
+          <span class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M3.5 6.5L12 13L20.5 6.5"/></svg></span>
+          <div>
+            <span class="info-label">Email</span>
+            <p class="info-value"><a href="mailto:hello@aalvinai.com">hello@aalvinai.com</a></p>
+          </div>
+        </div>
 
 </body>
 </html>
