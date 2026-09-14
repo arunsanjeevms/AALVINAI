@@ -2713,6 +2713,43 @@ section[id]{ scroll-margin-top:24px; }
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 08 · OUR APPROACH ──────────────────────────────────── -->
+  <section class="sec sec-approach" id="approach">
+    <div class="approach-graph rv" aria-hidden="true">
+      <svg viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="growthFade" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#c9a274" stop-opacity=".35"/>
+            <stop offset="1" stop-color="#c9a274" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <path class="growth-area" d="M10 300 L80 252 L150 262 L220 178 L290 190 L360 96 L390 44 L390 310 L10 310 Z"/>
+        <path id="growthPath" class="growth-line" d="M10 300 L80 252 L150 262 L220 178 L290 190 L360 96 L390 44"/>
+        <circle class="growth-vertex" cx="80" cy="252" r="4"/>
+        <circle class="growth-vertex" cx="150" cy="262" r="4"/>
+        <circle class="growth-vertex" cx="220" cy="178" r="4"/>
+        <circle class="growth-vertex" cx="290" cy="190" r="4"/>
+        <circle class="growth-vertex" cx="360" cy="96" r="4"/>
+        <circle class="growth-pulse" cx="390" cy="44" r="4.5"/>
+        <circle class="growth-tip" cx="390" cy="44" r="4.5"/>
+        <circle class="growth-particle" r="3">
+          <animate attributeName="opacity" from="0" to="1" dur="0.1s" begin="2.3s" fill="freeze"/>
+          <animateMotion dur="3.2s" begin="2.3s" repeatCount="indefinite">
+            <mpath href="#growthPath"/>
+          </animateMotion>
+        </circle>
+      </svg>
+    </div>
+    <div class="wrap">
+      <p class="eyebrow rv">Our Approach</p>
+      <h2 class="sec-h1 rv" style="--d:.05s">From idea<br>to intelligence.</h2>
+
+      <ol class="tl" id="timeline">
+        <li class="tl-step">
 
 </body>
 </html>
