@@ -1597,6 +1597,57 @@ section[id]{ scroll-margin-top:24px; }
   stroke-dasharray:600;
   stroke-dashoffset:0;
 }
+.growth-area{
+  fill:url(#growthFade);
+  opacity:0;
+}
+.growth-vertex{
+  fill:var(--stage);
+  stroke:var(--warm);
+  stroke-width:1.4;
+  opacity:0;
+  transform-box:fill-box;
+  transform-origin:center;
+}
+.growth-tip{
+  fill:var(--warm);
+  filter:drop-shadow(0 0 6px var(--warm-dim));
+  opacity:1;
+  transform-box:fill-box;
+  transform-origin:center;
+}
+.growth-pulse{
+  fill:none;
+  stroke:var(--warm);
+  stroke-width:1.2;
+  opacity:0;
+  transform-box:fill-box;
+  transform-origin:center;
+}
+.growth-particle{
+  fill:var(--warm);
+  filter:drop-shadow(0 0 5px var(--warm-dim));
+  opacity:0;
+}
+@media (prefers-reduced-motion: no-preference){
+  .growth-line{ stroke-dashoffset:600; }
+  .growth-tip{ opacity:0; }
+  .approach-graph.is-in .growth-line{ animation:growDraw 1.9s var(--ease) .15s forwards; }
+  .approach-graph.is-in .growth-area{ animation:growFade 1s var(--ease) 1.6s forwards; }
+  .approach-graph.is-in .growth-vertex:nth-of-type(1){ animation:vertexPop .45s var(--ease) .35s forwards; }
+  .approach-graph.is-in .growth-vertex:nth-of-type(2){ animation:vertexPop .45s var(--ease) .68s forwards; }
+  .approach-graph.is-in .growth-vertex:nth-of-type(3){ animation:vertexPop .45s var(--ease) 1.01s forwards; }
+  .approach-graph.is-in .growth-vertex:nth-of-type(4){ animation:vertexPop .45s var(--ease) 1.34s forwards; }
+  .approach-graph.is-in .growth-vertex:nth-of-type(5){ animation:vertexPop .45s var(--ease) 1.67s forwards; }
+  .approach-graph.is-in .growth-tip{ animation:growTip .5s var(--ease) 1.85s forwards; }
+  .approach-graph.is-in .growth-pulse{ animation:growPulse 2.4s ease-out 2.1s infinite; }
+}
+@keyframes growDraw{ to{ stroke-dashoffset:0; } }
+@keyframes growFade{ to{ opacity:.5; } }
+@keyframes vertexPop{ from{ opacity:0; transform:scale(0); } to{ opacity:1; transform:scale(1); } }
+@keyframes growTip{ from{ opacity:0; transform:scale(.4); } to{ opacity:1; transform:scale(1); } }
+@keyframes growPulse{
+  0%{ opacity:.6; transform:scale(.3); }
 
 </style>
 </head>
