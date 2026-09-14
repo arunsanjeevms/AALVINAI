@@ -1900,6 +1900,60 @@ section[id]{ scroll-margin-top:24px; }
   .founder-card-side{
     order:-1;
   }
+  .founder-portrait-frame{
+    max-width:240px;
+  }
+}
+
+/* ── 09 · FINAL CTA ──────────────────────────────────────────── */
+.sec-cta{ padding-block:0; overflow:hidden; }
+.cta-glow{
+  position:absolute; left:50%; top:8%; bottom:8%; width:min(42vw, 520px);
+  transform:translateX(-50%);
+  background:linear-gradient(180deg, transparent, rgba(255,255,255,.06) 25%, rgba(201,162,116,.11) 50%, rgba(255,255,255,.05) 75%, transparent);
+  filter:blur(36px);
+  pointer-events:none;
+}
+.cta-glow::after{
+  content:""; position:absolute; left:50%; top:12%; bottom:12%; width:1px;
+  transform:translateX(-50%);
+  background:linear-gradient(180deg, transparent, rgba(255,255,255,.55) 35%, rgba(255,255,255,.55) 65%, transparent);
+  filter:blur(.5px);
+}
+@media (prefers-reduced-motion: no-preference){
+  .cta-glow{ animation:ctaBreathe 6s ease-in-out infinite; }
+}
+@keyframes ctaBreathe{
+  0%,100%{ opacity:.8; }
+  50%{ opacity:1; }
+}
+.cta-wrap{
+  padding-block:clamp(72px, 10vw, 140px);
+  display:flex; flex-direction:column; align-items:center; text-align:center;
+}
+.cta-h{ font-family:'Space Grotesk','Poppins',sans-serif; font-size:clamp(26px, 3.8vw, 42px); line-height:1.1; font-weight:600; letter-spacing:-.02em; color:var(--ink); margin:16px 0 0; }
+.cta-p{ text-align:center; }
+.cta-actions{ display:flex; gap:18px; flex-wrap:wrap; justify-content:center; margin-top:32px; }
+.pill-final{ position:static; display:inline-flex; align-items:center; gap:8px; padding:14px 28px; font-size:14px; }
+.pill-final i{ font-style:normal; }
+.cta-secondary{ font-size:14px; }
+.cta-secondary::after{ content:none; }
+.cta-secondary:hover{ color:var(--warm); }
+
+/* ── 10 · FOOTER ─────────────────────────────────────────────── */
+.site-footer{ position:relative; border-top:1px solid var(--line); padding-block:clamp(40px,6vw,64px) 0; }
+
+.footer-grid{
+  display:grid;
+  grid-template-columns:minmax(380px, 1.6fr) minmax(110px, .8fr) minmax(150px, .9fr) minmax(180px, 1fr);
+  gap:28px;
+}
+.footer-col{ display:flex; flex-direction:column; gap:15px; }
+.footer-col-h{
+  margin:0 0 3px;
+  font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--ink);
+}
 
 </style>
 </head>
