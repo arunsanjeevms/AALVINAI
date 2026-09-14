@@ -1750,6 +1750,57 @@ section[id]{ scroll-margin-top:24px; }
   line-height:1.75;
   color:var(--muted);
 }
+.founder-bio strong{
+  color:var(--ink);
+  font-weight:600;
+}
+.founder-bio em{
+  color:var(--warm);
+  font-style:normal;
+}
+.founder-award-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-family:'Space Grotesk','Poppins',sans-serif;
+  font-size:11.5px;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#f3d2a2;
+  background:linear-gradient(135deg, rgba(201,162,116,.14) 0%, rgba(201,162,116,.04) 100%);
+  border:1px solid rgba(201,162,116,.3);
+  padding:5px 12px;
+  border-radius:100px;
+}
+.founder-award-badge svg{
+  width:13px; height:13px; color:var(--warm); flex:none;
+}
+.founder-metrics-strip{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:12px;
+  margin-top:4px;
+  padding-top:16px;
+  border-top:1px solid var(--line-soft);
+}
+.f-metric{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+.f-metric-val{
+  font-family:'Space Grotesk','Poppins',sans-serif;
+  font-size:clamp(17px, 2.1vw, 24px);
+  font-weight:700;
+  color:var(--ink);
+  line-height:1.15;
+}
+.f-metric-val em{
+  font-style:normal;
+  font-size:0.75em;
+  color:var(--warm);
+}
 
 </style>
 </head>
