@@ -2186,6 +2186,53 @@ section[id]{ scroll-margin-top:24px; }
 </div>
 
 <script>
+(function () {
+  var splash = document.getElementById('splash');
+  if (!splash) return;
+
+  // Immediately lock scroll to top
+  window.scrollTo(0, 0);
+  if (document.documentElement) document.documentElement.scrollTop = 0;
+  if (document.body) document.body.scrollTop = 0;
+
+  // Strict scroll event prevention during initial loader
+  var preventDefault = function (e) {
+    e.preventDefault();
+  };
+  var preventKeyScroll = function (e) {
+    // Space (32), PageUp (33), PageDown (34), End (35), Home (36), Left (37), Up (38), Right (39), Down (40)
+    var blocked = [32, 33, 34, 35, 36, 37, 38, 39, 40];
+    if (blocked.indexOf(e.keyCode) !== -1) {
+      e.preventDefault();
+      return false;
+    }
+  };
+
+  window.addEventListener('wheel', preventDefault, { passive: false });
+  window.addEventListener('touchmove', preventDefault, { passive: false });
+  window.addEventListener('keydown', preventKeyScroll, { passive: false });
+
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hide = function () {
+    splash.classList.add('is-done');
+    // Ensure viewport stays strictly at top
+    window.scrollTo(0, 0);
+    if (document.documentElement) document.documentElement.scrollTop = 0;
+    if (document.body) document.body.scrollTop = 0;
+
+    window.setTimeout(function () {
+      document.documentElement.classList.remove('is-loading');
+      document.body.classList.remove('is-loading');
+      window.removeEventListener('wheel', preventDefault, { passive: false });
+      window.removeEventListener('touchmove', preventDefault, { passive: false });
+      window.removeEventListener('keydown', preventKeyScroll, { passive: false });
+      window.scrollTo(0, 0);
+      if (splash.parentNode) splash.parentNode.removeChild(splash);
+    }, 720);
+  };
+  window.setTimeout(hide, reduced ? 1000 : 2500);
+})();
+</script>
 
 </body>
 </html>
