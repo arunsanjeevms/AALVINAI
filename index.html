@@ -2001,6 +2001,53 @@ section[id]{ scroll-margin-top:24px; }
 }
 .footer-bottom p{ margin:0; font-size:11px; color:var(--strip); }
 .footer-legal{ display:flex; gap:22px; }
+.footer-legal a,
+.footer-legal button{
+  font-family:inherit;
+  font-size:12px;
+  color:var(--nav);
+  background:none;
+  border:none;
+  padding:0;
+  cursor:pointer;
+  transition:color .3s var(--ease);
+}
+.footer-legal a:hover, .footer-legal a:focus-visible,
+.footer-legal button:hover, .footer-legal button:focus-visible{ color:var(--ink); }
+
+.modal-legal-body{
+  margin-top:24px;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  max-height:60vh;
+  overflow-y:auto;
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+}
+.modal-legal-body::-webkit-scrollbar{ display:none; width:0; height:0; }
+.modal-legal-sec{ display:flex; flex-direction:column; gap:6px; }
+.modal-legal-h{ font-family:'Space Grotesk','Poppins',sans-serif; font-size:15px; font-weight:600; color:var(--ink); margin:0; }
+.modal-legal-p{ font-size:13.5px; line-height:1.7; color:var(--muted); margin:0; }
+.modal-legal-list{ margin:0; padding-left:20px; font-size:13.5px; line-height:1.65; color:var(--muted); }
+.modal-legal-list li{ margin-bottom:4px; }
+
+/* ── CONTACT MODAL ───────────────────────────────────────────── */
+.modal{
+  position:fixed; inset:0; z-index:200;
+  display:flex; align-items:center; justify-content:center;
+  padding:24px;
+  visibility:hidden;
+  opacity:0;
+  transition:opacity .35s var(--ease), visibility .35s var(--ease);
+}
+.modal.is-open{ visibility:visible; opacity:1; }
+.modal-backdrop{
+  position:absolute; inset:0;
+  background:rgba(5,5,5,.72);
+  -webkit-backdrop-filter:blur(6px);
+  backdrop-filter:blur(6px);
+}
 
 </style>
 </head>
