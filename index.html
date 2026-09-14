@@ -1801,6 +1801,58 @@ section[id]{ scroll-margin-top:24px; }
   font-size:0.75em;
   color:var(--warm);
 }
+.f-metric-lbl{
+  font-size:11.5px;
+  line-height:1.35;
+  color:var(--strip);
+  letter-spacing:.02em;
+}
+@media (max-width:560px){
+  .founder-metrics-strip{
+    grid-template-columns:1fr 1fr;
+  }
+}
+.founder-actions{
+  margin-top:6px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  flex-wrap:wrap;
+}
+.founder-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background:linear-gradient(135deg, rgba(201,162,116,.16) 0%, rgba(201,162,116,.06) 100%);
+  color:var(--ink);
+  border:1px solid rgba(201,162,116,.36);
+  border-radius:999px;
+  padding:12px 22px;
+  font-size:14px;
+  font-weight:500;
+  text-decoration:none;
+  transition:all .3s var(--ease);
+}
+.founder-btn:hover{
+  background:var(--warm);
+  color:#050505;
+  border-color:var(--warm);
+  box-shadow:0 0 24px rgba(201,162,116,.35);
+  transform:translateY(-1px);
+}
+.founder-btn svg{
+  width:15px; height:15px;
+  transition:transform .3s var(--ease);
+}
+.founder-btn:hover svg{
+  transform:translate(2px, -2px);
+}
+.founder-site-label{
+  font-family:'Space Grotesk','Poppins',sans-serif;
+  font-size:13.5px;
+  font-weight:600;
+  letter-spacing:.02em;
+}
 
 </style>
 </head>
