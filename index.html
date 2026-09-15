@@ -3288,6 +3288,28 @@ section[id]{ scroll-margin-top:24px; }
         clone.setAttribute('aria-hidden', 'true');
         logosTrack.appendChild(clone);
       }
+      logosTrack.style.setProperty('--scroll-dist', setWidth + 'px');
+      if (!reduced) {
+        var duration = Math.max(setWidth / 60, 8);
+        logosTrack.style.setProperty('--scroll-dur', duration + 's');
+      }
+    };
+    sizeMarquee();
+    window.addEventListener('resize', sizeMarquee);
+  }
+
+  /* ---- 1. scroll reveal (.rv) ------------------------------- */
+  var revealEls = document.querySelectorAll('.rv, .sec-cta');
+  if (reduced || !('IntersectionObserver' in window)) {
+    revealEls.forEach(function (el) { el.classList.add('is-in'); });
+  } else {
+    var revealObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in');
+          revealObs.unobserve(entry.target);
+        }
+      });
 
 </script>
 </body>
