@@ -3427,6 +3427,25 @@ section[id]{ scroll-margin-top:24px; }
       window.addEventListener('resize', onScroll);
       updateTimeline();
     }
+  }
+
+  /* ---- 6. animated number counters for stats & metrics ------ */
+  var counters = Array.prototype.slice.call(document.querySelectorAll('[data-counter]'));
+  if (counters.length) {
+    function animateCounter(el) {
+      if (el.getAttribute('data-counted') === 'true') return;
+      el.setAttribute('data-counted', 'true');
+
+      var target = parseFloat(el.getAttribute('data-counter'));
+      var decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+      var prefix = el.getAttribute('data-prefix') || '';
+      var suffix = el.getAttribute('data-suffix') || '';
+      var duration = parseInt(el.getAttribute('data-duration') || '1800', 10);
+
+      if (reduced) {
+        el.textContent = prefix + (decimals > 0 ? target.toFixed(decimals) : target) + suffix;
+        return;
+      }
 
 </script>
 </body>
