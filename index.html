@@ -3380,6 +3380,27 @@ section[id]{ scroll-margin-top:24px; }
           iconWrap.classList.remove('is-swap');
         }
         /* swap metrics */
+        if (metricsEl && indMetricsData[idx]) {
+          metricsEl.innerHTML = indMetricsData[idx].map(function(m) {
+            return '<span class="ind-metric"><span class="ind-metric-dot"></span>' + m + '</span>';
+          }).join('');
+        }
+      };
+      if (reduced) { apply(); return; }
+      info.classList.add('is-swap');
+      if (iconWrap) iconWrap.classList.add('is-swap');
+      window.setTimeout(function () { apply(); info.classList.remove('is-swap'); }, 220);
+    }
+
+    items.forEach(function (btn) {
+      btn.addEventListener('click', function () { selectIndustry(btn); });
+      btn.addEventListener('mouseenter', function () {
+        if (window.matchMedia('(hover: hover)').matches) selectIndustry(btn);
+      });
+    });
+  }
+
+  /* ---- 5. approach timeline — progressive fill on scroll ------ */
 
 </script>
 </body>
