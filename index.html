@@ -3146,6 +3146,32 @@ section[id]{ scroll-margin-top:24px; }
     if (e.target.closest('a')) setOpen(false);
   });
 
+  window.addEventListener('resize', function () {
+    if (window.innerWidth / window.innerHeight > 1.1 && stage.classList.contains('is-open')) setOpen(false);
+  });
+
+  // Some browsers hold autoplay until a gesture; retry politely.
+  var v = document.querySelector('.plate-video');
+  if (v) {
+    var play = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
+    play();
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) play(); });
+    ['pointerdown', 'touchstart', 'keydown'].forEach(function (ev) {
+      document.addEventListener(ev, play, { once: true, passive: true });
+    });
+  }
+
+  /* ---- contact modal ------------------------------------------ */
+  var lastFocused = null;
+  function openModal(modal) {
+    lastFocused = document.activeElement;
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    var firstField = modal.querySelector('input, textarea');
+    if (firstField) firstField.focus();
+  }
+
 </script>
 </body>
 </html>
