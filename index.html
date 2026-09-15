@@ -3193,6 +3193,34 @@ section[id]{ scroll-margin-top:24px; }
     var openModalEl = document.querySelector('.modal.is-open');
     if (openModalEl) closeModal(openModalEl);
   });
+})();
+</script>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SITE SCRIPT — sections below the hero
+     ══════════════════════════════════════════════════════════════ -->
+<script>
+(function () {
+  'use strict';
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- 0. hero subtext rotator -------------------------------- */
+  var subRotate = document.getElementById('subRotate');
+  if (subRotate) {
+    var subPhrases = [
+      'Intelligent AI, enterprise and FinTech systems.',
+      'Smarter, faster, more secure business technology.',
+      'Engineering trust into every financial workflow.',
+      'Built for performance, security and scale.'
+    ];
+    if (reduced) {
+      subRotate.textContent = subPhrases[0];
+    } else {
+      var subIdx = 0;
+      subRotate.addEventListener('animationiteration', function () {
+        subIdx = (subIdx + 1) % subPhrases.length;
+        subRotate.textContent = subPhrases[subIdx];
+      });
 
 </script>
 </body>
