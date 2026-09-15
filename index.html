@@ -3263,6 +3263,31 @@ section[id]{ scroll-margin-top:24px; }
             setTimeout(typeTick, holdDelay);
             return;
           }
+          setTimeout(typeTick, typeSpeed);
+        }
+      }
+
+      setTimeout(typeTick, 2400);
+    }
+  }
+
+  /* ---- 0b. partner-strip marquee sizing ------------------------ */
+  var logosEl = document.querySelector('.logos');
+  var logosTrack = document.querySelector('.logos-track');
+  if (logosEl && logosTrack) {
+    var baseSet = logosTrack.querySelector('.lg-set');
+    var sizeMarquee = function () {
+      if (!baseSet) return;
+      var setWidth = baseSet.getBoundingClientRect().width;
+      if (!setWidth) return;
+      var viewportWidth = logosEl.getBoundingClientRect().width || window.innerWidth;
+      var needed = Math.max(2, Math.ceil((viewportWidth * 2) / setWidth));
+      var current = logosTrack.querySelectorAll('.lg-set').length;
+      for (var i = current; i < needed; i++) {
+        var clone = baseSet.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        logosTrack.appendChild(clone);
+      }
 
 </script>
 </body>
