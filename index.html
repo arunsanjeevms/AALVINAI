@@ -3310,6 +3310,32 @@ section[id]{ scroll-margin-top:24px; }
           revealObs.unobserve(entry.target);
         }
       });
+    }, { threshold: .16, rootMargin: '0px 0px -8% 0px' });
+    revealEls.forEach(function (el) { revealObs.observe(el); });
+  }
+
+  /* ---- 2. intelligence-layer panels (click toggle, touch-safe) */
+  document.querySelectorAll('.panel').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var open = btn.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
+
+  /* ---- 4. industries selector --------------------------------- */
+  var indList = document.getElementById('indList');
+  if (indList) {
+    var items = Array.prototype.slice.call(indList.querySelectorAll('.ind-item'));
+    var vis = document.getElementById('indVis');
+    var watermark = document.getElementById('indWatermark');
+    var info = document.getElementById('indInfo');
+    var nameEl = document.getElementById('indNum');
+    var titleEl = document.getElementById('indName');
+    var descEl = document.getElementById('indDesc');
+    var iconWrap = document.getElementById('indIcon');
+    var metricsEl = document.getElementById('indMetrics');
+
+    /* industry-specific SVG icons */
 
 </script>
 </body>
