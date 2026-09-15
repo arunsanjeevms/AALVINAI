@@ -3349,6 +3349,37 @@ section[id]{ scroll-margin-top:24px; }
     ];
 
     /* industry-specific metric tags */
+    var indMetricsData = [
+      ['Payments','Compliance','Lending'],
+      ['POS','Inventory','E-Commerce'],
+      ['ERP','CRM','Workflows'],
+      ['Patient Data','Scheduling','HIPAA'],
+      ['LMS','Records','Analytics'],
+      ['Fleet','Tracking','Delivery'],
+      ['Production','Supply Chain','IoT'],
+      ['Billing','Client Mgmt','Delivery'],
+      ['MVP','Scale','Automation']
+    ];
+
+    function selectIndustry(btn) {
+      items.forEach(function (i) {
+        i.classList.toggle('is-active', i === btn);
+        i.setAttribute('aria-selected', i === btn ? 'true' : 'false');
+      });
+      var idx = parseInt(btn.getAttribute('data-i'), 10);
+      var num = String(idx + 1).padStart(2, '0');
+      var apply = function () {
+        nameEl.textContent = num;
+        titleEl.textContent = btn.textContent;
+        descEl.textContent = btn.getAttribute('data-desc');
+        watermark.textContent = num;
+        vis.style.setProperty('--rot', (idx * 21) + 'deg');
+        /* swap icon */
+        if (iconWrap && indIcons[idx]) {
+          iconWrap.innerHTML = indIcons[idx];
+          iconWrap.classList.remove('is-swap');
+        }
+        /* swap metrics */
 
 </script>
 </body>
