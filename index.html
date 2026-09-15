@@ -3253,6 +3253,16 @@ section[id]{ scroll-margin-top:24px; }
             setTimeout(typeTick, pauseBeforeNext);
             return;
           }
+          heroWord.textContent = currentWord.substring(0, charIdx);
+          setTimeout(typeTick, deleteSpeed);
+        } else {
+          charIdx++;
+          heroWord.textContent = currentWord.substring(0, charIdx);
+          if (charIdx >= currentWord.length) {
+            isDeleting = true;
+            setTimeout(typeTick, holdDelay);
+            return;
+          }
 
 </script>
 </body>
