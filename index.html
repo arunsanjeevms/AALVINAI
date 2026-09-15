@@ -3121,5 +3121,31 @@ section[id]{ scroll-margin-top:24px; }
 </div>
 
 
+<script>
+(function () {
+  var stage  = document.getElementById('stage');
+  var burger = document.getElementById('burger');
+  var menu   = document.getElementById('menu');
+
+  function setOpen(open) {
+    stage.classList.toggle('is-open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    menu.setAttribute('aria-hidden', open ? 'false' : 'true');
+  }
+
+  burger.addEventListener('click', function () {
+    setOpen(!stage.classList.contains('is-open'));
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && stage.classList.contains('is-open')) setOpen(false);
+  });
+
+  menu.addEventListener('click', function (e) {
+    if (e.target.closest('a')) setOpen(false);
+  });
+
+</script>
 </body>
 </html>
