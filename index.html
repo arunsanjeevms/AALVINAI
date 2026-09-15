@@ -3447,6 +3447,30 @@ section[id]{ scroll-margin-top:24px; }
         return;
       }
 
+      var startTime = null;
+      function update(currentTime) {
+        if (!startTime) startTime = currentTime;
+        var elapsed = currentTime - startTime;
+        var progress = Math.min(elapsed / duration, 1);
+        // Exponential ease-out for natural, satisfying deceleration
+        var ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+        var current = target * ease;
+
+        if (decimals > 0) {
+          el.textContent = prefix + current.toFixed(decimals) + suffix;
+        } else {
+          el.textContent = prefix + Math.floor(current) + suffix;
+        }
+
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        } else {
+          el.textContent = prefix + (decimals > 0 ? target.toFixed(decimals) : target) + suffix;
+        }
+      }
+      requestAnimationFrame(update);
+    }
+
 </script>
 </body>
 </html>
