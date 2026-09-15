@@ -3471,6 +3471,32 @@ section[id]{ scroll-margin-top:24px; }
       requestAnimationFrame(update);
     }
 
+    if ('IntersectionObserver' in window) {
+      var counterObserver = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2, rootMargin: '0px 0px -40px 0px' });
+
+      counters.forEach(function (c) {
+        var decimals = parseInt(c.getAttribute('data-decimals') || '0', 10);
+        var prefix = c.getAttribute('data-prefix') || '';
+        var suffix = c.getAttribute('data-suffix') || '';
+        if (!reduced) {
+          c.textContent = prefix + (decimals > 0 ? (0).toFixed(decimals) : '0') + suffix;
+        }
+        counterObserver.observe(c);
+      });
+    } else {
+      counters.forEach(animateCounter);
+    }
+  }
+})();
+</script>
+
 </script>
 </body>
 </html>
