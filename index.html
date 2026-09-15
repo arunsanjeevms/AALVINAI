@@ -3171,6 +3171,28 @@ section[id]{ scroll-margin-top:24px; }
     var firstField = modal.querySelector('input, textarea');
     if (firstField) firstField.focus();
   }
+  function closeModal(modal) {
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (lastFocused && lastFocused.focus) lastFocused.focus();
+  }
+  document.querySelectorAll('[data-modal-open]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var modal = document.getElementById(btn.getAttribute('data-modal-open'));
+      if (modal) openModal(modal);
+    });
+  });
+  document.querySelectorAll('.modal').forEach(function (modal) {
+    modal.querySelectorAll('[data-modal-close]').forEach(function (el) {
+      el.addEventListener('click', function () { closeModal(modal); });
+    });
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    var openModalEl = document.querySelector('.modal.is-open');
+    if (openModalEl) closeModal(openModalEl);
+  });
 
 </script>
 </body>
