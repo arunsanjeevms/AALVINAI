@@ -2,7 +2,8 @@
 
 Technology That Moves Business Forward.
 
-## Architecture
-- Core tokens: ink, stage, muted, strip
-- Fluid units: --u, --uw, --h
-- Zero framework pure vanilla CSS
+## Core Pillars
+1. Intelligence Layer: Cognitive pipelines
+2. Enterprise Solutions: ERP, CRM, FinTech
+3. Engineering Standards: 99.99% SLA
+4. Cultural Heritage: Thiruvalluvar wisdom
