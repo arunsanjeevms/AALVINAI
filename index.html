@@ -3221,6 +3221,38 @@ section[id]{ scroll-margin-top:24px; }
         subIdx = (subIdx + 1) % subPhrases.length;
         subRotate.textContent = subPhrases[subIdx];
       });
+    }
+  }
+
+  /* ---- 0a. hero headline typing animation ---------------------- */
+  var heroWord = document.getElementById('heroWord');
+  var cursorEl = document.querySelector('.type-cursor');
+  if (heroWord) {
+    var heroWords = ['Forward.', 'Faster.', 'Smarter.', 'Further.', 'Beyond.'];
+    if (reduced) {
+      heroWord.textContent = heroWords[0];
+      if (cursorEl) cursorEl.style.display = 'none';
+    } else {
+      var wordIdx = 0;
+      var charIdx = heroWords[0].length;
+      var isDeleting = true;
+      var holdDelay = 2200;
+      var typeSpeed = 100;
+      var deleteSpeed = 55;
+      var pauseBeforeNext = 350;
+
+      function typeTick() {
+        var currentWord = heroWords[wordIdx];
+
+        if (isDeleting) {
+          charIdx--;
+          if (charIdx <= 0) {
+            heroWord.innerHTML = '&nbsp;';
+            isDeleting = false;
+            wordIdx = (wordIdx + 1) % heroWords.length;
+            setTimeout(typeTick, pauseBeforeNext);
+            return;
+          }
 
 </script>
 </body>
