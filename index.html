@@ -728,7 +728,7 @@ body.is-loading {
 /* ======================================
    PORTRAIT / NARROW - flow layout
    ====================================== */
-@media (max-aspect-ratio: 11/10){
+@media (max-aspect-ratio: 11/10), (max-height: 560px){
   :root{
     --m:min(calc(100vw / 430), 1.34px);
     --u:var(--m);
@@ -917,7 +917,7 @@ body.is-loading {
   .menu-inner{ padding-left:calc(52 * var(--m)); padding-right:calc(52 * var(--m)); }
 }
 
-@media (min-aspect-ratio: 11/10){
+@media (min-aspect-ratio: 11/10) and (min-height: 561px){
   .menu,.burger{ display:none; }
 }
 
@@ -959,189 +959,168 @@ section[id]{ scroll-margin-top:24px; }
   background:var(--stage);
 }
 
-/* ── PREMIUM SECTION BACKGROUNDS ─────────────────────────────── */
+/* ── SECTION BACKGROUNDS & PATTERNS ───────────────────────────────
+   Each section carries one distinct motif (dots / grid / diagonals /
+   rings / crosshatch) over an alternating base tone, so adjacent
+   sections never read as the same slab. Pattern layers live on
+   ::before (tone + glow) and ::after (the motif itself), both at
+   z-index 0 with content stacking above them.
+   ───────────────────────────────────────────────────────────────── */
 
-/* 01 · Manifesto — warm diagonal glow from the right */
+:root{
+  --pat:rgba(255,255,255,.045);     /* hairline patterns */
+  --pat-soft:rgba(255,255,255,.03); /* secondary hatch */
+  --dot:rgba(255,255,255,.075);     /* dot matrix */
+  --tone-a:#050505;                 /* base step */
+  --tone-b:#0b0b0d;                 /* raised step */
+}
+
+/* every motif layer fades out at the top and bottom edges so the
+   seam between two sections stays a line, not a pattern collision */
+.sec::after{
+  -webkit-mask-image:linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent);
+          mask-image:linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+/* 01 · Manifesto — warm glow from the right, no pattern */
+.sec-manifesto{ background:var(--tone-a); }
 .sec-manifesto::before{
   content:"";
   position:absolute; inset:0;
-  background:
-    radial-gradient(ellipse 60% 80% at 85% 50%, rgba(201,162,116,.08) 0%, transparent 70%),
-    repeating-linear-gradient(
-      -45deg,
-      transparent,
-      transparent 80px,
-      rgba(255,255,255,.012) 80px,
-      rgba(255,255,255,.012) 81px
-    );
-  pointer-events:none;
-  z-index:0;
+  background:radial-gradient(ellipse 60% 80% at 88% 50%, rgba(201,162,116,.14) 0%, transparent 68%);
+  pointer-events:none; z-index:0;
 }
+.sec-manifesto::after{ content:none; }
 
-/* 02 · Intelligence Layer — cool blue-purple mesh gradient */
-.sec-intel::before{
-  content:"";
-  position:absolute; inset:0;
+/* 02 · Intelligence Layer — blueprint grid on a raised tone */
+.sec-intel{
   background:
-    radial-gradient(ellipse 50% 60% at 15% 20%, rgba(100,120,200,.06) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 50% at 80% 75%, rgba(130,90,180,.05) 0%, transparent 55%),
-    linear-gradient(180deg, rgba(255,255,255,.015) 0%, transparent 40%, transparent 60%, rgba(255,255,255,.01) 100%);
-  pointer-events:none;
-  z-index:0;
+    radial-gradient(ellipse 55% 65% at 15% 15%, rgba(104,126,205,.07) 0%, transparent 62%),
+    radial-gradient(ellipse 45% 55% at 82% 78%, rgba(132,92,182,.06) 0%, transparent 58%),
+    var(--tone-b);
 }
 .sec-intel::after{
   content:"";
   position:absolute; inset:0;
   background-image:
-    linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
-  background-size:60px 60px;
-  opacity:.5;
-  pointer-events:none;
-  z-index:0;
+    linear-gradient(rgba(255,255,255,.011) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.011) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,.005) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.005) 1px, transparent 1px);
+  background-size:96px 96px, 96px 96px, 24px 24px, 24px 24px;
+  pointer-events:none; z-index:0;
 }
 
-/* 02b · Stats — warm center glow + fine noise texture */
+/* 02b · Stats — dot matrix, warm core, fine grain */
 .sec-stats{
   background:
-    radial-gradient(ellipse 70% 100% at 50% 50%, rgba(201,162,116,.04) 0%, transparent 70%),
-    linear-gradient(180deg, #070707, #050505 50%, #060606);
+    radial-gradient(ellipse 70% 110% at 50% 50%, rgba(201,162,116,.06) 0%, transparent 68%),
+    var(--tone-a);
 }
 .sec-stats::before{
   content:"";
   position:absolute; inset:0;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity:.03;
-  mix-blend-mode:overlay;
-  pointer-events:none;
-  z-index:0;
+  opacity:.03; mix-blend-mode:overlay;
+  pointer-events:none; z-index:0;
 }
-
-/* 03 · Solutions — topographic contour pattern */
-.sec-solutions{
-  background:
-    linear-gradient(180deg, #060608 0%, #050505 35%, #060607 100%);
-}
-.sec-solutions::before{
+.sec-stats::after{
   content:"";
   position:absolute; inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.035) 1.2px, transparent 1.2px);
+  background-size:26px 26px;
+  pointer-events:none; z-index:0;
+}
+
+/* 03 · Solutions — registration-mark plus field on a raised tone */
+.sec-solutions{
   background:
-    radial-gradient(ellipse 45% 55% at 70% 30%, rgba(201,162,116,.05) 0%, transparent 60%),
-    radial-gradient(ellipse 35% 40% at 20% 80%, rgba(160,140,110,.04) 0%, transparent 50%);
-  pointer-events:none;
-  z-index:0;
+    radial-gradient(ellipse 45% 55% at 72% 28%, rgba(201,162,116,.06) 0%, transparent 62%),
+    var(--tone-b);
 }
 .sec-solutions::after{
   content:"";
   position:absolute; inset:0;
-  background-image:
-    repeating-radial-gradient(circle at 30% 60%, transparent 0, transparent 38px, rgba(255,255,255,.012) 38px, rgba(255,255,255,.012) 39px, transparent 39px, transparent 78px);
-  opacity:.7;
-  pointer-events:none;
-  z-index:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56'%3E%3Cpath d='M28 23v10M23 28h10' stroke='%23ffffff' stroke-opacity='.028' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+  background-size:56px 56px;
+  pointer-events:none; z-index:0;
 }
 
-/* 07 · Industries — angular geometric overlay + deep gradient */
+/* 07 · Industries — cool glow from the left, no pattern */
 .sec-industries{
   background:
-    linear-gradient(165deg, #080808 0%, #050505 40%, #070708 100%);
+    radial-gradient(ellipse 55% 75% at 8% 50%, rgba(100,130,180,.06) 0%, transparent 62%),
+    var(--tone-a);
 }
-.sec-industries::before{
-  content:"";
-  position:absolute; inset:0;
-  background:
-    radial-gradient(ellipse 55% 70% at 10% 50%, rgba(100,130,180,.05) 0%, transparent 60%),
-    repeating-linear-gradient(
-      120deg,
-      transparent,
-      transparent 120px,
-      rgba(255,255,255,.01) 120px,
-      rgba(255,255,255,.01) 121px
-    ),
-    repeating-linear-gradient(
-      60deg,
-      transparent,
-      transparent 120px,
-      rgba(255,255,255,.008) 120px,
-      rgba(255,255,255,.008) 121px
-    );
-  pointer-events:none;
-  z-index:0;
-}
+.sec-industries::after{ content:none; }
 
-/* 08 · Approach — radial starburst + warm gradient */
+/* 08 · Approach — loose two-tone dot field under a warm overhead wash */
 .sec-approach{
   background:
-    linear-gradient(180deg, #060606 0%, #050505 50%, #070707 100%);
+    radial-gradient(ellipse 65% 60% at 50% 0%, rgba(201,162,116,.13) 0%, transparent 62%),
+    var(--tone-b);
 }
-.sec-approach::before{
+.sec-approach::after{
   content:"";
   position:absolute; inset:0;
-  background:
-    radial-gradient(ellipse 60% 60% at 50% 0%, rgba(201,162,116,.06) 0%, transparent 60%),
-    conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(255,255,255,.008) 30deg, transparent 60deg, rgba(255,255,255,.006) 90deg, transparent 120deg, rgba(255,255,255,.008) 150deg, transparent 180deg, rgba(255,255,255,.006) 210deg, transparent 240deg, rgba(255,255,255,.008) 270deg, transparent 300deg, rgba(255,255,255,.006) 330deg, transparent 360deg);
-  pointer-events:none;
-  z-index:0;
+  background-image:
+    radial-gradient(rgba(255,255,255,.06) 1.4px, transparent 1.4px),
+    radial-gradient(rgba(201,162,116,.07) 1.4px, transparent 1.4px);
+  background-size:44px 44px, 44px 44px;
+  background-position:0 0, 22px 22px;
+  pointer-events:none; z-index:0;
 }
 
-/* 08b · Standards — carbon fiber crosshatch */
+/* 08b · Standards — tight carbon-fibre crosshatch */
 .sec-standards{
   background:
-    linear-gradient(180deg, #070707 0%, #050505 50%, #060606 100%);
+    radial-gradient(ellipse 50% 60% at 50% 50%, rgba(255,255,255,.02) 0%, transparent 70%),
+    var(--tone-a);
 }
-.sec-standards::before{
+.sec-standards::after{
   content:"";
   position:absolute; inset:0;
-  background:
-    radial-gradient(ellipse 50% 60% at 50% 50%, rgba(255,255,255,.02) 0%, transparent 70%),
-    repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 10px,
-      rgba(255,255,255,.008) 10px,
-      rgba(255,255,255,.008) 11px
-    ),
-    repeating-linear-gradient(
-      -45deg,
-      transparent,
-      transparent 10px,
-      rgba(255,255,255,.008) 10px,
-      rgba(255,255,255,.008) 11px
-    );
-  pointer-events:none;
-  z-index:0;
+  background-image:
+    repeating-linear-gradient(45deg, transparent, transparent 7px, rgba(255,255,255,.012) 7px, rgba(255,255,255,.012) 8px),
+    repeating-linear-gradient(-45deg, transparent, transparent 7px, rgba(255,255,255,.012) 7px, rgba(255,255,255,.012) 8px);
+  pointer-events:none; z-index:0;
 }
 
-/* 08c · Founder */
+/* 08c · Founder — deliberately unpatterned, so the portrait reads as
+   the quiet beat between the dense sections */
 .sec-founder{
-  background:var(--stage);
+  background:linear-gradient(180deg, #080809 0%, var(--tone-a) 100%);
   border-top:none;
 }
-.sec-founder::before{
-  content:none;
-}
+.sec-founder::before, .sec-founder::after{ content:none; }
 
-/* 09 · CTA — enhanced aurora gradient */
+/* 09 · CTA — aurora close, no motif */
 .sec-cta{
   background:
-    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(201,162,116,.08) 0%, transparent 50%),
-    radial-gradient(ellipse 50% 50% at 20% 30%, rgba(100,120,200,.04) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 50% at 80% 40%, rgba(170,120,80,.04) 0%, transparent 60%),
-    linear-gradient(180deg, #060606 0%, #050505 40%, #070707 100%) !important;
+    radial-gradient(ellipse 80% 65% at 50% 100%, rgba(201,162,116,.16) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 50% at 18% 28%, rgba(100,120,200,.09) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 82% 42%, rgba(170,120,80,.08) 0%, transparent 60%),
+    #050505 !important;
 }
+.sec-cta::after{ content:none; }
 
-/* 10 · Footer — subtle dark gradient + fine grain */
+/* 10 · Footer — darkest step + fine grain */
 .site-footer{
-  background:
-    linear-gradient(180deg, #060606 0%, #040404 100%) !important;
+  background:linear-gradient(180deg, #060606 0%, #030303 100%) !important;
 }
 .site-footer::before{
   content:"";
   position:absolute; inset:0;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity:.025;
-  mix-blend-mode:overlay;
+  opacity:.04; mix-blend-mode:overlay;
   pointer-events:none;
+}
+
+/* patterns tighten on small screens so they never turn into moiré */
+@media (max-width: 640px){
+  .sec-intel::after{ background-size:64px 64px, 64px 64px, 16px 16px, 16px 16px; }
+  .sec-stats::after{ background-size:18px 18px; }
+  .sec-approach::after{ background-size:32px 32px, 32px 32px; background-position:0 0, 16px 16px; }
 }
 
 /* reusable corner-bracket motif — architectural language echoed
@@ -1682,44 +1661,57 @@ section[id]{ scroll-margin-top:24px; }
 }
 
 /* ── 08c · FOUNDER & LEADERSHIP ─────────────────────────────── */
+/* compact: one bordered card, portrait left, content right */
+.sec-founder{ padding-block:clamp(36px, 5vw, 64px); }
 .sec-founder .wrap{
   position:relative;
   z-index:1;
 }
+.sec-founder .sec-h1{
+  font-size:clamp(22px, 2.6vw, 30px);
+  max-width:none;
+  margin-top:10px;
+}
 .founder-grid{
-  margin-top:clamp(32px, 4.5vw, 56px);
+  margin-top:clamp(20px, 2.6vw, 28px);
   display:grid;
-  grid-template-columns:1.18fr 0.82fr;
-  gap:clamp(32px, 5vw, 68px);
+  grid-template-columns:clamp(120px, 14vw, 160px) 1fr;
+  gap:clamp(20px, 3vw, 36px);
   align-items:center;
+  padding:clamp(20px, 2.4vw, 28px) clamp(20px, 3vw, 36px);
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:linear-gradient(135deg, rgba(201,162,116,.05) 0%, rgba(255,255,255,.012) 60%);
 }
 .founder-info{
   display:flex;
   flex-direction:column;
-  gap:20px;
+  gap:12px;
+  min-width:0;
 }
 .founder-badge-row{
-  display:inline-flex;
+  display:flex;
+  flex-wrap:wrap;
   align-items:center;
-  gap:10px;
+  gap:8px;
 }
 .founder-role-badge{
   display:inline-flex;
   align-items:center;
   gap:8px;
   font-family:'Space Grotesk','Poppins',sans-serif;
-  font-size:12px;
+  font-size:11px;
   font-weight:600;
-  letter-spacing:.12em;
+  letter-spacing:.1em;
   text-transform:uppercase;
   color:var(--warm);
   background:rgba(201,162,116,.08);
   border:1px solid rgba(201,162,116,.24);
-  padding:6px 14px;
+  padding:4px 11px;
   border-radius:100px;
 }
 .founder-role-dot{
-  width:6px; height:6px;
+  width:5px; height:5px;
   border-radius:50%;
   background:var(--warm);
   box-shadow:0 0 8px var(--warm);
@@ -1727,26 +1719,26 @@ section[id]{ scroll-margin-top:24px; }
 .founder-name{
   margin:0;
   font-family:'Space Grotesk','Poppins',sans-serif;
-  font-size:clamp(30px, 3.8vw, 46px);
+  font-size:clamp(20px, 2.2vw, 26px);
   font-weight:700;
-  line-height:1.1;
-  letter-spacing:-.02em;
+  line-height:1.15;
+  letter-spacing:-.01em;
   color:var(--ink);
 }
 .founder-quote{
   margin:0;
-  padding-left:18px;
+  padding-left:14px;
   border-left:2px solid var(--warm-dim);
   font-style:italic;
-  font-size:clamp(15px, 1.35vw, 17px);
-  line-height:1.65;
+  font-size:clamp(13.5px, 1.2vw, 14.5px);
+  line-height:1.6;
   color:var(--ink);
   font-weight:300;
 }
 .founder-bio{
   margin:0;
-  font-size:15px;
-  line-height:1.75;
+  font-size:13.5px;
+  line-height:1.65;
   color:var(--muted);
 }
 .founder-bio strong{
@@ -1762,35 +1754,34 @@ section[id]{ scroll-margin-top:24px; }
   align-items:center;
   gap:6px;
   font-family:'Space Grotesk','Poppins',sans-serif;
-  font-size:11.5px;
+  font-size:10.5px;
   font-weight:600;
-  letter-spacing:.08em;
+  letter-spacing:.07em;
   text-transform:uppercase;
   color:#f3d2a2;
   background:linear-gradient(135deg, rgba(201,162,116,.14) 0%, rgba(201,162,116,.04) 100%);
   border:1px solid rgba(201,162,116,.3);
-  padding:5px 12px;
+  padding:4px 10px;
   border-radius:100px;
 }
 .founder-award-badge svg{
-  width:13px; height:13px; color:var(--warm); flex:none;
+  width:12px; height:12px; color:var(--warm); flex:none;
 }
 .founder-metrics-strip{
   display:grid;
   grid-template-columns:repeat(3, 1fr);
   gap:12px;
-  margin-top:4px;
-  padding-top:16px;
+  padding-top:12px;
   border-top:1px solid var(--line-soft);
 }
 .f-metric{
   display:flex;
   flex-direction:column;
-  gap:4px;
+  gap:2px;
 }
 .f-metric-val{
   font-family:'Space Grotesk','Poppins',sans-serif;
-  font-size:clamp(17px, 2.1vw, 24px);
+  font-size:clamp(16px, 1.7vw, 20px);
   font-weight:700;
   color:var(--ink);
   line-height:1.15;
@@ -1801,33 +1792,27 @@ section[id]{ scroll-margin-top:24px; }
   color:var(--warm);
 }
 .f-metric-lbl{
-  font-size:11.5px;
+  font-size:11px;
   line-height:1.35;
   color:var(--strip);
   letter-spacing:.02em;
 }
-@media (max-width:560px){
-  .founder-metrics-strip{
-    grid-template-columns:1fr 1fr;
-  }
-}
 .founder-actions{
-  margin-top:6px;
   display:flex;
   align-items:center;
-  gap:16px;
+  gap:12px;
   flex-wrap:wrap;
 }
 .founder-btn{
   display:inline-flex;
   align-items:center;
-  gap:10px;
+  gap:8px;
   background:linear-gradient(135deg, rgba(201,162,116,.16) 0%, rgba(201,162,116,.06) 100%);
   color:var(--ink);
   border:1px solid rgba(201,162,116,.36);
   border-radius:999px;
-  padding:12px 22px;
-  font-size:14px;
+  padding:8px 16px;
+  font-size:12.5px;
   font-weight:500;
   text-decoration:none;
   transition:all .3s var(--ease);
@@ -1840,7 +1825,7 @@ section[id]{ scroll-margin-top:24px; }
   transform:translateY(-1px);
 }
 .founder-btn svg{
-  width:15px; height:15px;
+  width:13px; height:13px;
   transition:transform .3s var(--ease);
 }
 .founder-btn:hover svg{
@@ -1848,11 +1833,12 @@ section[id]{ scroll-margin-top:24px; }
 }
 .founder-site-label{
   font-family:'Space Grotesk','Poppins',sans-serif;
-  font-size:13.5px;
+  font-size:12.5px;
   font-weight:600;
   letter-spacing:.02em;
 }
 .founder-card-side{
+  order:-1;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -1861,47 +1847,30 @@ section[id]{ scroll-margin-top:24px; }
 .founder-portrait-frame{
   position:relative;
   width:100%;
-  max-width:310px;
-  background:none;
-  border:none;
-  box-shadow:none;
-  padding:0;
   display:flex;
   align-items:flex-end;
   justify-content:center;
   overflow:visible;
 }
-.founder-portrait-frame:hover{
-  border:none;
-  box-shadow:none;
-}
 .founder-img{
   position:relative;
   z-index:1;
   width:100%;
-  max-height:370px;
+  max-height:190px;
   object-fit:contain;
   object-position:bottom center;
   display:block;
-  filter:contrast(1.04) drop-shadow(0 6px 20px rgba(201, 162, 116, 0.22));
-  transition:transform .5s var(--ease), filter .5s var(--ease);
-}
-.founder-portrait-frame:hover .founder-img{
-  transform:scale(1.02);
-  filter:contrast(1.05) drop-shadow(0 8px 24px rgba(201, 162, 116, 0.32));
+  filter:contrast(1.04) drop-shadow(0 4px 14px rgba(201, 162, 116, 0.22));
 }
 
-@media (max-width:960px){
+@media (max-width:720px){
   .founder-grid{
     grid-template-columns:1fr;
-    gap:44px;
+    gap:18px;
   }
-  .founder-card-side{
-    order:-1;
-  }
-  .founder-portrait-frame{
-    max-width:240px;
-  }
+  .founder-portrait-frame{ max-width:110px; margin-inline:auto; }
+  .founder-img{ max-height:130px; }
+  .founder-metrics-strip{ grid-template-columns:1fr 1fr; }
 }
 
 /* ── 09 · FINAL CTA ──────────────────────────────────────────── */
@@ -2152,6 +2121,131 @@ section[id]{ scroll-margin-top:24px; }
 
 @media (prefers-reduced-motion: reduce){
   .modal, .modal-panel{ transition:none; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   RESPONSIVE HARDENING — additive only.
+   Every rule below is gated on a narrow width, a coarse pointer or a
+   short viewport, so the desktop layout (wide + tall + fine pointer)
+   resolves exactly as it did before.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* media never forces a horizontal scrollbar (the hero's full-bleed
+   .plate-video is deliberately excluded — it must overflow to cover) */
+img{ max-width:100%; height:auto; }
+
+/* ── LANDSCAPE PHONES / SHORT VIEWPORTS ──────────────────────────
+   The hero's unit system is derived from viewport height, so a 390px-tall
+   landscape phone shrank body copy to ~8px. These viewports now use the
+   flow layout (see the extended condition on the PORTRAIT block) with a
+   width-derived unit and a stage that is allowed to grow. */
+@media (min-aspect-ratio: 11/10) and (max-height: 560px){
+  :root{ --m:min(calc(100vw / 900), 1.15px); }
+
+  .stage{ height:auto; min-height:100vh; overflow:visible; }
+
+  .topbar{ padding:calc(20 * var(--m)) calc(30 * var(--m)) 0; }
+  .hero{
+    justify-content:center;
+    padding:calc(26 * var(--m)) calc(30 * var(--m)) calc(20 * var(--m));
+    padding-left:max(calc(30 * var(--m)), env(safe-area-inset-left));
+    padding-right:max(calc(30 * var(--m)), env(safe-area-inset-right));
+  }
+  .headline{
+    font-size:max(30px, calc(44 * var(--m)));
+    max-width:min(640px, 70vw);
+  }
+  .sub{
+    font-size:max(14px, calc(17 * var(--m)));
+    max-width:min(560px, 64vw);
+    margin-top:calc(14 * var(--m));
+  }
+  .actions{ margin-top:calc(22 * var(--m)); gap:calc(22 * var(--m)); }
+  .logos{
+    height:max(28px, calc(30 * var(--m)));
+    margin:calc(16 * var(--m)) calc(-30 * var(--m)) calc(20 * var(--m));
+  }
+
+  /* the overlay menu is taller than the viewport here, so pin it to the
+     screen and let it scroll on its own */
+  .menu{ position:fixed; overflow-y:auto; -webkit-overflow-scrolling:touch; }
+  .menu-inner{ padding:calc(70 * var(--m)) calc(30 * var(--m)) calc(34 * var(--m)); }
+  .menu-list a{ font-size:max(19px, calc(24 * var(--m))); padding:calc(9 * var(--m)) 0; }
+  .menu-foot{ margin-top:calc(24 * var(--m)); }
+}
+@supports (height:100dvh){
+  @media (min-aspect-ratio: 11/10) and (max-height: 560px){
+    .stage{ min-height:100dvh; }
+  }
+}
+
+/* the splash never exceeds a short screen */
+@media (max-height: 560px){
+  .splash-inner{ gap:8px; }
+  .splash-kural{ font-size:14px; line-height:1.7; }
+  .splash-mark{ width:28px; }
+}
+
+/* ── TABLET (portrait tablets and small laptops) ─────────────────── */
+@media (max-width:1024px){
+  .modal-panel{ max-height:88vh; }
+}
+@supports (height:100dvh){
+  @media (max-width:1024px){
+    .modal-panel{ max-height:88dvh; }
+  }
+}
+
+/* ── PHONE / SMALL TABLET ────────────────────────────────────────── */
+@media (max-width:760px){
+  /* 16px is the threshold below which iOS Safari zooms the page on focus */
+  .contact-field input,
+  .contact-field textarea{ font-size:16px; }
+
+  .modal{ padding:16px; }
+  .modal-panel{ padding:clamp(22px, 5vw, 32px); }
+  .modal-close{ top:14px; right:14px; }
+  .modal-title{ padding-right:40px; }
+  /* let the panel do the scrolling rather than nesting a second scroller */
+  .modal-legal-body{ max-height:none; overflow-y:visible; }
+
+  .footer-legal{ flex-wrap:wrap; gap:16px 22px; }
+}
+
+/* ── VERY SMALL PHONES (≤400px) ──────────────────────────────────── */
+@media (max-width:400px){
+  :root{ --edge:18px; }
+  .cred-row{ gap:8px; }
+  .cred-badge{ padding:7px 13px; font-size:12px; }
+  .kural{ padding-left:16px; }
+  .ind-metrics{ gap:8px; }
+  .cta-actions{ gap:12px; width:100%; }
+  .pill-final{ width:100%; justify-content:center; }
+  .cta-secondary{ width:100%; justify-content:center; }
+  .footer-social a{ padding:7px 11px; }
+}
+
+/* ── PANEL LIST: keep the arrow clear of the title ───────────────── */
+@media (max-width:720px){
+  .panel-main{ padding-right:26px; }
+}
+
+/* ── TOUCH DEVICES ───────────────────────────────────────────────── */
+@media (pointer:coarse){
+  /* hover styling is not reachable, so the resting state has to read as
+     interactive on its own */
+  .sol-accent{ transform:scaleY(1); opacity:.45; }
+  .ind-panel::before{ opacity:1; }
+
+  /* comfortable tap targets */
+  .footer-col a,
+  .footer-legal a,
+  .footer-legal button,
+  .cta-secondary,
+  .sol-cta{ min-height:34px; display:inline-flex; align-items:center; }
+  .footer-social a{ min-height:38px; }
+  .ind-item{ padding-block:14px; }
+  .modal-close{ width:40px; height:40px; }
 }
 </style>
 </head>
@@ -2835,7 +2929,7 @@ section[id]{ scroll-margin-top:24px; }
             <span class="founder-role-badge"><span class="founder-role-dot"></span> Founder & Lead Full-Stack Architect</span>
             <span class="founder-award-badge">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.4 4.8 5.3.8-3.8 3.7.9 5.3L12 14.1l-4.8 2.5.9-5.3-3.8-3.7 5.3-.8L12 2z"/></svg>
-              3× National AI Hackathon Winner
+              AWS &amp; Kyndryl AI ASCEND '26 Champion
             </span>
           </div>
           <h3 class="founder-name">M S ARUN SANJEEV</h3>
@@ -3143,8 +3237,11 @@ section[id]{ scroll-margin-top:24px; }
     if (e.target.closest('a')) setOpen(false);
   });
 
+  // close the overlay only when the viewport has actually returned to the
+  // desktop nav — mirrors the CSS that hides .burger (wide AND tall enough)
   window.addEventListener('resize', function () {
-    if (window.innerWidth / window.innerHeight > 1.1 && stage.classList.contains('is-open')) setOpen(false);
+    var isDesktopNav = window.innerWidth / window.innerHeight > 1.1 && window.innerHeight > 560;
+    if (isDesktopNav && stage.classList.contains('is-open')) setOpen(false);
   });
 
   // Some browsers hold autoplay until a gesture; retry politely.
