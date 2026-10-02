@@ -1863,13 +1863,104 @@ section[id]{ scroll-margin-top:24px; }
   filter:contrast(1.04) drop-shadow(0 4px 14px rgba(201, 162, 116, 0.22));
 }
 
+/* carousel shell — each founder is one snap-aligned slide */
+.fcar{ margin-top:clamp(20px, 2.6vw, 28px); }
+.fcar .founder-grid{ margin-top:0; flex:1; }
+.fcar-track{
+  position:relative;
+  display:flex;
+  gap:16px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  overscroll-behavior-x:contain;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+  border-radius:16px;
+}
+.fcar-track::-webkit-scrollbar{ display:none; }
+.fcar-track:focus-visible{ outline:2px solid var(--warm-dim); outline-offset:4px; }
+.fcar-slide{
+  flex:0 0 100%;
+  min-width:0;
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+  display:flex;
+}
+.fcar-nav{
+  margin-top:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:16px;
+}
+.fcar-btn{
+  width:34px; height:34px;
+  display:grid; place-items:center;
+  border-radius:50%;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.02);
+  color:var(--nav);
+  cursor:pointer;
+  transition:color .3s var(--ease), border-color .3s var(--ease), background-color .3s var(--ease);
+}
+.fcar-btn svg{ width:15px; height:15px; }
+.fcar-btn:hover, .fcar-btn:focus-visible{
+  color:var(--warm);
+  border-color:rgba(201,162,116,.4);
+  background:rgba(201,162,116,.08);
+}
+.fcar-dots{ display:flex; align-items:center; gap:8px; }
+.fcar-dot{
+  width:8px; height:8px; padding:0;
+  border-radius:100px;
+  border:0;
+  background:rgba(255,255,255,.2);
+  cursor:pointer;
+  transition:width .35s var(--ease), background-color .35s var(--ease);
+}
+.fcar-dot:hover{ background:rgba(255,255,255,.4); }
+.fcar-dot.is-active{ width:24px; background:var(--warm); }
+@media (prefers-reduced-motion: reduce){
+  .fcar-dot, .fcar-btn{ transition:none; }
+}
+
+.founder-grid + .founder-grid{ margin-top:16px; }
+.founder-tags{
+  list-style:none;
+  margin:0;
+  padding:12px 0 0;
+  border-top:1px solid var(--line-soft);
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.founder-tags li{
+  font-family:'Space Grotesk','Poppins',sans-serif;
+  font-size:11.5px;
+  font-weight:500;
+  letter-spacing:.03em;
+  color:var(--nav);
+  border:1px solid var(--line);
+  border-radius:100px;
+  padding:4px 11px;
+}
+
 @media (max-width:720px){
+  /* phone: small portrait sits beside the name; everything else runs
+     full width below. .founder-info dissolves so its children can be
+     placed on the card's own grid. */
   .founder-grid{
-    grid-template-columns:1fr;
-    gap:18px;
+    grid-template-columns:64px 1fr;
+    gap:12px 14px;
+    align-items:start;
+    padding:18px 16px;
   }
-  .founder-portrait-frame{ max-width:110px; margin-inline:auto; }
-  .founder-img{ max-height:130px; }
+  .founder-info{ display:contents; }
+  .founder-card-side{ grid-area:1 / 1; align-self:center; }
+  .founder-name{ grid-area:1 / 2; align-self:center; }
+  .founder-badge-row{ grid-row:2; grid-column:1 / -1; }
+  .founder-quote, .founder-bio, .founder-metrics-strip, .founder-tags, .founder-actions{ grid-column:1 / -1; }
+  .founder-img{ max-height:78px; }
   .founder-metrics-strip{ grid-template-columns:1fr 1fr; }
 }
 
@@ -2246,6 +2337,142 @@ img{ max-width:100%; height:auto; }
   .footer-social a{ min-height:38px; }
   .ind-item{ padding-block:14px; }
   .modal-close{ width:40px; height:40px; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   MOBILE CAROUSELS — phones only (≤760px).
+   Card groups that stack into long columns on a phone become
+   horizontal swipe tracks instead. Nothing here applies above 760px,
+   so the desktop grids are untouched.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* scroll-progress bar, injected under each track by script; only
+   ever shown inside the phone breakpoint below */
+.mcar-bar{ display:none; }
+
+@media (max-width:760px){
+  /* shared swipe track — bleeds to the screen edges so the next card
+     peeks in, while the first card still lines up with .wrap */
+  .panels, .stats-grid, .sol-grid, .standards, .ind-list{
+    display:flex;
+    flex-direction:row;
+    align-items:stretch;
+    gap:12px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    scroll-snap-type:x mandatory;
+    overscroll-behavior-x:contain;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    margin-inline:calc(var(--edge) * -1);
+    padding-inline:var(--edge);
+    scroll-padding-inline:var(--edge);
+  }
+  .panels::-webkit-scrollbar, .stats-grid::-webkit-scrollbar, .sol-grid::-webkit-scrollbar,
+  .standards::-webkit-scrollbar, .ind-list::-webkit-scrollbar{ display:none; }
+
+  /* cards that start off-screen to the right would never trip the
+     scroll-reveal observer, so slides are simply always visible */
+  .panels > .rv, .stats-grid > .rv, .sol-grid > .rv{ opacity:1; transform:none; }
+
+  .mcar-bar{
+    display:block;
+    position:relative;
+    height:2px;
+    margin-top:18px;
+    background:var(--line);
+    border-radius:2px;
+    overflow:hidden;
+  }
+  .mcar-thumb{
+    position:absolute; left:0; top:0; bottom:0;
+    width:30%;
+    background:var(--warm);
+    border-radius:2px;
+  }
+
+  /* 02 · intelligence layer — rows become cards */
+  .panels{ border-top:0; margin-top:28px; }
+  .panel{
+    flex:0 0 84%;
+    width:auto;
+    grid-template-columns:34px 1fr;
+    row-gap:10px;
+    align-content:start;
+    padding:22px 18px;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.015);
+    scroll-snap-align:start;
+  }
+  .panel-meta{ grid-column:2; order:3; white-space:normal; align-self:start; }
+  .panel-arrow{ position:absolute; top:18px; right:16px; }
+
+  /* 02b · stats — two and a bit per screen */
+  .stats-grid{ border-top:0; row-gap:0; }
+  .stat-item{
+    flex:0 0 42%;
+    justify-content:center;
+    padding:20px 12px;
+    border:1px solid var(--line) !important;
+    background:rgba(255,255,255,.015);
+    scroll-snap-align:start;
+  }
+
+  /* 03 · solutions */
+  .sol-grid{ border:0; margin-top:28px; }
+  .sol{
+    flex:0 0 78%;
+    padding:22px 20px;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.015);
+    scroll-snap-align:start;
+  }
+  .sol-desc{ max-width:none; }
+
+  /* 07 · industries — the tab list becomes a swipeable chip row
+     sitting above its panel */
+  .ind-grid{ gap:16px; margin-top:28px; }
+  .ind-panel{ order:0; }
+  .ind-list{ gap:8px; scroll-snap-type:x proximity; }
+  .ind-list .ind-item{
+    flex:0 0 auto;
+    padding:10px 16px;
+    font-size:14px;
+    white-space:nowrap;
+    border:1px solid var(--line);
+    border-radius:999px;
+    scroll-snap-align:start;
+  }
+  .ind-list .ind-item.is-active{
+    color:var(--ink);
+    border-color:rgba(201,162,116,.5);
+    background:rgba(201,162,116,.1);
+  }
+  .ind-list .ind-item.is-active::before{ content:none; }
+  /* the centred backdrop icon would sit behind the copy on a narrow
+     panel, so it moves up into the free top-right corner */
+  .ind-icon-wrap{ top:22px; right:22px; left:auto; width:56px; height:56px; transform:none; }
+  .ind-panel:hover .ind-icon-wrap{ transform:none; }
+  .ind-icon-wrap.is-swap{ transform:scale(.9); }
+
+  /* 08b · standards */
+  .standards{ background:none; border:0; margin-top:28px; }
+  .standard{
+    flex:0 0 78%;
+    border:1px solid var(--line);
+    scroll-snap-align:start;
+  }
+
+  /* 10 · footer — link columns sit side by side instead of one long stack */
+  .footer-grid{ grid-template-columns:1fr 1fr; gap:28px 20px; }
+  .footer-col-brand, .footer-col:last-child{ grid-column:1 / -1; }
+  .footer-desc{ max-width:none; }
+  /* links and plain labels share one row height so the two columns line up */
+  .footer-col:not(.footer-col-brand){ gap:4px; }
+  .footer-col:not(.footer-col-brand) > a,
+  .footer-col:not(.footer-col-brand) > span{ min-height:34px; display:inline-flex; align-items:center; }
+  .footer-col-h{ margin-bottom:8px; }
+  .footer-bottom{ flex-direction:column; align-items:flex-start; gap:10px; }
 }
 </style>
 </head>
@@ -2923,50 +3150,101 @@ img{ max-width:100%; height:auto; }
       <p class="eyebrow rv">Leadership & Vision</p>
       <h2 class="sec-h1 rv" style="--d:.05s">Engineering Leadership.<br>Purpose-Driven Vision.</h2>
 
-      <div class="founder-grid">
-        <div class="founder-info rv" style="--d:.1s">
-          <div class="founder-badge-row">
-            <span class="founder-role-badge"><span class="founder-role-dot"></span> Founder & Lead Full-Stack Architect</span>
-            <span class="founder-award-badge">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.4 4.8 5.3.8-3.8 3.7.9 5.3L12 14.1l-4.8 2.5.9-5.3-3.8-3.7 5.3-.8L12 2z"/></svg>
-              AWS &amp; Kyndryl AI ASCEND '26 Champion
-            </span>
-          </div>
-          <h3 class="founder-name">M S ARUN SANJEEV</h3>
-          <blockquote class="founder-quote">
-            "True technological leadership isn't just about theory—it's about rapid problem solving under high pressure, rock-solid security, and engineering resilient systems that scale to thousands of users."
-          </blockquote>
-          <p class="founder-bio">
-            Full Stack Architect & <strong>4× National AI Hackathon Winner</strong> (AWS & Kyndryl, Hexaware). Experienced in scaling production systems to <strong>10,000+ active users</strong>, Arun leads core engineering and Generative AI execution at AALVINAI Technologies.
-          </p>
+      <div class="fcar rv" id="founderCarousel" role="region" aria-roledescription="carousel" aria-label="Founders" style="--d:.1s">
+        <div class="fcar-track" tabindex="0">
+          <article class="fcar-slide" role="group" aria-roledescription="slide" aria-label="1 of 2: M S Arun Sanjeev">
+            <div class="founder-grid">
+              <div class="founder-info">
+                <div class="founder-badge-row">
+                  <span class="founder-role-badge"><span class="founder-role-dot"></span> Founder & Lead Full-Stack Architect</span>
+                  <span class="founder-award-badge">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.4 4.8 5.3.8-3.8 3.7.9 5.3L12 14.1l-4.8 2.5.9-5.3-3.8-3.7 5.3-.8L12 2z"/></svg>
+                    AWS &amp; Kyndryl AI ASCEND '26 Champion
+                  </span>
+                </div>
+                <h3 class="founder-name">M S ARUN SANJEEV</h3>
+                <blockquote class="founder-quote">
+                  "True technological leadership isn't just about theory—it's about rapid problem solving under high pressure, rock-solid security, and engineering resilient systems that scale to thousands of users."
+                </blockquote>
+                <p class="founder-bio">
+                  Full Stack Architect & <strong>4× National AI Hackathon Winner</strong> (AWS & Kyndryl, Hexaware). Experienced in scaling production systems to <strong>10,000+ active users</strong>, Arun leads core engineering and Generative AI execution at AALVINAI Technologies.
+                </p>
 
-          <div class="founder-metrics-strip">
-            <div class="f-metric">
-              <span class="f-metric-val" data-counter="10" data-suffix="K+">10K<em>+</em></span>
-              <span class="f-metric-lbl">Production Users Served</span>
+                <div class="founder-metrics-strip">
+                  <div class="f-metric">
+                    <span class="f-metric-val" data-counter="10" data-suffix="K+">10K<em>+</em></span>
+                    <span class="f-metric-lbl">Production Users Served</span>
+                  </div>
+                  <div class="f-metric">
+                    <span class="f-metric-val" data-counter="4" data-suffix="×">4<em>×</em></span>
+                    <span class="f-metric-lbl">National Hackathon Winner</span>
+                  </div>
+                  <div class="f-metric">
+                    <span class="f-metric-val" style="font-size:clamp(15px,1.5vw,18px);">AWS & Kyndryl</span>
+                    <span class="f-metric-lbl">AI ASCEND '26 Champion</span>
+                  </div>
+                </div>
+                <div class="founder-actions">
+                  <a href="https://www.arunsanjeev.dev" target="_blank" rel="noopener noreferrer" class="founder-btn" aria-label="Visit portfolio of M S Arun Sanjeev at arunsanjeev.dev">
+                    <span>Personal Portfolio</span>
+                    <span class="founder-site-label">www.arunsanjeev.dev</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                  </a>
+                </div>
+              </div>
+
+              <div class="founder-card-side">
+                <div class="founder-portrait-frame">
+                  <img src="arunsanjeev.png" alt="M S ARUN SANJEEV — Founder & Chief Technologist at AALVINAI Technologies" class="founder-img" loading="lazy">
+                </div>
+              </div>
             </div>
-            <div class="f-metric">
-              <span class="f-metric-val" data-counter="4" data-suffix="×">4<em>×</em></span>
-              <span class="f-metric-lbl">National Hackathon Winner</span>
+          </article>
+          <article class="fcar-slide" role="group" aria-roledescription="slide" aria-label="2 of 2: K Sahithya">
+            <div class="founder-grid">
+              <div class="founder-info">
+                <div class="founder-badge-row">
+                  <span class="founder-role-badge"><span class="founder-role-dot"></span> Co-Founder & Product Manager</span>
+                </div>
+                <h3 class="founder-name">K SAHITHYA</h3>
+                <p class="founder-bio">
+                  Co-Founder of AALVINAI Technologies, <strong>Sahithya leads product management</strong>, turning ideas into clear product direction. She keeps <strong>customer relationships and communication</strong> at the centre of every build, and brings a public speaker's clarity and an innovative thinker's curiosity to how the team works with clients.
+                </p>
+                <ul class="founder-tags" aria-label="Areas of focus">
+                  <li>Product Management</li>
+                  <li>Customer Relationships</li>
+                  <li>Communication</li>
+                  <li>Public Speaking</li>
+                  <li>Innovation</li>
+                </ul>
+                <div class="founder-actions">
+                  <a href="https://sahithya.dev" target="_blank" rel="noopener noreferrer" class="founder-btn" aria-label="Visit portfolio of K Sahithya at sahithya.dev">
+                    <span>Personal Portfolio</span>
+                    <span class="founder-site-label">sahithya.dev</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                  </a>
+                </div>
+              </div>
+
+              <div class="founder-card-side">
+                <div class="founder-portrait-frame">
+                  <img src="sahithya-cutout.png" alt="K SAHITHYA — Co-Founder & Product Manager at AALVINAI Technologies" class="founder-img" loading="lazy">
+                </div>
+              </div>
             </div>
-            <div class="f-metric">
-              <span class="f-metric-val" style="font-size:clamp(15px,1.5vw,18px);">AWS & Kyndryl</span>
-              <span class="f-metric-lbl">AI ASCEND '26 Champion</span>
-            </div>
-          </div>
-          <div class="founder-actions">
-            <a href="https://www.arunsanjeev.dev" target="_blank" rel="noopener noreferrer" class="founder-btn" aria-label="Visit portfolio of M S Arun Sanjeev at arunsanjeev.dev">
-              <span>Personal Portfolio</span>
-              <span class="founder-site-label">www.arunsanjeev.dev</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-            </a>
-          </div>
+          </article>
         </div>
-
-        <div class="founder-card-side rv" style="--d:.18s">
-          <div class="founder-portrait-frame">
-            <img src="arunsanjeev.png" alt="M S ARUN SANJEEV — Founder & Chief Technologist at AALVINAI Technologies" class="founder-img" loading="lazy">
+        <div class="fcar-nav">
+          <button type="button" class="fcar-btn" data-dir="-1" aria-label="Previous founder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+          </button>
+          <div class="fcar-dots">
+            <button type="button" class="fcar-dot is-active" aria-label="Show M S Arun Sanjeev" aria-current="true"></button>
+            <button type="button" class="fcar-dot" aria-label="Show K Sahithya"></button>
           </div>
+          <button type="button" class="fcar-btn" data-dir="1" aria-label="Next founder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
         </div>
       </div>
     </div>
@@ -3408,6 +3686,103 @@ img{ max-width:100%; height:auto; }
     revealEls.forEach(function (el) { revealObs.observe(el); });
   }
 
+  /* ---- founders carousel (scroll-snap track + arrows/dots) ---- */
+  (function () {
+    var root = document.getElementById('founderCarousel');
+    if (!root) return;
+    var track = root.querySelector('.fcar-track');
+    var slides = Array.prototype.slice.call(root.querySelectorAll('.fcar-slide'));
+    var dots = Array.prototype.slice.call(root.querySelectorAll('.fcar-dot'));
+    var current = 0;
+
+    function paint(i) {
+      current = i;
+      slides.forEach(function (sl, n) {
+        if (n === i) sl.removeAttribute('inert'); else sl.setAttribute('inert', '');
+      });
+      dots.forEach(function (d, n) {
+        d.classList.toggle('is-active', n === i);
+        if (n === i) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current');
+      });
+    }
+    var DELAY = 10000, timer = 0, hovering = false, focused = false, onScreen = false;
+    function goTo(i, instant) {
+      i = (i + slides.length) % slides.length;
+      track.scrollTo({ left: slides[i].offsetLeft, behavior: (instant || reduced) ? 'auto' : 'smooth' });
+      paint(i);
+      schedule();
+    }
+    /* advance every 10s; paused while hovered, focused, off-screen,
+       in a background tab, or when the visitor prefers reduced motion */
+    function schedule() {
+      clearTimeout(timer);
+      if (reduced || hovering || focused || !onScreen || document.hidden) return;
+      timer = setTimeout(function () { goTo(current + 1); }, DELAY);
+    }
+    root.addEventListener('mouseenter', function () { hovering = true; schedule(); });
+    root.addEventListener('mouseleave', function () { hovering = false; schedule(); });
+    root.addEventListener('focusin', function () { focused = true; schedule(); });
+    root.addEventListener('focusout', function () { focused = false; schedule(); });
+    document.addEventListener('visibilitychange', schedule);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        onScreen = entries[0].isIntersecting;
+        schedule();
+      }, { threshold: .4 }).observe(root);
+    }
+    var raf = 0;
+    track.addEventListener('scroll', function () {
+      if (raf) return;
+      raf = requestAnimationFrame(function () {
+        raf = 0;
+        var best = 0, bestD = Infinity;
+        slides.forEach(function (sl, n) {
+          var d = Math.abs(sl.offsetLeft - track.scrollLeft);
+          if (d < bestD) { bestD = d; best = n; }
+        });
+        if (best !== current) { paint(best); schedule(); }
+      });
+    }, { passive: true });
+    root.querySelectorAll('.fcar-btn').forEach(function (b) {
+      b.addEventListener('click', function () { goTo(current + Number(b.dataset.dir)); });
+    });
+    dots.forEach(function (d, n) { d.addEventListener('click', function () { goTo(n); }); });
+    track.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); goTo(current + 1); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(current - 1); }
+    });
+    window.addEventListener('resize', function () { goTo(current, true); });
+    paint(0);
+  })();
+
+  /* ---- phone swipe tracks: scroll-progress bar under each -------
+     The tracks only scroll inside the <=760px layout; on wider screens
+     the bar stays display:none and update() has nothing to do. */
+  document.querySelectorAll('.panels, .stats-grid, .sol-grid, .standards').forEach(function (track) {
+    var bar = document.createElement('div');
+    bar.className = 'mcar-bar';
+    bar.setAttribute('aria-hidden', 'true');
+    var thumb = document.createElement('span');
+    thumb.className = 'mcar-thumb';
+    bar.appendChild(thumb);
+    track.insertAdjacentElement('afterend', bar);
+
+    var raf = 0;
+    function update() {
+      raf = 0;
+      var max = track.scrollWidth - track.clientWidth;
+      var w = bar.clientWidth;
+      if (max <= 1 || !w) return;
+      var tw = Math.max(28, w * track.clientWidth / track.scrollWidth);
+      thumb.style.width = tw + 'px';
+      thumb.style.transform = 'translateX(' + (track.scrollLeft / max) * (w - tw) + 'px)';
+    }
+    function request() { if (!raf) raf = requestAnimationFrame(update); }
+    track.addEventListener('scroll', request, { passive: true });
+    window.addEventListener('resize', request);
+    update();
+  });
+
   /* ---- 2. intelligence-layer panels (click toggle, touch-safe) */
   document.querySelectorAll('.panel').forEach(function (btn) {
     btn.addEventListener('click', function () {
@@ -3460,6 +3835,15 @@ img{ max-width:100%; height:auto; }
         i.classList.toggle('is-active', i === btn);
         i.setAttribute('aria-selected', i === btn ? 'true' : 'false');
       });
+      /* phone layout: the list is a swipeable chip row, so bring the
+         chosen chip to the centre (a no-op when the list isn't scrollable) */
+      if (indList.scrollWidth > indList.clientWidth + 1) {
+        var lr = indList.getBoundingClientRect(), br = btn.getBoundingClientRect();
+        indList.scrollTo({
+          left: indList.scrollLeft + (br.left - lr.left) - (lr.width - br.width) / 2,
+          behavior: reduced ? 'auto' : 'smooth'
+        });
+      }
       var idx = parseInt(btn.getAttribute('data-i'), 10);
       var num = String(idx + 1).padStart(2, '0');
       var apply = function () {
