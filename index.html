@@ -15,7 +15,8 @@ if (document.documentElement) { document.documentElement.scrollTop = 0; }
 <title>AALVINAI TECHNOLOGIES - Technology That Moves Business Forward</title>
 <meta name="description" content="AALVINAI Technologies builds intelligent AI, ERP, CRM and FinTech systems engineered with determination, precision and purpose.">
 <meta name="theme-color" content="#050505">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 31.5 48.5'><path d='M21.5 0L21.5 19.5L31.5 19.5L31.5 29L10 48.5L10 28.5L0.5 28.5L0.5 18.5Z' fill='%23b4b4b4'/><rect x='0.5' y='18.5' width='9' height='10' fill='%23fdfdfd'/><rect x='22' y='19.5' width='9.5' height='9.5' fill='%23fdfdfd'/></svg>">
+<link rel="icon" type="image/svg+xml" href="logo-mark.svg">
+<link rel="apple-touch-icon" href="logo-mark-512.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -179,11 +180,11 @@ button{ font:inherit; color:inherit; background:none; border:0; }
   position:absolute;
   left:calc(75 * var(--u));
   top:calc(27 * var(--u));
-  width:calc(31.5 * var(--u));
-  height:calc(48.5 * var(--u));
+  width:calc(44 * var(--u));
+  height:calc(44 * var(--u));
   display:block;
 }
-.brand svg{ width:100%; height:100%; display:block; }
+.brand img{ width:100%; height:100%; object-fit:contain; display:block; }
 
 .links{
   position:absolute;
@@ -604,7 +605,7 @@ body.is-loading {
   margin-bottom:2px;
 }
 .splash-mark{
-  width:36px;
+  width:52px;
   height:auto;
   filter:drop-shadow(0 2px 8px rgba(0,0,0,0.5));
   opacity:0;
@@ -785,8 +786,8 @@ body.is-loading {
   .brand{
     position:relative;
     left:auto; top:auto;
-    width:max(22px, calc(28 * var(--m)));
-    height:max(34px, calc(43 * var(--m)));
+    width:max(32px, calc(38 * var(--m)));
+    height:max(32px, calc(38 * var(--m)));
   }
   .links,.pill-nav{ display:none; }
   .burger{
@@ -1229,15 +1230,37 @@ section[id]{ scroll-margin-top:24px; }
   .manifesto-figure-wrap.is-in{ opacity:.7; }
 }
 @media (max-width:760px){
-  .sec-manifesto{ display:block; min-height:0; }
-  .manifesto-figure-slot{
-    position:relative;
-    right:auto; top:auto; bottom:auto; left:auto;
-    display:block;
-    width:min(160px, 42vw);
-    margin:32px auto 0;
+  .sec-manifesto{ display:block; min-height:0; position:relative; overflow:hidden; }
+  .beam{ display:none; }
+
+  /* drop the long description so the section reads as a short,
+     punchy block instead of a tall one (eyebrow/heading centring
+     comes from the shared .sec rule further down) */
+  .sec-manifesto .sec-p{ display:none; }
+  .sec-manifesto .cred-row{ justify-content:center; }
+  .sec-manifesto .kural{
+    margin-inline:auto;
+    padding-left:0;
+    border-left:0;
+    text-align:center;
   }
-  .manifesto-figure-wrap.is-in{ opacity:.75; }
+
+  /* the statue becomes a faint full-bleed backdrop behind the text
+     instead of a separate block image below it */
+  .manifesto-figure-slot{
+    position:absolute;
+    inset:0;
+    margin:0;
+    z-index:0;
+  }
+  .manifesto-figure-wrap{ opacity:.16; transform:translateX(10%); }
+  .manifesto-figure-wrap.is-in{ opacity:.05; }
+  .manifesto-figure{
+    width:min(320px, 82vw);
+    max-width:none;
+    filter:none;
+    animation:none;
+  }
 }
 .cred-row{ display:flex; flex-wrap:wrap; gap:12px; margin-top:24px; }
 .cred-badge{
@@ -1355,13 +1378,20 @@ section[id]{ scroll-margin-top:24px; }
 .stat-label{ font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--strip); }
 
 @media (max-width:760px){
-  .stats-grid{ grid-template-columns:1fr 1fr; row-gap:24px; }
-  .stat-item{ border-left:0; }
-  .stat-item:nth-child(2n){ border-left:1px solid var(--line); }
-}
-@media (max-width:420px){
-  .stats-grid{ grid-template-columns:1fr; }
-  .stat-item{ border-left:0 !important; }
+  /* 3 per row (2 rows for 5 stats) instead of 2 per row (3 rows) —
+     shorter overall, still no scrolling and no boxed cards */
+  .stats-grid{
+    display:flex; flex-wrap:wrap; justify-content:center;
+    border-top:0; row-gap:22px; column-gap:0;
+  }
+  .stat-item{
+    flex:0 0 33.333%;
+    padding:0 6px;
+    border-left:0 !important;
+    gap:4px;
+  }
+  .stat-val{ font-size:clamp(20px, 5.5vw, 26px); }
+  .stat-label{ font-size:9.5px; line-height:1.3; }
 }
 
 /* ── 03 · SOLUTIONS ──────────────────────────────────────────── */
@@ -1661,7 +1691,7 @@ section[id]{ scroll-margin-top:24px; }
 }
 
 /* ── 08c · FOUNDER & LEADERSHIP ─────────────────────────────── */
-/* compact: one bordered card, portrait left, content right */
+/* one card per founder, three zones: portrait | story | facts rail */
 .sec-founder{ padding-block:clamp(36px, 5vw, 64px); }
 .sec-founder .wrap{
   position:relative;
@@ -1675,55 +1705,84 @@ section[id]{ scroll-margin-top:24px; }
 .founder-grid{
   margin-top:clamp(20px, 2.6vw, 28px);
   display:grid;
-  grid-template-columns:clamp(120px, 14vw, 160px) 1fr;
-  gap:clamp(20px, 3vw, 36px);
+  grid-template-columns:clamp(150px, 15vw, 190px) minmax(0, 1fr) clamp(240px, 22vw, 280px);
+  gap:clamp(24px, 3vw, 40px);
   align-items:center;
-  padding:clamp(20px, 2.4vw, 28px) clamp(20px, 3vw, 36px);
+  padding:clamp(24px, 2.6vw, 32px) clamp(24px, 3vw, 40px);
   border:1px solid var(--line);
   border-radius:16px;
   background:linear-gradient(135deg, rgba(201,162,116,.05) 0%, rgba(255,255,255,.012) 60%);
 }
+
+/* portrait */
+.founder-card-side{
+  order:-1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+}
+.founder-portrait-frame{
+  position:relative;
+  width:100%;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  overflow:visible;
+}
+.founder-img{
+  position:relative;
+  z-index:1;
+  width:100%;
+  max-height:220px;
+  object-fit:contain;
+  object-position:bottom center;
+  display:block;
+  filter:contrast(1.04) drop-shadow(0 4px 14px rgba(201, 162, 116, 0.22));
+}
+
+/* story */
 .founder-info{
   display:flex;
   flex-direction:column;
-  gap:12px;
+  gap:14px;
   min-width:0;
 }
-.founder-badge-row{
+.founder-head{
   display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  gap:8px;
-}
-.founder-role-badge{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  font-family:'Space Grotesk','Poppins',sans-serif;
-  font-size:11px;
-  font-weight:600;
-  letter-spacing:.1em;
-  text-transform:uppercase;
-  color:var(--warm);
-  background:rgba(201,162,116,.08);
-  border:1px solid rgba(201,162,116,.24);
-  padding:4px 11px;
-  border-radius:100px;
-}
-.founder-role-dot{
-  width:5px; height:5px;
-  border-radius:50%;
-  background:var(--warm);
-  box-shadow:0 0 8px var(--warm);
+  flex-direction:column;
+  gap:7px;
+  min-width:0;
 }
 .founder-name{
   margin:0;
   font-family:'Space Grotesk','Poppins',sans-serif;
-  font-size:clamp(20px, 2.2vw, 26px);
+  font-size:clamp(22px, 2.3vw, 28px);
   font-weight:700;
   line-height:1.15;
   letter-spacing:-.01em;
   color:var(--ink);
+}
+.founder-role{
+  margin:0;
+  display:flex;
+  align-items:flex-start;
+  gap:8px;
+  font-family:'Space Grotesk','Poppins',sans-serif;
+  font-size:11.5px;
+  font-weight:600;
+  line-height:1.4;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--warm);
+}
+.founder-role-dot{
+  flex:none;
+  width:5px; height:5px;
+  margin-top:.45em;
+  border-radius:50%;
+  background:var(--warm);
+  box-shadow:0 0 8px var(--warm);
 }
 .founder-quote{
   margin:0;
@@ -1749,30 +1808,22 @@ section[id]{ scroll-margin-top:24px; }
   color:var(--warm);
   font-style:normal;
 }
-.founder-award-badge{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  font-family:'Space Grotesk','Poppins',sans-serif;
-  font-size:10.5px;
-  font-weight:600;
-  letter-spacing:.07em;
-  text-transform:uppercase;
-  color:#f3d2a2;
-  background:linear-gradient(135deg, rgba(201,162,116,.14) 0%, rgba(201,162,116,.04) 100%);
-  border:1px solid rgba(201,162,116,.3);
-  padding:4px 10px;
-  border-radius:100px;
-}
-.founder-award-badge svg{
-  width:12px; height:12px; color:var(--warm); flex:none;
+
+/* facts rail — metrics or focus tags, then the portfolio link */
+.founder-aside{
+  align-self:stretch;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:18px;
+  min-width:0;
+  padding-left:clamp(22px, 2.6vw, 34px);
+  border-left:1px solid var(--line-soft);
 }
 .founder-metrics-strip{
-  display:grid;
-  grid-template-columns:repeat(3, 1fr);
-  gap:12px;
-  padding-top:12px;
-  border-top:1px solid var(--line-soft);
+  display:flex;
+  flex-direction:column;
+  gap:14px;
 }
 .f-metric{
   display:flex;
@@ -1781,7 +1832,7 @@ section[id]{ scroll-margin-top:24px; }
 }
 .f-metric-val{
   font-family:'Space Grotesk','Poppins',sans-serif;
-  font-size:clamp(16px, 1.7vw, 20px);
+  font-size:clamp(17px, 1.6vw, 20px);
   font-weight:700;
   color:var(--ink);
   line-height:1.15;
@@ -1797,23 +1848,36 @@ section[id]{ scroll-margin-top:24px; }
   color:var(--strip);
   letter-spacing:.02em;
 }
-.founder-actions{
+.founder-tags{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.founder-tags li{
+  font-family:'Space Grotesk','Poppins',sans-serif;
+  font-size:11.5px;
+  font-weight:500;
+  letter-spacing:.03em;
+  color:var(--nav);
+  border:1px solid var(--line);
+  border-radius:100px;
+  padding:4px 11px;
+}
+.founder-actions{ display:flex; }
+.founder-btn{
   display:flex;
   align-items:center;
+  justify-content:space-between;
   gap:12px;
-  flex-wrap:wrap;
-}
-.founder-btn{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
+  width:100%;
   background:linear-gradient(135deg, rgba(201,162,116,.16) 0%, rgba(201,162,116,.06) 100%);
   color:var(--ink);
   border:1px solid rgba(201,162,116,.36);
-  border-radius:999px;
-  padding:8px 16px;
-  font-size:12.5px;
-  font-weight:500;
+  border-radius:12px;
+  padding:10px 14px;
   text-decoration:none;
   transition:all .3s var(--ease);
 }
@@ -1824,43 +1888,33 @@ section[id]{ scroll-margin-top:24px; }
   box-shadow:0 0 24px rgba(201,162,116,.35);
   transform:translateY(-1px);
 }
+.founder-btn-text{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  min-width:0;
+}
+.founder-btn-cap{
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  opacity:.7;
+}
+.founder-site-label{
+  font-family:'Space Grotesk','Poppins',sans-serif;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.02em;
+  overflow-wrap:anywhere;
+}
 .founder-btn svg{
-  width:13px; height:13px;
+  flex:none;
+  width:14px; height:14px;
   transition:transform .3s var(--ease);
 }
 .founder-btn:hover svg{
   transform:translate(2px, -2px);
-}
-.founder-site-label{
-  font-family:'Space Grotesk','Poppins',sans-serif;
-  font-size:12.5px;
-  font-weight:600;
-  letter-spacing:.02em;
-}
-.founder-card-side{
-  order:-1;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  position:relative;
-}
-.founder-portrait-frame{
-  position:relative;
-  width:100%;
-  display:flex;
-  align-items:flex-end;
-  justify-content:center;
-  overflow:visible;
-}
-.founder-img{
-  position:relative;
-  z-index:1;
-  width:100%;
-  max-height:190px;
-  object-fit:contain;
-  object-position:bottom center;
-  display:block;
-  filter:contrast(1.04) drop-shadow(0 4px 14px rgba(201, 162, 116, 0.22));
 }
 
 /* carousel shell — each founder is one snap-aligned slide */
@@ -1924,25 +1978,31 @@ section[id]{ scroll-margin-top:24px; }
   .fcar-dot, .fcar-btn{ transition:none; }
 }
 
-.founder-grid + .founder-grid{ margin-top:16px; }
-.founder-tags{
-  list-style:none;
-  margin:0;
-  padding:12px 0 0;
-  border-top:1px solid var(--line-soft);
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-}
-.founder-tags li{
-  font-family:'Space Grotesk','Poppins',sans-serif;
-  font-size:11.5px;
-  font-weight:500;
-  letter-spacing:.03em;
-  color:var(--nav);
-  border:1px solid var(--line);
-  border-radius:100px;
-  padding:4px 11px;
+/* tablet: too narrow for three zones, so the facts rail drops under
+   the story and runs as a row */
+@media (max-width:1000px){
+  .founder-grid{
+    grid-template-columns:clamp(120px, 15vw, 160px) minmax(0, 1fr);
+    row-gap:18px;
+  }
+  .founder-card-side{ grid-column:1; grid-row:1 / span 2; }
+  .founder-info{ grid-column:2; }
+  .founder-aside{
+    grid-column:2;
+    align-self:auto;
+    flex-direction:row;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px 24px;
+    padding-left:0;
+    border-left:0;
+    padding-top:16px;
+    border-top:1px solid var(--line-soft);
+  }
+  .founder-metrics-strip{ flex-direction:row; flex-wrap:wrap; gap:14px 28px; }
+  .founder-tags{ flex:1 1 260px; }
+  .founder-btn{ width:auto; }
 }
 
 @media (max-width:720px){
@@ -1950,18 +2010,33 @@ section[id]{ scroll-margin-top:24px; }
      full width below. .founder-info dissolves so its children can be
      placed on the card's own grid. */
   .founder-grid{
-    grid-template-columns:64px 1fr;
+    grid-template-columns:64px minmax(0, 1fr);
     gap:12px 14px;
     align-items:start;
+    align-content:start;
     padding:18px 16px;
   }
   .founder-info{ display:contents; }
   .founder-card-side{ grid-area:1 / 1; align-self:center; }
-  .founder-name{ grid-area:1 / 2; align-self:center; }
-  .founder-badge-row{ grid-row:2; grid-column:1 / -1; }
-  .founder-quote, .founder-bio, .founder-metrics-strip, .founder-tags, .founder-actions{ grid-column:1 / -1; }
+  .founder-head{ grid-area:1 / 2; align-self:center; }
+  .founder-bio, .founder-aside{ grid-column:1 / -1; }
+  .founder-aside{ flex-direction:column; flex-wrap:nowrap; align-items:stretch; gap:14px; padding-top:14px; }
+  .founder-btn{ width:100%; }
   .founder-img{ max-height:78px; }
-  .founder-metrics-strip{ grid-template-columns:1fr 1fr; }
+  .founder-role{ font-size:10.5px; letter-spacing:.08em; }
+
+  /* keep the mobile card to photo + name/role + portfolio button;
+     the quote, bio, metrics/tags and raw URL add length without
+     adding much on a small screen */
+  .founder-quote,
+  .founder-bio,
+  .founder-metrics-strip,
+  .founder-tags,
+  .founder-site-label{ display:none; }
+
+  /* autoplay drives the mobile carousel, so the arrow/dot controls
+     are unneeded clutter */
+  .fcar-nav{ display:none; }
 }
 
 /* ── 09 · FINAL CTA ──────────────────────────────────────────── */
@@ -2022,7 +2097,7 @@ section[id]{ scroll-margin-top:24px; }
 
 .footer-col-brand{ gap:18px; }
 .footer-brand{ display:flex; align-items:center; gap:10px; }
-.footer-brand svg{ width:16px; height:auto; flex:none; }
+.footer-brand img{ width:24px; height:auto; flex:none; }
 .footer-brand-name{ font-size:15px; color:var(--ink); }
 .footer-brand-name strong{ font-weight:700; }
 .footer-desc{ margin:0; font-size:13.5px; line-height:1.62; color:var(--nav); max-width:34ch; }
@@ -2274,7 +2349,7 @@ img{ max-width:100%; height:auto; }
 @media (max-height: 560px){
   .splash-inner{ gap:8px; }
   .splash-kural{ font-size:14px; line-height:1.7; }
-  .splash-mark{ width:28px; }
+  .splash-mark{ width:42px; }
 }
 
 /* ── TABLET (portrait tablets and small laptops) ─────────────────── */
@@ -2300,7 +2375,19 @@ img{ max-width:100%; height:auto; }
   /* let the panel do the scrolling rather than nesting a second scroller */
   .modal-legal-body{ max-height:none; overflow-y:visible; }
 
+  /* hero partner strip — removed entirely on mobile */
+  .logos{ display:none; }
+
   .footer-legal{ flex-wrap:wrap; gap:16px 22px; }
+
+  .cta-actions{ flex-direction:column; align-items:center; width:100%; }
+  .pill-final{ width:auto; max-width:78%; justify-content:center; }
+  .cta-secondary{ width:auto; justify-content:center; }
+
+  /* every section's eyebrow + heading + subtitle centre on mobile */
+  .sec .wrap > .eyebrow{ justify-content:center; width:100%; }
+  .sec .wrap > .sec-h1,
+  .sec .wrap > .sec-p{ text-align:center; margin-inline:auto; }
 }
 
 /* ── VERY SMALL PHONES (≤400px) ──────────────────────────────────── */
@@ -2310,10 +2397,7 @@ img{ max-width:100%; height:auto; }
   .cred-badge{ padding:7px 13px; font-size:12px; }
   .kural{ padding-left:16px; }
   .ind-metrics{ gap:8px; }
-  .cta-actions{ gap:12px; width:100%; }
-  .pill-final{ width:100%; justify-content:center; }
-  .cta-secondary{ width:100%; justify-content:center; }
-  .footer-social a{ padding:7px 11px; }
+  .cta-actions{ gap:12px; }
 }
 
 /* ── PANEL LIST: keep the arrow clear of the title ───────────────── */
@@ -2353,7 +2437,7 @@ img{ max-width:100%; height:auto; }
 @media (max-width:760px){
   /* shared swipe track — bleeds to the screen edges so the next card
      peeks in, while the first card still lines up with .wrap */
-  .panels, .stats-grid, .sol-grid, .standards, .ind-list{
+  .panels, .sol-grid, .standards, .ind-list{
     display:flex;
     flex-direction:row;
     align-items:stretch;
@@ -2368,12 +2452,12 @@ img{ max-width:100%; height:auto; }
     padding-inline:var(--edge);
     scroll-padding-inline:var(--edge);
   }
-  .panels::-webkit-scrollbar, .stats-grid::-webkit-scrollbar, .sol-grid::-webkit-scrollbar,
+  .panels::-webkit-scrollbar, .sol-grid::-webkit-scrollbar,
   .standards::-webkit-scrollbar, .ind-list::-webkit-scrollbar{ display:none; }
 
   /* cards that start off-screen to the right would never trip the
      scroll-reveal observer, so slides are simply always visible */
-  .panels > .rv, .stats-grid > .rv, .sol-grid > .rv{ opacity:1; transform:none; }
+  .panels > .rv, .sol-grid > .rv{ opacity:1; transform:none; }
 
   .mcar-bar{
     display:block;
@@ -2406,17 +2490,6 @@ img{ max-width:100%; height:auto; }
   }
   .panel-meta{ grid-column:2; order:3; white-space:normal; align-self:start; }
   .panel-arrow{ position:absolute; top:18px; right:16px; }
-
-  /* 02b · stats — two and a bit per screen */
-  .stats-grid{ border-top:0; row-gap:0; }
-  .stat-item{
-    flex:0 0 42%;
-    justify-content:center;
-    padding:20px 12px;
-    border:1px solid var(--line) !important;
-    background:rgba(255,255,255,.015);
-    scroll-snap-align:start;
-  }
 
   /* 03 · solutions */
   .sol-grid{ border:0; margin-top:28px; }
@@ -2463,16 +2536,34 @@ img{ max-width:100%; height:auto; }
     scroll-snap-align:start;
   }
 
-  /* 10 · footer — link columns sit side by side instead of one long stack */
-  .footer-grid{ grid-template-columns:1fr 1fr; gap:28px 20px; }
-  .footer-col-brand, .footer-col:last-child{ grid-column:1 / -1; }
-  .footer-desc{ max-width:none; }
-  /* links and plain labels share one row height so the two columns line up */
-  .footer-col:not(.footer-col-brand){ gap:4px; }
-  .footer-col:not(.footer-col-brand) > a,
-  .footer-col:not(.footer-col-brand) > span{ min-height:34px; display:inline-flex; align-items:center; }
-  .footer-col-h{ margin-bottom:8px; }
-  .footer-bottom{ flex-direction:column; align-items:flex-start; gap:10px; }
+  /* 10 · footer — mobile shows a compact footer: centred brand mark,
+     icon-only social row, then copyright + legal links; the link
+     columns (quick links / solutions / contact) are dropped */
+  .site-footer{ padding-block:clamp(28px,5vw,40px) 28px; }
+  .footer-grid{ grid-template-columns:1fr; gap:0; }
+  .footer-desc,
+  .footer-col:not(.footer-col-brand){ display:none; }
+  .footer-col-brand{ align-items:center; text-align:center; gap:14px; }
+  .footer-brand{ justify-content:center; }
+  .footer-social{ justify-content:center; }
+  .footer-social a{
+    padding:0; width:40px; height:40px;
+    justify-content:center;
+    border-radius:50%;
+  }
+  .footer-social-label{
+    position:absolute; width:1px; height:1px; overflow:hidden;
+    clip:rect(0 0 0 0); white-space:nowrap;
+  }
+
+  /* one compact block instead of two visually separate ones: tighter
+     gap and no divider line between the brand row and the legal row */
+  .footer-bottom{
+    flex-direction:column; align-items:center; text-align:center;
+    gap:10px; margin-top:16px; padding-block:0;
+    border-top:0;
+  }
+  .footer-legal{ justify-content:center; }
 }
 </style>
 </head>
@@ -2481,19 +2572,7 @@ img{ max-width:100%; height:auto; }
 <div class="splash" id="splash" role="status" aria-live="polite">
   <div class="splash-inner">
     <div class="splash-mark-wrapper">
-      <svg class="splash-mark" viewBox="0 0 31.5 48.5" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <defs>
-          <linearGradient id="gold-splash-grad" x1="4" y1="0" x2="30" y2="48" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stop-color="#f0dfc8"/>
-            <stop offset="35%" stop-color="#c9a274"/>
-            <stop offset="70%" stop-color="#9a774f"/>
-            <stop offset="100%" stop-color="#c9a274"/>
-          </linearGradient>
-        </defs>
-        <path d="M21.5 0 L21.5 19.5 L31.5 19.5 L31.5 29 L10 48.5 L10 28.5 L0.5 28.5 L0.5 18.5 Z" fill="url(#gold-splash-grad)"/>
-        <rect x="0.5" y="18.5" width="9" height="10" fill="#fdfdfd"/>
-        <rect x="22" y="19.5" width="9.5" height="9.5" fill="#fdfdfd"/>
-      </svg>
+      <img class="splash-mark" src="logo-mark.svg" alt="" aria-hidden="true">
     </div>
     <p class="splash-name">AALVINAI TECHNOLOGIES</p>
     <div class="splash-loader-bar" aria-hidden="true">
@@ -2565,25 +2644,7 @@ img{ max-width:100%; height:auto; }
   <!-- header -->
   <header class="topbar">
     <a class="brand" href="#" aria-label="Home">
-      <svg viewBox="0 0 31.5 48.5" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <defs>
-          <linearGradient id="bg1" x1="8" y1="0" x2="34.1" y2="28.9" gradientUnits="userSpaceOnUse">
-            <stop offset="0" stop-color="#9e9e9e"/>
-            <stop offset=".28" stop-color="#a6a6a6"/>
-            <stop offset=".34" stop-color="#a3a3a3"/>
-            <stop offset=".40" stop-color="#3a3a3a"/>
-            <stop offset=".55" stop-color="#414141"/>
-            <stop offset=".60" stop-color="#7a7a7a"/>
-            <stop offset=".68" stop-color="#8e8e8e"/>
-            <stop offset=".80" stop-color="#a9a9a9"/>
-            <stop offset=".95" stop-color="#c4c4c4"/>
-            <stop offset="1" stop-color="#cccccc"/>
-          </linearGradient>
-        </defs>
-        <path d="M21.5 0 L21.5 19.5 L31.5 19.5 L31.5 29 L10 48.5 L10 28.5 L0.5 28.5 L0.5 18.5 Z" fill="url(#bg1)"/>
-        <rect x="0.5" y="18.5" width="9" height="10" fill="#fdfdfd"/>
-        <rect x="22" y="19.5" width="9.5" height="9.5" fill="#fdfdfd"/>
-      </svg>
+      <img src="logo-mark.svg" alt="" aria-hidden="true">
     </a>
 
     <nav class="links" aria-label="Primary">
@@ -3155,21 +3216,19 @@ img{ max-width:100%; height:auto; }
           <article class="fcar-slide" role="group" aria-roledescription="slide" aria-label="1 of 2: M S Arun Sanjeev">
             <div class="founder-grid">
               <div class="founder-info">
-                <div class="founder-badge-row">
-                  <span class="founder-role-badge"><span class="founder-role-dot"></span> Founder & Lead Full-Stack Architect</span>
-                  <span class="founder-award-badge">
-                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.4 4.8 5.3.8-3.8 3.7.9 5.3L12 14.1l-4.8 2.5.9-5.3-3.8-3.7 5.3-.8L12 2z"/></svg>
-                    AWS &amp; Kyndryl AI ASCEND '26 Champion
-                  </span>
+                <div class="founder-head">
+                  <h3 class="founder-name">M S ARUN SANJEEV</h3>
+                  <p class="founder-role"><span class="founder-role-dot"></span>Founder & Lead Full-Stack Architect</p>
                 </div>
-                <h3 class="founder-name">M S ARUN SANJEEV</h3>
                 <blockquote class="founder-quote">
                   "True technological leadership isn't just about theory—it's about rapid problem solving under high pressure, rock-solid security, and engineering resilient systems that scale to thousands of users."
                 </blockquote>
                 <p class="founder-bio">
                   Full Stack Architect & <strong>4× National AI Hackathon Winner</strong> (AWS & Kyndryl, Hexaware). Experienced in scaling production systems to <strong>10,000+ active users</strong>, Arun leads core engineering and Generative AI execution at AALVINAI Technologies.
                 </p>
+              </div>
 
+              <div class="founder-aside">
                 <div class="founder-metrics-strip">
                   <div class="f-metric">
                     <span class="f-metric-val" data-counter="10" data-suffix="K+">10K<em>+</em></span>
@@ -3180,14 +3239,13 @@ img{ max-width:100%; height:auto; }
                     <span class="f-metric-lbl">National Hackathon Winner</span>
                   </div>
                   <div class="f-metric">
-                    <span class="f-metric-val" style="font-size:clamp(15px,1.5vw,18px);">AWS & Kyndryl</span>
+                    <span class="f-metric-val">AWS & Kyndryl</span>
                     <span class="f-metric-lbl">AI ASCEND '26 Champion</span>
                   </div>
                 </div>
                 <div class="founder-actions">
                   <a href="https://www.arunsanjeev.dev" target="_blank" rel="noopener noreferrer" class="founder-btn" aria-label="Visit portfolio of M S Arun Sanjeev at arunsanjeev.dev">
-                    <span>Personal Portfolio</span>
-                    <span class="founder-site-label">www.arunsanjeev.dev</span>
+                    <span class="founder-btn-text"><span class="founder-btn-cap">Personal Portfolio</span><span class="founder-site-label">www.arunsanjeev.dev</span></span>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
                   </a>
                 </div>
@@ -3203,13 +3261,16 @@ img{ max-width:100%; height:auto; }
           <article class="fcar-slide" role="group" aria-roledescription="slide" aria-label="2 of 2: K Sahithya">
             <div class="founder-grid">
               <div class="founder-info">
-                <div class="founder-badge-row">
-                  <span class="founder-role-badge"><span class="founder-role-dot"></span> Co-Founder & Product Manager</span>
+                <div class="founder-head">
+                  <h3 class="founder-name">K SAHITHYA</h3>
+                  <p class="founder-role"><span class="founder-role-dot"></span>Co-Founder & Product Manager</p>
                 </div>
-                <h3 class="founder-name">K SAHITHYA</h3>
                 <p class="founder-bio">
                   Co-Founder of AALVINAI Technologies, <strong>Sahithya leads product management</strong>, turning ideas into clear product direction. She keeps <strong>customer relationships and communication</strong> at the centre of every build, and brings a public speaker's clarity and an innovative thinker's curiosity to how the team works with clients.
                 </p>
+              </div>
+
+              <div class="founder-aside">
                 <ul class="founder-tags" aria-label="Areas of focus">
                   <li>Product Management</li>
                   <li>Customer Relationships</li>
@@ -3219,8 +3280,7 @@ img{ max-width:100%; height:auto; }
                 </ul>
                 <div class="founder-actions">
                   <a href="https://sahithya.dev" target="_blank" rel="noopener noreferrer" class="founder-btn" aria-label="Visit portfolio of K Sahithya at sahithya.dev">
-                    <span>Personal Portfolio</span>
-                    <span class="founder-site-label">sahithya.dev</span>
+                    <span class="founder-btn-text"><span class="founder-btn-cap">Personal Portfolio</span><span class="founder-site-label">sahithya.dev</span></span>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
                   </a>
                 </div>
@@ -3270,18 +3330,7 @@ img{ max-width:100%; height:auto; }
       <div class="footer-grid">
         <div class="footer-col footer-col-brand">
           <div class="footer-brand">
-            <svg viewBox="0 0 31.5 48.5" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <defs>
-                <linearGradient id="bg1-footer" x1="8" y1="0" x2="34.1" y2="28.9" gradientUnits="userSpaceOnUse">
-                  <stop offset="0" stop-color="#9e9e9e"/><stop offset=".28" stop-color="#a6a6a6"/><stop offset=".34" stop-color="#a3a3a3"/>
-                  <stop offset=".40" stop-color="#3a3a3a"/><stop offset=".55" stop-color="#414141"/><stop offset=".60" stop-color="#7a7a7a"/>
-                  <stop offset=".68" stop-color="#8e8e8e"/><stop offset=".80" stop-color="#a9a9a9"/><stop offset=".95" stop-color="#c4c4c4"/><stop offset="1" stop-color="#cccccc"/>
-                </linearGradient>
-              </defs>
-              <path d="M21.5 0 L21.5 19.5 L31.5 19.5 L31.5 29 L10 48.5 L10 28.5 L0.5 28.5 L0.5 18.5 Z" fill="url(#bg1-footer)"/>
-              <rect x="0.5" y="18.5" width="9" height="10" fill="#fdfdfd"/>
-              <rect x="22" y="19.5" width="9.5" height="9.5" fill="#fdfdfd"/>
-            </svg>
+            <img src="logo-mark.svg" alt="" aria-hidden="true">
             <span class="footer-brand-name"><strong>AALVINAI TECHNOLOGIES</strong></span>
           </div>
           <p class="footer-desc">Delivering intelligent AI, enterprise and financial technology solutions for forward-thinking businesses worldwide.</p>
@@ -3289,19 +3338,19 @@ img{ max-width:100%; height:auto; }
           <div class="footer-social">
             <a href="#" aria-label="LinkedIn">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.6c0-1.34-.02-3.07-1.87-3.07-1.87 0-2.16 1.46-2.16 2.97V21H9z"/></svg>
-              LinkedIn
+              <span class="footer-social-label">LinkedIn</span>
             </a>
             <a href="#" aria-label="X">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 4L20 20M20 4L4 20"/></svg>
-              X
+              <span class="footer-social-label">X</span>
             </a>
             <a href="#" aria-label="GitHub">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.55 2.87 8.4 6.84 9.76.5.1.68-.22.68-.5 0-.24-.01-1.05-.01-1.9-2.78.62-3.37-1.19-3.37-1.19-.45-1.18-1.11-1.5-1.11-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.36-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.4 9.4 0 0 1 5 0c1.9-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.35 4.8-4.58 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .28.18.61.69.5A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"/></svg>
-              GitHub
+              <span class="footer-social-label">GitHub</span>
             </a>
             <a href="mailto:hello@aalvinai.com" aria-label="Email">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M3.5 6.5L12 13L20.5 6.5"/></svg>
-              Email
+              <span class="footer-social-label">Email</span>
             </a>
           </div>
         </div>
@@ -3331,7 +3380,7 @@ img{ max-width:100%; height:auto; }
       </div>
     </div>
     <div class="footer-bottom wrap">
-      <p>© 2026 AALVINAI Technologies. All rights reserved.</p>
+      <p>© AALVINAI Technologies. All rights reserved.</p>
       <nav class="footer-legal" aria-label="Legal">
         <button type="button" class="legal-btn" data-modal-open="privacyModal">Privacy Policy</button>
         <button type="button" class="legal-btn" data-modal-open="termsModal">Terms of Service</button>
@@ -3705,19 +3754,22 @@ img{ max-width:100%; height:auto; }
         if (n === i) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current');
       });
     }
-    var DELAY = 10000, timer = 0, hovering = false, focused = false, onScreen = false;
+    var mobileMq = window.matchMedia('(max-width:720px)');
+    function delay() { return mobileMq.matches ? 3000 : 10000; }
+    var timer = 0, hovering = false, focused = false, onScreen = false;
     function goTo(i, instant) {
       i = (i + slides.length) % slides.length;
       track.scrollTo({ left: slides[i].offsetLeft, behavior: (instant || reduced) ? 'auto' : 'smooth' });
       paint(i);
       schedule();
     }
-    /* advance every 10s; paused while hovered, focused, off-screen,
-       in a background tab, or when the visitor prefers reduced motion */
+    /* advance every 10s (3s on mobile); paused while hovered, focused,
+       off-screen, in a background tab, or when the visitor prefers
+       reduced motion */
     function schedule() {
       clearTimeout(timer);
       if (reduced || hovering || focused || !onScreen || document.hidden) return;
-      timer = setTimeout(function () { goTo(current + 1); }, DELAY);
+      timer = setTimeout(function () { goTo(current + 1); }, delay());
     }
     root.addEventListener('mouseenter', function () { hovering = true; schedule(); });
     root.addEventListener('mouseleave', function () { hovering = false; schedule(); });
@@ -3758,7 +3810,7 @@ img{ max-width:100%; height:auto; }
   /* ---- phone swipe tracks: scroll-progress bar under each -------
      The tracks only scroll inside the <=760px layout; on wider screens
      the bar stays display:none and update() has nothing to do. */
-  document.querySelectorAll('.panels, .stats-grid, .sol-grid, .standards').forEach(function (track) {
+  document.querySelectorAll('.panels, .sol-grid, .standards').forEach(function (track) {
     var bar = document.createElement('div');
     bar.className = 'mcar-bar';
     bar.setAttribute('aria-hidden', 'true');

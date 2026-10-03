@@ -6,7 +6,8 @@
 <title>Terms of Service — AALVINAI Technologies</title>
 <meta name="description" content="Terms of Service and Master Service Agreement terms for AALVINAI Technologies.">
 <meta name="theme-color" content="#050505">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 31.5 48.5'><path d='M21.5 0L21.5 19.5L31.5 19.5L31.5 29L10 48.5L10 28.5L0.5 28.5L0.5 18.5Z' fill='%23b4b4b4'/><rect x='0.5' y='18.5' width='9' height='10' fill='%23fdfdfd'/><rect x='22' y='19.5' width='9.5' height='9.5' fill='%23fdfdfd'/></svg>">
+<link rel="icon" type="image/svg+xml" href="logo-mark.svg">
+<link rel="apple-touch-icon" href="logo-mark-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -114,16 +115,25 @@ a:hover{ text-decoration:underline; }
   font-size:12px;
   color:var(--strip);
 }
+
+@media (max-width:560px){
+  .header{ padding:16px 18px; gap:12px; }
+  .brand{ font-size:14px; gap:9px; }
+  .back-link{ font-size:12px; }
+  .container{ padding-left:18px; padding-right:18px; }
+  h2{ font-size:18px; margin-top:30px; }
+  ul{ padding-left:18px; }
+  .footer{ padding:28px 18px; }
+}
+@media (pointer:coarse){
+  .back-link{ min-height:36px; }
+}
 </style>
 </head>
 <body>
 <header class="header">
   <a href="index.html" class="brand">
-    <svg viewBox="0 0 31.5 48.5" width="20" height="28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M21.5 0 L21.5 19.5 L31.5 19.5 L31.5 29 L10 48.5 L10 28.5 L0.5 28.5 L0.5 18.5 Z" fill="#b4b4b4"/>
-      <rect x="0.5" y="18.5" width="9" height="10" fill="#fdfdfd"/>
-      <rect x="22" y="19.5" width="9.5" height="9.5" fill="#fdfdfd"/>
-    </svg>
+    <img src="logo-mark.svg" width="28" height="28" alt="" aria-hidden="true">
     <span>AALVINAI TECHNOLOGIES</span>
   </a>
   <a href="index.html" class="back-link">← Back to Home</a>
