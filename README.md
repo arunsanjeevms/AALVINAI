@@ -4,6 +4,8 @@
 
 AALVINAI Technologies builds intelligent AI, ERP, CRM and FinTech systems engineered with determination, precision and purpose.
 
+🌐 Live at **[aalvinai.in](https://aalvinai.in)** (GitHub Pages, custom domain via `CNAME`) · ✉️ [hello@aalvinai.in](mailto:hello@aalvinai.in)
+
 ---
 
 ## 🚀 Key Highlights
@@ -24,6 +26,11 @@ AALVINAI Technologies builds intelligent AI, ERP, CRM and FinTech systems engine
 ├── terms.html              # Enterprise service terms & mutual obligations
 ├── arunsanjeev.png         # Arun Sanjeev (Founder & Chief Architect)
 ├── thiruvalluvar-white.png # Cultural motif & Thiruvalluvar heritage emblem
+├── og-image.png            # 1200×630 social share card (Open Graph / Twitter)
+├── favicon.ico             # Square favicon for browsers & search results
+├── robots.txt              # Crawler rules + sitemap pointer
+├── sitemap.xml             # Sitemap for search engines
+├── CNAME                   # GitHub Pages custom domain (aalvinai.in)
 ├── .gitignore              # Environment & build artifact ignore rules
 └── README.md               # Platform documentation & architectural overview
 ```
