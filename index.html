@@ -3532,11 +3532,11 @@ img{ max-width:100%; height:auto; }
     <p class="modal-sub">Have a project in mind? Let's talk about how we can help.</p>
 
     <div class="modal-body">
-      <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
-        <input type="hidden" name="access_key" value="5cea4d92-1dd8-4d6e-ad59-cbf695ebd244">
-        <input type="hidden" name="subject" value="New inquiry from AALVINAI website">
-        <input type="hidden" name="from_name" value="AALVINAI Technologies — Website">
-        <input type="checkbox" name="botcheck" class="visually-hidden" tabindex="-1" autocomplete="off">
+      <form class="contact-form" id="contactForm" action="https://formsubmit.co/ajax/msarunsanjeev@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="New inquiry from AALVINAI website">
+        <input type="hidden" name="_cc" value="sahithyamani074@gmail.com">
+        <input type="hidden" name="_template" value="table">
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="contact-field">
           <label for="cf-name">Name</label>
           <input id="cf-name" name="name" type="text" placeholder="Your full name" required>
@@ -3750,7 +3750,7 @@ img{ max-width:100%; height:auto; }
     if (openModalEl) closeModal(openModalEl);
   });
 
-  /* ---- contact form submission (Web3Forms) --------------------- */
+  /* ---- contact form submission (FormSubmit) --------------------- */
   var contactForm = document.getElementById('contactForm');
   if (contactForm) {
     var cfStatus = document.getElementById('cfStatus');
@@ -3765,7 +3765,7 @@ img{ max-width:100%; height:auto; }
 
     contactForm.addEventListener('submit', function (e) {
       e.preventDefault();
-      if (contactForm.querySelector('[name="botcheck"]').checked) return; // spam honeypot tripped
+      if (contactForm.querySelector('[name="_honey"]').value) return; // spam honeypot tripped
 
       cfButton.disabled = true;
       cfButton.innerHTML = '<span>Sending…</span>';
@@ -3780,7 +3780,7 @@ img{ max-width:100%; height:auto; }
       })
         .then(function (res) { return res.json(); })
         .then(function (data) {
-          if (data.success) {
+          if (data.success === true || data.success === 'true') {
             setStatus('Thanks — your message is on its way. We’ll be in touch shortly.', 'ok');
             contactForm.reset();
           } else {
