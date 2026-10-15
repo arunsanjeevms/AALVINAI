@@ -2372,7 +2372,17 @@ section[id]{ scroll-margin-top:24px; }
   border-color:var(--warm-dim);
   background:rgba(255,255,255,.06);
 }
-.contact-form .pill{ width:100%; height:54px; margin-top:8px; font-size:15px; cursor:pointer; }
+.contact-form .pill{ width:100%; height:54px; margin-top:8px; font-size:15px; cursor:pointer; transition:opacity .25s var(--ease), transform .3s var(--ease), box-shadow .3s var(--ease); }
+.contact-form .pill:disabled{ opacity:.6; cursor:wait; transform:none; box-shadow:none; }
+.form-status{
+  margin:12px 0 0;
+  font-size:13px;
+  line-height:1.5;
+  min-height:1px;
+  display:none;
+}
+.form-status.is-ok{ display:block; color:#8fd19e; }
+.form-status.is-err{ display:block; color:#e2938f; }
 
 /* contact details ----------------------------------------------- */
 .contact-info{ display:flex; flex-direction:column; }
@@ -3522,22 +3532,27 @@ img{ max-width:100%; height:auto; }
     <p class="modal-sub">Have a project in mind? Let's talk about how we can help.</p>
 
     <div class="modal-body">
-      <form class="contact-form" action="mailto:hello@aalvinai.in" method="post" enctype="text/plain">
+      <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="5cea4d92-1dd8-4d6e-ad59-cbf695ebd244">
+        <input type="hidden" name="subject" value="New inquiry from AALVINAI website">
+        <input type="hidden" name="from_name" value="AALVINAI Technologies — Website">
+        <input type="checkbox" name="botcheck" class="visually-hidden" tabindex="-1" autocomplete="off">
         <div class="contact-field">
           <label for="cf-name">Name</label>
-          <input id="cf-name" name="Name" type="text" placeholder="Your full name" required>
+          <input id="cf-name" name="name" type="text" placeholder="Your full name" required>
         </div>
         <div class="contact-field">
           <label for="cf-email">Email</label>
-          <input id="cf-email" name="Email" type="email" placeholder="your@email.com" required>
+          <input id="cf-email" name="email" type="email" placeholder="your@email.com" required>
         </div>
         <div class="contact-field">
           <label for="cf-message">Message</label>
-          <textarea id="cf-message" name="Message" rows="5" placeholder="Tell us about your project…" required></textarea>
+          <textarea id="cf-message" name="message" rows="5" placeholder="Tell us about your project…" required></textarea>
         </div>
         <button type="submit" class="pill">
           <span>Send Message &nbsp;→</span>
         </button>
+        <p class="form-status" id="cfStatus" role="status" aria-live="polite"></p>
       </form>
 
       <div class="contact-info">
@@ -3734,6 +3749,53 @@ img{ max-width:100%; height:auto; }
     var openModalEl = document.querySelector('.modal.is-open');
     if (openModalEl) closeModal(openModalEl);
   });
+
+  /* ---- contact form submission (Web3Forms) --------------------- */
+  var contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    var cfStatus = document.getElementById('cfStatus');
+    var cfButton = contactForm.querySelector('button[type="submit"]');
+    var cfButtonLabel = cfButton.innerHTML;
+
+    function setStatus(msg, kind) {
+      cfStatus.textContent = msg;
+      cfStatus.classList.remove('is-ok', 'is-err');
+      if (kind) cfStatus.classList.add(kind === 'ok' ? 'is-ok' : 'is-err');
+    }
+
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (contactForm.querySelector('[name="botcheck"]').checked) return; // spam honeypot tripped
+
+      cfButton.disabled = true;
+      cfButton.innerHTML = '<span>Sending…</span>';
+      setStatus('', null);
+
+      var payload = Object.fromEntries(new FormData(contactForm));
+
+      fetch(contactForm.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload)
+      })
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          if (data.success) {
+            setStatus('Thanks — your message is on its way. We’ll be in touch shortly.', 'ok');
+            contactForm.reset();
+          } else {
+            setStatus(data.message || 'Something went wrong. Please try again or email us directly.', 'err');
+          }
+        })
+        .catch(function () {
+          setStatus('Network error — please try again or email hello@aalvinai.in directly.', 'err');
+        })
+        .finally(function () {
+          cfButton.disabled = false;
+          cfButton.innerHTML = cfButtonLabel;
+        });
+    });
+  }
 })();
 </script>
 
