@@ -139,6 +139,7 @@
             }
           }
         },
+
         {
           "@type": "ListItem",
           "position": 5,
@@ -160,6 +161,7 @@
             }
           }
         },
+        
         {
           "@type": "ListItem",
           "position": 6,
@@ -811,11 +813,14 @@ button{ font:inherit; color:inherit; background:none; border:0; }
   display:block; margin-top:1px;
 }
 .hnav{ display:flex; align-items:center; gap:clamp(16px, 2.2vw, 34px); }
-.hnav a{
+.hnav a,
+.hnav button{
   font-size:13.5px; color:var(--nav);
   transition:color .28s var(--ease);
+  cursor:pointer;
 }
-.hnav a:hover{ color:#fff; }
+.hnav a:hover,
+.hnav button:hover{ color:#fff; }
 .hnav a[aria-current="page"]{ color:var(--ink); }
 .hnav a[aria-current="page"]::after{
   content:""; display:block; height:1px; margin-top:5px;
@@ -1236,11 +1241,12 @@ button{ font:inherit; color:inherit; background:none; border:0; }
   margin:0 0 3px;
   font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--ink);
 }
-.footer-col a, .footer-col span{
+.footer-col a, .footer-col button, .footer-col span{
   font-size:13.5px; line-height:1.4; color:var(--nav);
   transition:color .3s var(--ease);
 }
-.footer-col a:hover{ color:var(--ink); }
+.footer-col button{ cursor:pointer; text-align:left; }
+.footer-col a:hover, .footer-col button:hover{ color:var(--ink); }
 .footer-col span{ color:var(--strip); }
 .footer-col-brand{ gap:18px; }
 .footer-brand{ display:flex; align-items:center; gap:10px; }
@@ -1293,7 +1299,158 @@ button{ font:inherit; color:inherit; background:none; border:0; }
 
 @media (pointer:coarse){
   .chip{ min-height:38px; }
-  .hnav a{ min-height:34px; display:inline-flex; align-items:center; }
+  .hnav a, .hnav button{ min-height:34px; display:inline-flex; align-items:center; }
+}
+
+/* ======================================================
+   CONTACT MODAL (ported from index.html)
+   ====================================================== */
+.modal{
+  position:fixed; inset:0; z-index:200;
+  display:flex; align-items:center; justify-content:center;
+  padding:24px;
+  visibility:hidden;
+  opacity:0;
+  transition:opacity .35s var(--ease), visibility .35s var(--ease);
+}
+.modal.is-open{ visibility:visible; opacity:1; }
+.modal-backdrop{
+  position:absolute; inset:0;
+  background:rgba(5,5,5,.72);
+  -webkit-backdrop-filter:blur(6px);
+  backdrop-filter:blur(6px);
+}
+.modal-panel{
+  position:relative;
+  width:100%; max-width:900px;
+  max-height:88vh;
+  overflow-y:auto;
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+  background:var(--surface);
+  border:1px solid var(--line);
+  padding:clamp(28px,4vw,52px);
+  transform:translateY(16px) scale(.98);
+  opacity:0;
+  transition:transform .4s var(--ease), opacity .4s var(--ease);
+}
+.modal-panel::-webkit-scrollbar{
+  display:none;
+  width:0;
+  height:0;
+}
+.modal.is-open .modal-panel{ transform:translateY(0) scale(1); opacity:1; }
+.modal-close{
+  position:absolute; top:20px; right:20px;
+  display:grid; place-items:center;
+  width:34px; height:34px;
+  border:1px solid var(--line);
+  border-radius:50%;
+  color:var(--nav);
+  cursor:pointer;
+  transition:color .3s var(--ease), border-color .3s var(--ease);
+}
+.modal-close:hover, .modal-close:focus-visible{ color:var(--warm); border-color:var(--warm-dim); }
+.modal-close svg{ width:14px; height:14px; }
+.modal-title{
+  font-family:'Space Grotesk','Poppins',sans-serif;
+  font-size:clamp(30px,4vw,44px);
+  line-height:1.08;
+  font-weight:600;
+  letter-spacing:-.02em;
+  color:var(--ink);
+  margin:14px 0 0;
+}
+.modal-sub{ margin:14px 0 0; font-size:15px; line-height:1.6; color:var(--muted); max-width:46ch; }
+
+.modal-body{
+  margin-top:clamp(30px,4vw,44px);
+  display:grid;
+  grid-template-columns:1.15fr 1fr;
+  gap:clamp(28px,4vw,56px);
+  align-items:start;
+}
+
+/* form ---------------------------------------------------------- */
+.contact-field{ display:flex; flex-direction:column; gap:9px; margin-bottom:18px; }
+.contact-field label{ font-size:13px; font-weight:600; color:var(--ink); }
+.contact-field input,
+.contact-field textarea{
+  width:100%;
+  font-family:inherit;
+  font-size:14px;
+  color:var(--ink);
+  background:rgba(255,255,255,.035);
+  border:1px solid var(--line);
+  border-radius:6px;
+  padding:14px 16px;
+  transition:border-color .3s var(--ease), background-color .3s var(--ease);
+  resize:vertical;
+}
+.contact-field input::placeholder,
+.contact-field textarea::placeholder{ color:var(--strip); }
+.contact-field input:focus,
+.contact-field textarea:focus{
+  outline:none;
+  border-color:var(--warm-dim);
+  background:rgba(255,255,255,.06);
+}
+.contact-form .pill{ width:100%; height:54px; margin-top:8px; font-size:15px; cursor:pointer; transition:opacity .25s var(--ease), transform .3s var(--ease), box-shadow .3s var(--ease); }
+.contact-form .pill:disabled{ opacity:.6; cursor:wait; transform:none; box-shadow:none; }
+.form-status{
+  margin:12px 0 0;
+  font-size:13px;
+  line-height:1.5;
+  min-height:1px;
+  display:none;
+}
+.form-status.is-ok{ display:block; color:#8fd19e; }
+.form-status.is-err{ display:block; color:#e2938f; }
+
+/* contact details ----------------------------------------------- */
+.contact-info{ display:flex; flex-direction:column; }
+.info-row{
+  display:grid;
+  grid-template-columns:22px 1fr;
+  column-gap:16px;
+  align-items:start;
+  padding-block:22px;
+  border-top:1px solid var(--line);
+}
+.info-row:first-child{ border-top:0; padding-top:4px; }
+.info-icon{ color:var(--nav); padding-top:2px; }
+.info-icon svg{ display:block; width:17px; height:17px; }
+.info-label{
+  display:block;
+  font-size:11px; font-weight:600; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--nav);
+}
+.info-value{ margin:10px 0 0; font-size:14.5px; line-height:1.75; color:var(--muted); }
+.info-value a{ color:var(--muted); border-bottom:1px solid var(--line); transition:color .3s var(--ease), border-color .3s var(--ease); }
+.info-value a:hover, .info-value a:focus-visible{ color:var(--warm); border-color:var(--warm-dim); }
+
+@media (max-width:820px){
+  .modal-body{ grid-template-columns:1fr; gap:32px; }
+}
+@media (max-width:1024px){
+  .modal-panel{ max-height:88vh; }
+}
+@supports (height:100dvh){
+  @media (max-width:1024px){
+    .modal-panel{ max-height:88dvh; }
+  }
+}
+@media (max-width:760px){
+  /* 16px is the threshold below which iOS Safari zooms the page on focus */
+  .contact-field input,
+  .contact-field textarea{ font-size:16px; }
+  .modal{ padding:16px; }
+  .modal-panel{ padding:clamp(22px, 5vw, 32px); }
+  .modal-close{ top:14px; right:14px; }
+  .modal-title{ padding-right:40px; }
+}
+@media (prefers-reduced-motion: reduce){
+  .modal, .modal-panel{ transition:none; }
 }
 </style>
 </head>
@@ -1314,9 +1471,9 @@ button{ font:inherit; color:inherit; background:none; border:0; }
       <a href="index.html#solutions">Solutions</a>
       <a href="products.html" aria-current="page">Products</a>
       <a href="index.html#industries">Industries</a>
-      <a href="index.html#contact">Contact</a>
+      <button type="button" data-modal-open="contactModal">Contact</button>
     </nav>
-    <a class="pill" href="index.html#contact"><span>Get Started</span></a>
+    <button type="button" class="pill" data-modal-open="contactModal"><span>Get Started</span></button>
   </div>
 </header>
 
@@ -1386,10 +1543,10 @@ button{ font:inherit; color:inherit; background:none; border:0; }
           <p class="prod-kicker">College ERP</p>
           <p class="prod-desc">Complete college management covering admissions, student records, academics, examinations, fees, faculty, placements and institutional administration.</p>
           <ul class="prod-tags"><li>Admissions</li><li>Examinations</li><li>Placements</li></ul>
-          <a class="prod-cta" href="index.html#contact">
+          <button type="button" class="prod-cta" data-modal-open="contactModal">
             <span>Request a walkthrough</span>
             <i aria-hidden="true">&#8594;</i>
-          </a>
+          </button>
         </article>
         <article class="prod rv" style="--d:0.08s" data-cat="education" data-search="edunex school erp school administration covering admissions, attendance, examinations, report cards, fees, teacher records, parent communication and transport. report cards fees transport">
           <span class="prod-accent" aria-hidden="true"></span>
@@ -1401,10 +1558,10 @@ button{ font:inherit; color:inherit; background:none; border:0; }
           <p class="prod-kicker">School ERP</p>
           <p class="prod-desc">School administration covering admissions, attendance, examinations, report cards, fees, teacher records, parent communication and transport.</p>
           <ul class="prod-tags"><li>Report cards</li><li>Fees</li><li>Transport</li></ul>
-          <a class="prod-cta" href="index.html#contact">
+          <button type="button" class="prod-cta" data-modal-open="contactModal">
             <span>Request a walkthrough</span>
             <i aria-hidden="true">&#8594;</i>
-          </a>
+          </button>
         </article>
         <article class="prod rv" style="--d:0.12s" data-cat="education" data-search="hostelsync hostel management hostel operations with biometric attendance integration, ivr-based parental leave approval, digital leave workflows and mess token management. biometric ivr approval mess tokens">
           <span class="prod-accent" aria-hidden="true"></span>
@@ -1416,10 +1573,10 @@ button{ font:inherit; color:inherit; background:none; border:0; }
           <p class="prod-kicker">Hostel Management</p>
           <p class="prod-desc">Hostel operations with biometric attendance integration, IVR-based parental leave approval, digital leave workflows and mess token management.</p>
           <ul class="prod-tags"><li>Biometric</li><li>IVR approval</li><li>Mess tokens</li></ul>
-          <a class="prod-cta" href="index.html#contact">
+          <button type="button" class="prod-cta" data-modal-open="contactModal">
             <span>Request a walkthrough</span>
             <i aria-hidden="true">&#8594;</i>
-          </a>
+          </button>
         </article>
         <article class="prod rv" style="--d:0.04s" data-cat="education" data-search="labops computer lab management centralised pc status monitoring, remote screen access, power management, hardware change detection and timestamped audit reports. remote screen power control audit trail">
           <span class="prod-accent" aria-hidden="true"></span>
@@ -1431,10 +1588,10 @@ button{ font:inherit; color:inherit; background:none; border:0; }
           <p class="prod-kicker">Computer Lab Management</p>
           <p class="prod-desc">Centralised PC status monitoring, remote screen access, power management, hardware change detection and timestamped audit reports.</p>
           <ul class="prod-tags"><li>Remote screen</li><li>Power control</li><li>Audit trail</li></ul>
-          <a class="prod-cta" href="index.html#contact">
+          <button type="button" class="prod-cta" data-modal-open="contactModal">
             <span>Request a walkthrough</span>
             <i aria-hidden="true">&#8594;</i>
-          </a>
+          </button>
         </article>
         <article class="prod rv" style="--d:0.08s" data-cat="education" data-search="skillforge learning management system online courses, assignments, quizzes, assessments, certificates, learning progress and instructor-led training. courses assessments certificates">
           <span class="prod-accent" aria-hidden="true"></span>
@@ -1446,10 +1603,10 @@ button{ font:inherit; color:inherit; background:none; border:0; }
           <p class="prod-kicker">Learning Management System</p>
           <p class="prod-desc">Online courses, assignments, quizzes, assessments, certificates, learning progress and instructor-led training.</p>
           <ul class="prod-tags"><li>Courses</li><li>Assessments</li><li>Certificates</li></ul>
-          <a class="prod-cta" href="index.html#contact">
+          <button type="button" class="prod-cta" data-modal-open="contactModal">
             <span>Request a walkthrough</span>
             <i aria-hidden="true">&#8594;</i>
-          </a>
+          </button>
         </article>
       </div>
     </section>
@@ -1474,10 +1631,10 @@ button{ font:inherit; color:inherit; background:none; border:0; }
           <p class="prod-kicker">Finance Management</p>
           <p class="prod-desc">Enterprise finance management with daybook, ledger, loan processing, KYC, CIF, document management and full audit logging.</p>
           <ul class="prod-tags"><li>Daybook</li><li>Loans</li><li>KYC &amp; CIF</li></ul>
-          <a class="prod-cta" href="index.html#contact">
+          <button type="button" class="prod-cta" data-modal-open="contactModal">
             <span>Request a walkthrough</span>
             <i aria-hidden="true">&#8594;</i>
-          </a>
+          </button>
         </article>
         <article class="prod rv" style="--d:0.08s" data-cat="finance" data-search="vasool microfinance collection app microfinance collection mobile app with customer payment tracking and bluetooth pos receipt printing in the field. field app bluetooth print collections">
           <span class="prod-accent" aria-hidden="true"></span>
@@ -1489,10 +1646,10 @@ button{ font:inherit; color:inherit; background:none; border:0; }
           <p class="prod-kicker">Microfinance Collection App</p>
           <p class="prod-desc">Microfinance collection mobile app with customer payment tracking and Bluetooth POS receipt printing in the field.</p>
           <ul class="prod-tags"><li>Field app</li><li>Bluetooth print</li><li>Collections</li></ul>
-          <a class="prod-cta" href="index.html#contact">
+          <button type="button" class="prod-cta" data-modal-open="contactModal">
             <span>Request a walkthrough</span>
             <i aria-hidden="true">&#8594;</i>
-          </a>
+          </button>
         </article>
         <article class="prod rv" style="--d:0.12s" data-cat="finance" data-search="chitflow chit fund management chit fund administration, member records, contributions, installments, payment history and reporting. members installments reporting">
           <span class="prod-accent" aria-hidden="true"></span>
@@ -1504,10 +1661,10 @@ button{ font:inherit; color:inherit; background:none; border:0; }
           <p class="prod-kicker">Chit Fund Management</p>
           <p class="prod-desc">Chit fund administration, member records, contributions, installments, payment history and reporting.</p>
           <ul class="prod-tags"><li>Members</li><li>Installments</li><li>Reporting</li></ul>
-          <a class="prod-cta" href="index.html#contact">
+          <button type="button" class="prod-cta" data-modal-open="contactModal">
             <span>Request a walkthrough</span>
             <i aria-hidden="true">&#8594;</i>
-          </a>
+          </button>
         </article>
         <article class="prod rv" style="--d:0.04s" data-cat="finance" data-search="billora billing & invoicing billing, quotation creation, invoice generation, customer management and payment tracking. quotations invoices payments">
           <span class="prod-accent" aria-hidden="true"></span>
@@ -1519,10 +1676,10 @@ button{ font:inherit; color:inherit; background:none; border:0; }
           <p class="prod-kicker">Billing &amp; Invoicing</p>
           <p class="prod-desc">Billing, quotation creation, invoice generation, customer management and payment tracking.</p>
           <ul class="prod-tags"><li>Quotations</li><li>Invoices</li><li>Payments</li></ul>
-          <a class="prod-cta" href="index.html#contact">
+          <button type="button" class="prod-cta" data-modal-open="contactModal">
             <span>Request a walkthrough</span>
             <i aria-hidden="true">&#8594;</i>
-          </a>
+          </button>
         </article>
         <article class="prod rv" style="--d:0.08s" data-cat="finance" data-search="payflow subscription billing subscription management, recurring billing cycles, renewals, invoices and payment status tracking. recurring renewals reminders">
           <span class="prod-accent" aria-hidden="true"></span>
@@ -1534,10 +1691,10 @@ button{ font:inherit; color:inherit; background:none; border:0; }
           <p class="prod-kicker">Subscription Billing</p>
           <p class="prod-desc">Subscription management, recurring billing cycles, renewals, invoices and payment status tracking.</p>
           <ul class="prod-tags"><li>Recurring</li><li>Renewals</li><li>Reminders</li></ul>
-          <a class="prod-cta" href="index.html#contact">
+          <button type="button" class="prod-cta" data-modal-open="contactModal">
             <span>Request a walkthrough</span>
             <i aria-hidden="true">&#8594;</i>
-          </a>
+          </button>
         </article>
       </div>
     </section>
@@ -1562,10 +1719,10 @@ button{ font:inherit; color:inherit; background:none; border:0; }
           <p class="prod-kicker">Point of Sale</p>
           <p class="prod-desc">POS software for fast checkout, sales processing, product management and sales reporting.</p>
           <ul class="prod-tags"><li>Checkout</li><li>Catalogue</li><li>Day reports</li></ul>
-          <a class="prod-cta" href="index.html#contact">
+          <button type="button" class="prod-cta" data-modal-open="contactModal">
             <span>Request a walkthrough</span>
             <i aria-hidden="true">&#8594;</i>
-          </a>
+          </button>
         </article>
         <article class="prod rv" style="--d:0.08s" data-cat="retail" data-search="medistock pharmacy management pharmacy management for medicine inventory, batch tracking, expiry monitoring, billing and supplier records. batch tracking expiry alerts suppliers">
           <span class="prod-accent" aria-hidden="true"></span>
@@ -1577,10 +1734,10 @@ button{ font:inherit; color:inherit; background:none; border:0; }
           <p class="prod-kicker">Pharmacy Management</p>
           <p class="prod-desc">Pharmacy management for medicine inventory, batch tracking, expiry monitoring, billing and supplier records.</p>
           <ul class="prod-tags"><li>Batch tracking</li><li>Expiry alerts</li><li>Suppliers</li></ul>
-          <a class="prod-cta" href="index.html#contact">
+          <button type="button" class="prod-cta" data-modal-open="contactModal">
             <span>Request a walkthrough</span>
             <i aria-hidden="true">&#8594;</i>
-          </a>
+          </button>
         </article>
         <article class="prod rv" style="--d:0.12s" data-cat="retail" data-search="stockwise inventory & warehouse inventory and warehouse management covering stock movements, purchasing, transfers and multi-location inventory. movements transfers multi-location">
           <span class="prod-accent" aria-hidden="true"></span>
@@ -1592,10 +1749,10 @@ button{ font:inherit; color:inherit; background:none; border:0; }
           <p class="prod-kicker">Inventory &amp; Warehouse</p>
           <p class="prod-desc">Inventory and warehouse management covering stock movements, purchasing, transfers and multi-location inventory.</p>
           <ul class="prod-tags"><li>Movements</li><li>Transfers</li><li>Multi-location</li></ul>
-          <a class="prod-cta" href="index.html#contact">
+          <button type="button" class="prod-cta" data-modal-open="contactModal">
             <span>Request a walkthrough</span>
             <i aria-hidden="true">&#8594;</i>
-          </a>
+          </button>
         </article>
         <article class="prod rv" style="--d:0.04s" data-cat="retail" data-search="procureflow procurement & vendors procurement and vendor management covering purchase requests, supplier quotations, purchase orders and approval workflows. requisitions quotations approvals">
           <span class="prod-accent" aria-hidden="true"></span>
@@ -1607,10 +1764,10 @@ button{ font:inherit; color:inherit; background:none; border:0; }
           <p class="prod-kicker">Procurement &amp; Vendors</p>
           <p class="prod-desc">Procurement and vendor management covering purchase requests, supplier quotations, purchase orders and approval workflows.</p>
           <ul class="prod-tags"><li>Requisitions</li><li>Quotations</li><li>Approvals</li></ul>
-          <a class="prod-cta" href="index.html#contact">
+          <button type="button" class="prod-cta" data-modal-open="contactModal">
             <span>Request a walkthrough</span>
             <i aria-hidden="true">&#8594;</i>
-          </a>
+          </button>
         </article>
       </div>
     </section>
@@ -1635,10 +1792,10 @@ button{ font:inherit; color:inherit; background:none; border:0; }
           <p class="prod-kicker">Construction Management</p>
           <p class="prod-desc">Construction project management for site activities, materials, labour, budgets, contractor payments and progress tracking.</p>
           <ul class="prod-tags"><li>Site activity</li><li>Budgets</li><li>Contractors</li></ul>
-          <a class="prod-cta" href="index.html#contact">
+          <button type="button" class="prod-cta" data-modal-open="contactModal">
             <span>Request a walkthrough</span>
             <i aria-hidden="true">&#8594;</i>
-          </a>
+          </button>
         </article>
         <article class="prod rv" style="--d:0.08s" data-cat="assets" data-search="assettrack asset lifecycle asset lifecycle management for equipment, computers, allocation, warranties, service records and maintenance schedules. allocation warranty service logs">
           <span class="prod-accent" aria-hidden="true"></span>
@@ -1650,10 +1807,10 @@ button{ font:inherit; color:inherit; background:none; border:0; }
           <p class="prod-kicker">Asset Lifecycle</p>
           <p class="prod-desc">Asset lifecycle management for equipment, computers, allocation, warranties, service records and maintenance schedules.</p>
           <ul class="prod-tags"><li>Allocation</li><li>Warranty</li><li>Service logs</li></ul>
-          <a class="prod-cta" href="index.html#contact">
+          <button type="button" class="prod-cta" data-modal-open="contactModal">
             <span>Request a walkthrough</span>
             <i aria-hidden="true">&#8594;</i>
-          </a>
+          </button>
         </article>
       </div>
     </section>
@@ -1678,10 +1835,10 @@ button{ font:inherit; color:inherit; background:none; border:0; }
           <p class="prod-kicker">Freight Operations Platform</p>
           <p class="prod-desc">Fleet and transport-operations platform for Indian road-freight companies covering bookings, dispatch, trip tracking, cargo security, maintenance, GST invoicing, settlements, analytics and a document-grounded AI assistant.</p>
           <ul class="prod-tags"><li>Live dispatch</li><li>GST &amp; settlements</li><li>Document AI</li></ul>
-          <a class="prod-cta" href="index.html#contact">
+          <button type="button" class="prod-cta" data-modal-open="contactModal">
             <span>Request a walkthrough</span>
             <i aria-hidden="true">&#8594;</i>
-          </a>
+          </button>
         </article>
       </div>
     </section>
@@ -1706,10 +1863,10 @@ button{ font:inherit; color:inherit; background:none; border:0; }
           <p class="prod-kicker">Customer Relationship Management</p>
           <p class="prod-desc">CRM for customer profiles, lead tracking, sales pipelines, follow-ups and complete interaction history.</p>
           <ul class="prod-tags"><li>Leads</li><li>Pipelines</li><li>Follow-ups</li></ul>
-          <a class="prod-cta" href="index.html#contact">
+          <button type="button" class="prod-cta" data-modal-open="contactModal">
             <span>Request a walkthrough</span>
             <i aria-hidden="true">&#8594;</i>
-          </a>
+          </button>
         </article>
         <article class="prod rv" style="--d:0.08s" data-cat="business" data-search="peoplehub hr & workforce hr and workforce management for employee records, recruitment, attendance, leave and payroll workflows. recruitment attendance payroll">
           <span class="prod-accent" aria-hidden="true"></span>
@@ -1721,10 +1878,10 @@ button{ font:inherit; color:inherit; background:none; border:0; }
           <p class="prod-kicker">HR &amp; Workforce</p>
           <p class="prod-desc">HR and workforce management for employee records, recruitment, attendance, leave and payroll workflows.</p>
           <ul class="prod-tags"><li>Recruitment</li><li>Attendance</li><li>Payroll</li></ul>
-          <a class="prod-cta" href="index.html#contact">
+          <button type="button" class="prod-cta" data-modal-open="contactModal">
             <span>Request a walkthrough</span>
             <i aria-hidden="true">&#8594;</i>
-          </a>
+          </button>
         </article>
         <article class="prod rv" style="--d:0.12s" data-cat="business" data-search="docuflow document management document management with version history, approval workflows, access permissions and expiry reminders. versions permissions reminders">
           <span class="prod-accent" aria-hidden="true"></span>
@@ -1736,10 +1893,10 @@ button{ font:inherit; color:inherit; background:none; border:0; }
           <p class="prod-kicker">Document Management</p>
           <p class="prod-desc">Document management with version history, approval workflows, access permissions and expiry reminders.</p>
           <ul class="prod-tags"><li>Versions</li><li>Permissions</li><li>Reminders</li></ul>
-          <a class="prod-cta" href="index.html#contact">
+          <button type="button" class="prod-cta" data-modal-open="contactModal">
             <span>Request a walkthrough</span>
             <i aria-hidden="true">&#8594;</i>
-          </a>
+          </button>
         </article>
         <article class="prod rv" style="--d:0.04s" data-cat="business" data-search="helpnest helpdesk & itsm helpdesk and it service management for tickets, incidents, assignments, escalations and resolution history. tickets escalations resolution log">
           <span class="prod-accent" aria-hidden="true"></span>
@@ -1751,10 +1908,10 @@ button{ font:inherit; color:inherit; background:none; border:0; }
           <p class="prod-kicker">Helpdesk &amp; ITSM</p>
           <p class="prod-desc">Helpdesk and IT service management for tickets, incidents, assignments, escalations and resolution history.</p>
           <ul class="prod-tags"><li>Tickets</li><li>Escalations</li><li>Resolution log</li></ul>
-          <a class="prod-cta" href="index.html#contact">
+          <button type="button" class="prod-cta" data-modal-open="contactModal">
             <span>Request a walkthrough</span>
             <i aria-hidden="true">&#8594;</i>
-          </a>
+          </button>
         </article>
         <article class="prod rv" style="--d:0.08s" data-cat="business" data-search="insightiq business intelligence business intelligence with dashboards, operational kpis, trend analysis and management reporting. dashboards kpis trends">
           <span class="prod-accent" aria-hidden="true"></span>
@@ -1766,10 +1923,10 @@ button{ font:inherit; color:inherit; background:none; border:0; }
           <p class="prod-kicker">Business Intelligence</p>
           <p class="prod-desc">Business intelligence with dashboards, operational KPIs, trend analysis and management reporting.</p>
           <ul class="prod-tags"><li>Dashboards</li><li>KPIs</li><li>Trends</li></ul>
-          <a class="prod-cta" href="index.html#contact">
+          <button type="button" class="prod-cta" data-modal-open="contactModal">
             <span>Request a walkthrough</span>
             <i aria-hidden="true">&#8594;</i>
-          </a>
+          </button>
         </article>
       </div>
     </section>
@@ -1794,10 +1951,10 @@ button{ font:inherit; color:inherit; background:none; border:0; }
           <p class="prod-kicker">Overseas Consultancy</p>
           <p class="prod-desc">Foreign consultancy management for clients, applications, documentation, follow-ups and case tracking.</p>
           <ul class="prod-tags"><li>Applications</li><li>Documents</li><li>Case stages</li></ul>
-          <a class="prod-cta" href="index.html#contact">
+          <button type="button" class="prod-cta" data-modal-open="contactModal">
             <span>Request a walkthrough</span>
             <i aria-hidden="true">&#8594;</i>
-          </a>
+          </button>
         </article>
         <article class="prod rv" style="--d:0.08s" data-cat="services" data-search="docslot appointment scheduling doctor appointment scheduling, patient registration, doctor availability and booking management. availability bookings registration">
           <span class="prod-accent" aria-hidden="true"></span>
@@ -1809,10 +1966,10 @@ button{ font:inherit; color:inherit; background:none; border:0; }
           <p class="prod-kicker">Appointment Scheduling</p>
           <p class="prod-desc">Doctor appointment scheduling, patient registration, doctor availability and booking management.</p>
           <ul class="prod-tags"><li>Availability</li><li>Bookings</li><li>Registration</li></ul>
-          <a class="prod-cta" href="index.html#contact">
+          <button type="button" class="prod-cta" data-modal-open="contactModal">
             <span>Request a walkthrough</span>
             <i aria-hidden="true">&#8594;</i>
-          </a>
+          </button>
         </article>
         <article class="prod rv" style="--d:0.12s" data-cat="services" data-search="carebridge clinic management clinic administration for patient records, consultations, prescriptions, billing and follow-up scheduling. records prescriptions billing">
           <span class="prod-accent" aria-hidden="true"></span>
@@ -1824,10 +1981,10 @@ button{ font:inherit; color:inherit; background:none; border:0; }
           <p class="prod-kicker">Clinic Management</p>
           <p class="prod-desc">Clinic administration for patient records, consultations, prescriptions, billing and follow-up scheduling.</p>
           <ul class="prod-tags"><li>Records</li><li>Prescriptions</li><li>Billing</li></ul>
-          <a class="prod-cta" href="index.html#contact">
+          <button type="button" class="prod-cta" data-modal-open="contactModal">
             <span>Request a walkthrough</span>
             <i aria-hidden="true">&#8594;</i>
-          </a>
+          </button>
         </article>
       </div>
     </section>
@@ -1852,10 +2009,10 @@ button{ font:inherit; color:inherit; background:none; border:0; }
           <p class="prod-kicker">Event Management</p>
           <p class="prod-desc">Event planning, registrations, attendee management, QR-code check-in, scheduling and event analytics.</p>
           <ul class="prod-tags"><li>Registrations</li><li>QR check-in</li><li>Analytics</li></ul>
-          <a class="prod-cta" href="index.html#contact">
+          <button type="button" class="prod-cta" data-modal-open="contactModal">
             <span>Request a walkthrough</span>
             <i aria-hidden="true">&#8594;</i>
-          </a>
+          </button>
         </article>
         <article class="prod rv" style="--d:0.08s" data-cat="community" data-search="janconnect membership management political membership management, organisational units, membership records, volunteer coordination and authorised outreach. units members volunteers">
           <span class="prod-accent" aria-hidden="true"></span>
@@ -1867,10 +2024,10 @@ button{ font:inherit; color:inherit; background:none; border:0; }
           <p class="prod-kicker">Membership Management</p>
           <p class="prod-desc">Political membership management, organisational units, membership records, volunteer coordination and authorised outreach.</p>
           <ul class="prod-tags"><li>Units</li><li>Members</li><li>Volunteers</li></ul>
-          <a class="prod-cta" href="index.html#contact">
+          <button type="button" class="prod-cta" data-modal-open="contactModal">
             <span>Request a walkthrough</span>
             <i aria-hidden="true">&#8594;</i>
-          </a>
+          </button>
         </article>
       </div>
     </section>
@@ -1895,10 +2052,10 @@ button{ font:inherit; color:inherit; background:none; border:0; }
           <p class="prod-kicker">Custom Development</p>
           <p class="prod-desc">Custom e-commerce websites, business web applications, mobile applications and API integrations.</p>
           <ul class="prod-tags"><li>Web apps</li><li>Mobile</li><li>Integrations</li></ul>
-          <a class="prod-cta" href="index.html#contact">
+          <button type="button" class="prod-cta" data-modal-open="contactModal">
             <span>Request a walkthrough</span>
             <i aria-hidden="true">&#8594;</i>
-          </a>
+          </button>
         </article>
         <article class="prod rv" style="--d:0.08s" data-cat="commerce" data-search="shopnest e-commerce platform online storefronts, product catalogues, shopping carts, orders, customer accounts and e-commerce administration. storefront carts orders">
           <span class="prod-accent" aria-hidden="true"></span>
@@ -1910,10 +2067,10 @@ button{ font:inherit; color:inherit; background:none; border:0; }
           <p class="prod-kicker">E-Commerce Platform</p>
           <p class="prod-desc">Online storefronts, product catalogues, shopping carts, orders, customer accounts and e-commerce administration.</p>
           <ul class="prod-tags"><li>Storefront</li><li>Carts</li><li>Orders</li></ul>
-          <a class="prod-cta" href="index.html#contact">
+          <button type="button" class="prod-cta" data-modal-open="contactModal">
             <span>Request a walkthrough</span>
             <i aria-hidden="true">&#8594;</i>
-          </a>
+          </button>
         </article>
         <article class="prod rv" style="--d:0.12s" data-cat="commerce" data-search="bookora booking & appointments booking and appointment management for service businesses, including availability, reservations, cancellations and notifications. slots reservations notifications">
           <span class="prod-accent" aria-hidden="true"></span>
@@ -1925,10 +2082,10 @@ button{ font:inherit; color:inherit; background:none; border:0; }
           <p class="prod-kicker">Booking &amp; Appointments</p>
           <p class="prod-desc">Booking and appointment management for service businesses, including availability, reservations, cancellations and notifications.</p>
           <ul class="prod-tags"><li>Slots</li><li>Reservations</li><li>Notifications</li></ul>
-          <a class="prod-cta" href="index.html#contact">
+          <button type="button" class="prod-cta" data-modal-open="contactModal">
             <span>Request a walkthrough</span>
             <i aria-hidden="true">&#8594;</i>
-          </a>
+          </button>
         </article>
       </div>
     </section>
@@ -1947,7 +2104,7 @@ button{ font:inherit; color:inherit; background:none; border:0; }
     <h2 class="cta-h rv" style="--d:.06s">Not on the list?<br>We build that too.</h2>
     <p class="cta-p rv" style="--d:.12s">Tell us how your operation actually runs. We will map it to the closest platform here, or engineer what is missing.</p>
     <div class="cta-actions rv" style="--d:.18s">
-      <a class="pill" href="index.html#contact">Start a Conversation <i aria-hidden="true">&#8594;</i></a>
+      <button type="button" class="pill" data-modal-open="contactModal">Start a Conversation <i aria-hidden="true">&#8594;</i></button>
       <a class="pill pill-ghost" href="tel:+919492633000">+91 94926 33000</a>
     </div>
   </div>
@@ -1982,7 +2139,7 @@ button{ font:inherit; color:inherit; background:none; border:0; }
         <a href="index.html#solutions">Solutions</a>
         <a href="products.html">Products</a>
         <a href="index.html#industries">Industries</a>
-        <a href="index.html#contact">Contact</a>
+        <button type="button" data-modal-open="contactModal">Contact</button>
       </div>
       <div class="footer-col">
         <p class="footer-col-h">Categories</p>
@@ -2009,6 +2166,75 @@ button{ font:inherit; color:inherit; background:none; border:0; }
     </nav>
   </div>
 </footer>
+
+<!-- ── CONTACT MODAL ─────────────────────────────────────────── -->
+<div class="modal" id="contactModal" aria-hidden="true">
+  <div class="modal-backdrop" data-modal-close></div>
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
+    <button type="button" class="modal-close" data-modal-close aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 5L19 19M19 5L5 19"/></svg>
+    </button>
+    <p class="eyebrow">Get in touch</p>
+    <h2 id="contactModalTitle" class="modal-title">Contact Us</h2>
+    <p class="modal-sub">Have a project in mind? Let's talk about how we can help.</p>
+
+    <div class="modal-body">
+      <form class="contact-form" id="contactForm" action="https://formsubmit.co/ajax/msarunsanjeev@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="New inquiry from AALVINAI website">
+        <input type="hidden" name="_cc" value="sahithyamani074@gmail.com">
+        <input type="hidden" name="_template" value="table">
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="contact-field">
+          <label for="cf-name">Name</label>
+          <input id="cf-name" name="name" type="text" placeholder="Your full name" required>
+        </div>
+        <div class="contact-field">
+          <label for="cf-email">Email</label>
+          <input id="cf-email" name="email" type="email" placeholder="your@email.com" required>
+        </div>
+        <div class="contact-field">
+          <label for="cf-message">Message</label>
+          <textarea id="cf-message" name="message" rows="5" placeholder="Tell us about your project…" required></textarea>
+        </div>
+        <button type="submit" class="pill">
+          <span>Send Message &nbsp;→</span>
+        </button>
+        <p class="form-status" id="cfStatus" role="status" aria-live="polite"></p>
+      </form>
+
+      <div class="contact-info">
+        <div class="info-row">
+          <span class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M3.5 6.5L12 13L20.5 6.5"/></svg></span>
+          <div>
+            <span class="info-label">Email</span>
+            <p class="info-value"><a href="mailto:hello@aalvinai.in">hello@aalvinai.in</a></p>
+          </div>
+        </div>
+        <div class="info-row">
+          <span class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 10.5C7.8 13.2 9.8 15.2 12.5 16.5L14.5 14.5C14.8 14.2 15.2 14.1 15.6 14.2C16.8 14.6 18.1 14.8 19.5 14.8C20.1 14.8 20.5 15.2 20.5 15.8V19.5C20.5 20.1 20.1 20.5 19.5 20.5C10.9 20.5 3.5 13.1 3.5 4.5C3.5 3.9 3.9 3.5 4.5 3.5H8.2C8.8 3.5 9.2 3.9 9.2 4.5C9.2 5.9 9.4 7.2 9.8 8.4C9.9 8.8 9.8 9.2 9.5 9.5L7.5 11.5"/></svg></span>
+          <div>
+            <span class="info-label">Phone</span>
+            <p class="info-value"><a href="tel:+919492633000">+91 94926 33000</a></p>
+          </div>
+        </div>
+        <div class="info-row">
+          <span class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21.5C12 21.5 19 15.3 19 9.8C19 5.9 15.9 2.5 12 2.5C8.1 2.5 5 5.9 5 9.8C5 15.3 12 21.5 12 21.5Z"/><circle cx="12" cy="9.8" r="2.8"/></svg></span>
+          <div>
+            <span class="info-label">Location</span>
+            <p class="info-value">Tamil Nadu, India</p>
+          </div>
+        </div>
+        <div class="info-row">
+          <span class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7V12L15.5 14.5"/></svg></span>
+          <div>
+            <span class="info-label">Support</span>
+            <p class="info-value">24/7 service available</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 (function(){
@@ -2137,6 +2363,95 @@ button{ font:inherit; color:inherit; background:none; border:0; }
   }
 
   apply();
+})();
+</script>
+
+<!-- ══════════════════════════════════════════════════════════════
+     CONTACT MODAL + FORM — ported from index.html
+     ══════════════════════════════════════════════════════════════ -->
+<script>
+(function () {
+  'use strict';
+
+  /* ---- contact modal -------------------------------------------- */
+  var lastFocused = null;
+  function openModal(modal) {
+    lastFocused = document.activeElement;
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    var firstField = modal.querySelector('input, textarea');
+    if (firstField) firstField.focus();
+  }
+  function closeModal(modal) {
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (lastFocused && lastFocused.focus) lastFocused.focus();
+  }
+  document.querySelectorAll('[data-modal-open]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var modal = document.getElementById(btn.getAttribute('data-modal-open'));
+      if (modal) openModal(modal);
+    });
+  });
+  document.querySelectorAll('.modal').forEach(function (modal) {
+    modal.querySelectorAll('[data-modal-close]').forEach(function (el) {
+      el.addEventListener('click', function () { closeModal(modal); });
+    });
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    var openModalEl = document.querySelector('.modal.is-open');
+    if (openModalEl) closeModal(openModalEl);
+  });
+
+  /* ---- contact form submission (FormSubmit) --------------------- */
+  var contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    var cfStatus = document.getElementById('cfStatus');
+    var cfButton = contactForm.querySelector('button[type="submit"]');
+    var cfButtonLabel = cfButton.innerHTML;
+
+    function setStatus(msg, kind) {
+      cfStatus.textContent = msg;
+      cfStatus.classList.remove('is-ok', 'is-err');
+      if (kind) cfStatus.classList.add(kind === 'ok' ? 'is-ok' : 'is-err');
+    }
+
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (contactForm.querySelector('[name="_honey"]').value) return; // spam honeypot tripped
+
+      cfButton.disabled = true;
+      cfButton.innerHTML = '<span>Sending…</span>';
+      setStatus('', null);
+
+      var payload = Object.fromEntries(new FormData(contactForm));
+
+      fetch(contactForm.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload)
+      })
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          if (data.success === true || data.success === 'true') {
+            setStatus('Thanks — your message is on its way. We’ll be in touch shortly.', 'ok');
+            contactForm.reset();
+          } else {
+            setStatus(data.message || 'Something went wrong. Please try again or email us directly.', 'err');
+          }
+        })
+        .catch(function () {
+          setStatus('Network error — please try again or email hello@aalvinai.in directly.', 'err');
+        })
+        .finally(function () {
+          cfButton.disabled = false;
+          cfButton.innerHTML = cfButtonLabel;
+        });
+    });
+  }
 })();
 </script>
 </body>
