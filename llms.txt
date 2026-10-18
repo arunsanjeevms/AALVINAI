@@ -1,0 +1,71 @@
+# AALVINAI Technologies
+
+> AALVINAI Technologies is a software company based in Tamil Nadu, India. It builds, deploys and supports 30 business software products in-house — ERP for colleges and schools, finance and lending, billing, POS, pharmacy, inventory, procurement, construction, transport, CRM, HR, documents, helpdesk, BI, healthcare, events and e-commerce — and takes on custom web, mobile and AI development.
+
+Every product shares one architecture and can run on its own or alongside the others. Contact: hello@aalvinai.in · +91 94926 33000 · Tamil Nadu, India.
+
+## Products
+
+### Education & Campus
+
+- [CampusOS — College ERP software](https://aalvinai.in/products/campusos/): Complete college management covering admissions, student records, academics, examinations, fees, faculty, placements and institutional administration.
+- [EduNex — School ERP software](https://aalvinai.in/products/edunex/): School administration covering admissions, attendance, examinations, report cards, fees, teacher records, parent communication and transport.
+- [HostelSync — Hostel management software](https://aalvinai.in/products/hostelsync/): Hostel operations with biometric attendance integration, IVR-based parental leave approval, digital leave workflows and mess token management.
+- [LabOps — Computer lab management software](https://aalvinai.in/products/labops/): Centralised PC status monitoring, remote screen access, power management, hardware change detection and timestamped audit reports.
+- [SkillForge — Learning management system (LMS)](https://aalvinai.in/products/skillforge/): Online courses, assignments, quizzes, assessments, certificates, learning progress and instructor-led training.
+
+### Finance, Accounting & Financial Services
+
+- [Credixa — Loan & finance management software](https://aalvinai.in/products/credixa/): Enterprise finance management with daybook, ledger, loan processing, KYC, CIF, document management and full audit logging.
+- [Vasool — Microfinance collection app](https://aalvinai.in/products/vasool/): Microfinance collection mobile app with customer payment tracking and Bluetooth POS receipt printing in the field.
+- [ChitFlow — Chit fund management software](https://aalvinai.in/products/chitflow/): Chit fund administration, member records, contributions, installments, payment history and reporting.
+- [Billora — Billing & invoicing software](https://aalvinai.in/products/billora/): Billing, quotation creation, invoice generation, customer management and payment tracking.
+- [PayFlow — Subscription billing software](https://aalvinai.in/products/payflow/): Subscription management, recurring billing cycles, renewals, invoices and payment status tracking.
+
+### Retail, Inventory & Procurement
+
+- [PointOps — POS billing software](https://aalvinai.in/products/pointops/): POS software for fast checkout, sales processing, product management and sales reporting.
+- [MediStock — Pharmacy management software](https://aalvinai.in/products/medistock/): Pharmacy management for medicine inventory, batch tracking, expiry monitoring, billing and supplier records.
+- [StockWise — Inventory & warehouse management software](https://aalvinai.in/products/stockwise/): Inventory and warehouse management covering stock movements, purchasing, transfers and multi-location inventory.
+- [ProcureFlow — Procurement & vendor management software](https://aalvinai.in/products/procureflow/): Procurement and vendor management covering purchase requests, supplier quotations, purchase orders and approval workflows.
+
+### Construction & Assets
+
+- [Buildora — Construction project management software](https://aalvinai.in/products/buildora/): Construction project management for site activities, materials, labour, budgets, contractor payments and progress tracking.
+- [AssetTrack — Asset management software](https://aalvinai.in/products/assettrack/): Asset lifecycle management for equipment, computers, allocation, warranties, service records and maintenance schedules.
+
+### Transport & Logistics
+
+- [TransAxis — Fleet & transport management software](https://aalvinai.in/products/transaxis/): Fleet and transport-operations platform for Indian road-freight companies covering bookings, dispatch, trip tracking, cargo security, maintenance, GST invoicing, settlements, analytics and a document-grounded AI assistant.
+
+### Business Management & Enterprise Productivity
+
+- [Connectra — CRM software](https://aalvinai.in/products/connectra/): CRM for customer profiles, lead tracking, sales pipelines, follow-ups and complete interaction history.
+- [PeopleHub — HR & payroll software](https://aalvinai.in/products/peoplehub/): HR and workforce management for employee records, recruitment, attendance, leave and payroll workflows.
+- [DocuFlow — Document management system](https://aalvinai.in/products/docuflow/): Document management with version history, approval workflows, access permissions and expiry reminders.
+- [HelpNest — Helpdesk & IT service management software](https://aalvinai.in/products/helpnest/): Helpdesk and IT service management for tickets, incidents, assignments, escalations and resolution history.
+- [InsightIQ — Business intelligence software](https://aalvinai.in/products/insightiq/): Business intelligence with dashboards, operational KPIs, trend analysis and management reporting.
+
+### Consultancy, Healthcare & Professional Services
+
+- [GlobePath — Overseas consultancy management software](https://aalvinai.in/products/globepath/): Foreign consultancy management for clients, applications, documentation, follow-ups and case tracking.
+- [DocSlot — Doctor appointment booking software](https://aalvinai.in/products/docslot/): Doctor appointment scheduling, patient registration, doctor availability and booking management.
+- [CareBridge — Clinic management software](https://aalvinai.in/products/carebridge/): Clinic administration for patient records, consultations, prescriptions, billing and follow-up scheduling.
+
+### Events, Membership & Community
+
+- [Eventora — Event management software](https://aalvinai.in/products/eventora/): Event planning, registrations, attendee management, QR-code check-in, scheduling and event analytics.
+- [JanConnect — Political membership management software](https://aalvinai.in/products/janconnect/): Political membership management, organisational units, membership records, volunteer coordination and authorised outreach.
+
+### Digital Commerce & Custom Development
+
+- [Nexora — Custom web & mobile app development](https://aalvinai.in/products/nexora/): Custom e-commerce websites, business web applications, mobile applications and API integrations.
+- [ShopNest — E-commerce platform](https://aalvinai.in/products/shopnest/): Online storefronts, product catalogues, shopping carts, orders, customer accounts and e-commerce administration.
+- [Bookora — Booking & appointment software](https://aalvinai.in/products/bookora/): Booking and appointment management for service businesses, including availability, reservations, cancellations and notifications.
+
+## Company
+
+- [Home](https://aalvinai.in/): who AALVINAI is, its solutions and the industries it serves
+- [All products](https://aalvinai.in/products.html): the full catalogue with search and category filters
+- [Privacy Policy](https://aalvinai.in/privacy.html)
+- [Terms of Service](https://aalvinai.in/terms.html)
