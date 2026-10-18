@@ -3,11 +3,16 @@
 <head>
 <meta charset="utf-8">
 <script>
-// Prevent scroll restoration and lock to top immediately
+// Prevent scroll restoration and lock to top immediately. A deep link such as
+// /#solutions (from another page) is remembered and honoured once the opening
+// splash has gone, instead of being dropped.
 if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+window.__deepLink = window.location.hash || '';
 if (window.location.hash) {
   try { history.replaceState(null, document.title, window.location.pathname + window.location.search); } catch (e) {}
 }
+// The splash plays once per browser session; later visits go straight to the page.
+try { if (sessionStorage.getItem('aalvinai:splash') === '1') { document.documentElement.classList.add('splash-seen'); } } catch (e) {}
 window.scrollTo(0, 0);
 if (document.documentElement) { document.documentElement.scrollTop = 0; }
 </script>
@@ -703,6 +708,7 @@ body.is-loading {
   transition:opacity .65s cubic-bezier(.22,1,.36,1), transform .65s cubic-bezier(.22,1,.36,1), visibility .65s cubic-bezier(.22,1,.36,1);
   will-change:opacity, transform;
 }
+html.splash-seen .splash{ display:none; }
 .splash.is-done{
   opacity:0;
   transform:scale(1.02);
@@ -2730,6 +2736,33 @@ img{ max-width:100%; height:auto; }
   var splash = document.getElementById('splash');
   if (!splash) return;
 
+  // Jump to a remembered deep link (e.g. /#solutions) — instantly, like a normal
+  // anchor, rather than animating down from the top of the page
+  var goToDeepLink = function () {
+    var hash = window.__deepLink;
+    window.__deepLink = '';
+    if (!hash) return;
+    var target = null;
+    try { target = document.querySelector(hash); } catch (e) {}
+    if (!target) return;
+    try { history.replaceState(null, document.title, hash); } catch (e) {}
+    var root = document.documentElement, behaviour = root.style.scrollBehavior;
+    root.style.scrollBehavior = 'auto';
+    target.scrollIntoView();
+    root.style.scrollBehavior = behaviour;
+  };
+
+  // Splash already played this session: release the page straight away
+  if (document.documentElement.classList.contains('splash-seen')) {
+    document.documentElement.classList.remove('is-loading');
+    document.body.classList.remove('is-loading');
+    if (splash.parentNode) splash.parentNode.removeChild(splash);
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', goToDeepLink);
+    else goToDeepLink();
+    return;
+  }
+  try { sessionStorage.setItem('aalvinai:splash', '1'); } catch (e) {}
+
   // Immediately lock scroll to top
   window.scrollTo(0, 0);
   if (document.documentElement) document.documentElement.scrollTop = 0;
@@ -2754,11 +2787,19 @@ img{ max-width:100%; height:auto; }
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var hide = function () {
+    var deepLink = !!window.__deepLink;
     splash.classList.add('is-done');
-    // Ensure viewport stays strictly at top
-    window.scrollTo(0, 0);
-    if (document.documentElement) document.documentElement.scrollTop = 0;
-    if (document.body) document.body.scrollTop = 0;
+    if (deepLink) {
+      // release the page now so the requested section is what the fading splash reveals
+      document.documentElement.classList.remove('is-loading');
+      document.body.classList.remove('is-loading');
+      goToDeepLink();
+    } else {
+      // Ensure viewport stays strictly at top
+      window.scrollTo(0, 0);
+      if (document.documentElement) document.documentElement.scrollTop = 0;
+      if (document.body) document.body.scrollTop = 0;
+    }
 
     window.setTimeout(function () {
       document.documentElement.classList.remove('is-loading');
@@ -2766,7 +2807,7 @@ img{ max-width:100%; height:auto; }
       window.removeEventListener('wheel', preventDefault, { passive: false });
       window.removeEventListener('touchmove', preventDefault, { passive: false });
       window.removeEventListener('keydown', preventKeyScroll, { passive: false });
-      window.scrollTo(0, 0);
+      if (!deepLink) window.scrollTo(0, 0);
       if (splash.parentNode) splash.parentNode.removeChild(splash);
     }, 720);
   };
