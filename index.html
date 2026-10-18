@@ -1666,6 +1666,16 @@ section[id]{ scroll-margin-top:24px; }
   transition:opacity .3s var(--ease);
 }
 .ind-info.is-swap .ind-metrics{ opacity:0; }
+.ind-link{
+  position:relative; align-self:flex-start;
+  display:inline-flex; align-items:center; gap:8px; margin-top:20px;
+  font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--nav);
+  transition:color .3s var(--ease), opacity .3s var(--ease);
+}
+.ind-link i{ font-style:normal; transition:transform .4s var(--ease); }
+.ind-link:hover, .ind-link:focus-visible{ color:var(--warm); }
+.ind-link:hover i, .ind-link:focus-visible i{ transform:translateX(5px); }
+.ind-info.is-swap .ind-link{ opacity:0; }
 .ind-metric{
   display:inline-flex; align-items:center; gap:6px;
   padding:5px 12px;
@@ -3099,7 +3109,7 @@ img{ max-width:100%; height:auto; }
     </div>
     <div class="wrap">
     <div class="sol-grid" role="list">
-      <a class="sol rv" style="--d:.06s" href="#contact" role="listitem">
+      <a class="sol rv" style="--d:.06s" href="products.html" role="listitem">
         <span class="sol-accent" aria-hidden="true"></span>
         <span class="sol-head">
           <span class="sol-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3L21 8L12 13L3 8Z"/><path d="M3 13L12 18L21 13"/><path d="M3 17.5L12 22.5L21 17.5"/></svg></span>
@@ -3109,7 +3119,7 @@ img{ max-width:100%; height:auto; }
         <span class="sol-desc">Connect finance, operations, people and data through one intelligent system.</span>
         <span class="sol-cta">Explore <i aria-hidden="true">→</i></span>
       </a>
-      <a class="sol rv" style="--d:.08s" href="#contact" role="listitem">
+      <a class="sol rv" style="--d:.08s" href="products/connectra/" role="listitem">
         <span class="sol-accent" aria-hidden="true"></span>
         <span class="sol-head">
           <span class="sol-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20c0-3.3 2.5-5.8 5.5-5.8s5.5 2.5 5.5 5.8"/><circle cx="17.5" cy="7" r="2.3"/><path d="M15.8 14.6c2.7.4 4.7 2.6 4.7 5.4"/></svg></span>
@@ -3129,7 +3139,7 @@ img{ max-width:100%; height:auto; }
         <span class="sol-desc">Production-grade LLM integrations, autonomous RAG pipelines, and MCP tool architectures built to scale.</span>
         <span class="sol-cta">Explore <i aria-hidden="true">→</i></span>
       </a>
-      <a class="sol rv" style="--d:.12s" href="#contact" role="listitem">
+      <a class="sol rv" style="--d:.12s" href="products.html#finance" role="listitem">
         <span class="sol-accent" aria-hidden="true"></span>
         <span class="sol-head">
           <span class="sol-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5L20 6V11.5C20 16.5 16.6 20.3 12 21.5C7.4 20.3 4 16.5 4 11.5V6Z"/><path d="M9 12L11.2 14.2L15.5 9.5"/></svg></span>
@@ -3139,7 +3149,7 @@ img{ max-width:100%; height:auto; }
         <span class="sol-desc">Secure, high-performance financial infrastructure built for scale.</span>
         <span class="sol-cta">Explore <i aria-hidden="true">→</i></span>
       </a>
-      <a class="sol rv" style="--d:.14s" href="#contact" role="listitem">
+      <a class="sol rv" style="--d:.14s" href="products/credixa/" role="listitem">
         <span class="sol-accent" aria-hidden="true"></span>
         <span class="sol-head">
           <span class="sol-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2"/><circle cx="8.3" cy="12" r="2.2"/><path d="M5 16c0-1.7 1.5-3 3.3-3s3.3 1.3 3.3 3"/><path d="M14.5 9.5H19M14.5 12.5H19M14.5 15.5H17.2"/></svg></span>
@@ -3149,7 +3159,7 @@ img{ max-width:100%; height:auto; }
         <span class="sol-desc">Verify identity and stay compliant without slowing the business down.</span>
         <span class="sol-cta">Explore <i aria-hidden="true">→</i></span>
       </a>
-      <a class="sol rv" style="--d:.16s" href="#contact" role="listitem">
+      <a class="sol rv" style="--d:.16s" href="products/billora/" role="listitem">
         <span class="sol-accent" aria-hidden="true"></span>
         <span class="sol-head">
           <span class="sol-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2.5H15L19 6.5V21.5H6Z"/><path d="M14.5 2.5V7H19"/><path d="M9 12H16M9 15.5H16M9 18.5H13"/></svg></span>
@@ -3159,7 +3169,7 @@ img{ max-width:100%; height:auto; }
         <span class="sol-desc">Automated billing and reconciliation, engineered for accuracy.</span>
         <span class="sol-cta">Explore <i aria-hidden="true">→</i></span>
       </a>
-      <a class="sol rv" style="--d:.18s" href="#contact" role="listitem">
+      <a class="sol rv" style="--d:.18s" href="products/pointops/" role="listitem">
         <span class="sol-accent" aria-hidden="true"></span>
         <span class="sol-head">
           <span class="sol-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="1.8"/><path d="M3 8.5H21"/><path d="M6 13H10"/><path d="M9 17V20.5M15 17V20.5M7 20.5H17"/></svg></span>
@@ -3169,7 +3179,7 @@ img{ max-width:100%; height:auto; }
         <span class="sol-desc">Reliable point-of-sale systems built for speed at every counter.</span>
         <span class="sol-cta">Explore <i aria-hidden="true">→</i></span>
       </a>
-      <a class="sol rv" style="--d:.2s" href="#contact" role="listitem">
+      <a class="sol rv" style="--d:.2s" href="products/nexora/" role="listitem">
         <span class="sol-accent" aria-hidden="true"></span>
         <span class="sol-head">
           <span class="sol-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6.5" y="2.5" width="11" height="19" rx="2.2"/><path d="M10.5 19.2H13.5"/></svg></span>
@@ -3191,15 +3201,15 @@ img{ max-width:100%; height:auto; }
 
       <div class="ind-grid rv" style="--d:.12s">
         <div class="ind-list" role="tablist" aria-label="Industries" id="indList">
-          <button class="ind-item is-active" role="tab" aria-selected="true" data-i="0" data-desc="Secure platforms for payments, lending and compliance at scale.">Finance</button>
-          <button class="ind-item" role="tab" aria-selected="false" data-i="1" data-desc="Unified commerce across inventory, POS and customer experience.">Retail</button>
-          <button class="ind-item" role="tab" aria-selected="false" data-i="2" data-desc="Operational systems that connect every department into one system of record.">Enterprise</button>
-          <button class="ind-item" role="tab" aria-selected="false" data-i="3" data-desc="Reliable systems for patient data, scheduling and compliance.">Healthcare</button>
-          <button class="ind-item" role="tab" aria-selected="false" data-i="4" data-desc="Platforms that manage learners, records and operations with ease.">Education</button>
-          <button class="ind-item" role="tab" aria-selected="false" data-i="5" data-desc="Real-time visibility across fleets, inventory and delivery.">Logistics</button>
-          <button class="ind-item" role="tab" aria-selected="false" data-i="6" data-desc="Production, inventory and supply chain, engineered together.">Manufacturing</button>
-          <button class="ind-item" role="tab" aria-selected="false" data-i="7" data-desc="Client, billing and delivery workflows in a single system.">Services</button>
-          <button class="ind-item" role="tab" aria-selected="false" data-i="8" data-desc="Lean, scalable infrastructure built to move as fast as you do.">Startups</button>
+          <button class="ind-item is-active" role="tab" aria-selected="true" data-i="0" data-desc="Secure platforms for payments, lending and compliance at scale." data-href="products.html#finance" data-link="Explore finance products">Finance</button>
+          <button class="ind-item" role="tab" aria-selected="false" data-i="1" data-desc="Unified commerce across inventory, POS and customer experience." data-href="products.html#retail" data-link="Explore retail products">Retail</button>
+          <button class="ind-item" role="tab" aria-selected="false" data-i="2" data-desc="Operational systems that connect every department into one system of record." data-href="products.html#business" data-link="Explore enterprise products">Enterprise</button>
+          <button class="ind-item" role="tab" aria-selected="false" data-i="3" data-desc="Reliable systems for patient data, scheduling and compliance." data-href="products.html#services" data-link="Explore healthcare products">Healthcare</button>
+          <button class="ind-item" role="tab" aria-selected="false" data-i="4" data-desc="Platforms that manage learners, records and operations with ease." data-href="products.html#education" data-link="Explore education products">Education</button>
+          <button class="ind-item" role="tab" aria-selected="false" data-i="5" data-desc="Real-time visibility across fleets, inventory and delivery." data-href="products/transaxis/" data-link="Explore TransAxis">Logistics</button>
+          <button class="ind-item" role="tab" aria-selected="false" data-i="6" data-desc="Production, inventory and supply chain, engineered together." data-href="products.html#retail" data-link="Explore inventory &amp; procurement">Manufacturing</button>
+          <button class="ind-item" role="tab" aria-selected="false" data-i="7" data-desc="Client, billing and delivery workflows in a single system." data-href="products.html#services" data-link="Explore professional-services products">Services</button>
+          <button class="ind-item" role="tab" aria-selected="false" data-i="8" data-desc="Lean, scalable infrastructure built to move as fast as you do." data-href="products.html" data-link="Explore all products">Startups</button>
         </div>
 
         <div class="ind-panel" id="indPanel">
@@ -3225,6 +3235,7 @@ img{ max-width:100%; height:auto; }
               <span class="ind-metric"><span class="ind-metric-dot"></span>Compliance</span>
               <span class="ind-metric"><span class="ind-metric-dot"></span>Lending</span>
             </div>
+            <a class="ind-link" id="indLink" href="products.html#finance">Explore finance products <i aria-hidden="true">→</i></a>
           </div>
         </div>
       </div>
@@ -3501,11 +3512,11 @@ img{ max-width:100%; height:auto; }
         </div>
         <div class="footer-col">
           <p class="footer-col-h">Solutions</p>
-          <span>ERP Systems</span>
-          <span>CRM Platforms</span>
-          <span>AI Solutions</span>
-          <span>FinTech Platforms</span>
-          <span>POS Solutions</span>
+          <a href="products.html">ERP Systems</a>
+          <a href="products/connectra/">CRM Platforms</a>
+          <a href="#solutions">AI Solutions</a>
+          <a href="products.html#finance">FinTech Platforms</a>
+          <a href="products/pointops/">POS Solutions</a>
         </div>
         <div class="footer-col">
           <p class="footer-col-h">Contact</p>
@@ -4044,6 +4055,7 @@ img{ max-width:100%; height:auto; }
     var descEl = document.getElementById('indDesc');
     var iconWrap = document.getElementById('indIcon');
     var metricsEl = document.getElementById('indMetrics');
+    var linkEl = document.getElementById('indLink');
 
     /* industry-specific SVG icons */
     var indIcons = [
@@ -4091,6 +4103,11 @@ img{ max-width:100%; height:auto; }
         nameEl.textContent = num;
         titleEl.textContent = btn.textContent;
         descEl.textContent = btn.getAttribute('data-desc');
+        /* each industry links into the matching part of the product catalogue */
+        if (linkEl) {
+          linkEl.setAttribute('href', btn.getAttribute('data-href') || 'products.html');
+          linkEl.innerHTML = (btn.getAttribute('data-link') || 'Explore products') + ' <i aria-hidden="true">→</i>';
+        }
         watermark.textContent = num;
         vis.style.setProperty('--rot', (idx * 21) + 'deg');
         /* swap icon */
