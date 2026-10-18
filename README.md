@@ -21,18 +21,40 @@ AALVINAI Technologies builds intelligent AI, ERP, CRM and FinTech systems engine
 ## 📂 Repository Structure
 
 ```
-├── index.html              # Main single-page application & responsive design system
+├── index.html              # Home page & responsive design system
+├── products.html           # Product catalogue hub (cards/chips/JSON-LD are generated)
+├── products/<slug>/        # 30 generated product landing pages
+├── 404.html                # Branded not-found page (served by GitHub Pages)
 ├── privacy.html            # Data privacy, compliance & governance policy
 ├── terms.html              # Enterprise service terms & mutual obligations
-├── arunsanjeev.png         # Arun Sanjeev (Founder & Chief Architect)
-├── thiruvalluvar-white.png # Cultural motif & Thiruvalluvar heritage emblem
-├── og-image.png            # 1200×630 social share card (Open Graph / Twitter)
-├── favicon.ico             # Square favicon for browsers & search results
+├── _tools/build_products.py  # Product data + page/sitemap generator (not published)
+├── sitemap.xml             # Generated — every public page with git-based <lastmod>
+├── llms.txt                # Generated — plain-text summary for AI search tools
+├── 6bac…1144.txt           # IndexNow ownership key (do not delete)
 ├── robots.txt              # Crawler rules + sitemap pointer
-├── sitemap.xml             # Sitemap for search engines
-├── CNAME                   # GitHub Pages custom domain (aalvinai.in)
-├── .gitignore              # Environment & build artifact ignore rules
-└── README.md               # Platform documentation & architectural overview
+├── og-image.png            # 1200×630 social share card (Open Graph / Twitter)
+├── thiruvalluvar-white.webp  # Heritage figure used on the home page
+├── favicon.ico, logo-mark.*  # Icons
+└── CNAME                   # GitHub Pages custom domain (aalvinai.in)
+```
+
+---
+
+## 🧩 Products & SEO
+
+Product data lives in one place: the `PRODUCTS` list in `_tools/build_products.py`.
+To add, edit or retire a product, change that list and run:
+
+```bash
+python _tools/build_products.py          # writes products/<slug>/, products.html blocks, sitemap.xml, llms.txt
+python _tools/build_products.py --check  # CI-style check: exit 1 if anything generated is stale
+```
+
+The script warns if the hand-written counts in `products.html` (hero heading, stats, toolbar)
+no longer match. After deploying, notify Bing/Yandex instantly via IndexNow:
+
+```bash
+python _tools/build_products.py --indexnow
 ```
 
 ---
