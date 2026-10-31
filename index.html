@@ -1164,7 +1164,7 @@ section[id]{ scroll-margin-top:24px; }
 /* 02c · Clients — plain base between two patterned sections; hairline
    rails frame a slow ticker of client names that pauses on hover */
 .sec-clients{
-  padding-block:clamp(48px, 6vw, 84px);
+  padding-block:clamp(48px, 6vw, 84px) clamp(36px, 4.5vw, 60px);
   background:
     radial-gradient(ellipse 60% 90% at 50% 100%, rgba(201,162,116,.05) 0%, transparent 65%),
     var(--tone-a);
@@ -1181,38 +1181,38 @@ section[id]{ scroll-margin-top:24px; }
 .clients-track{
   display:flex;
   width:max-content;
-  animation:clientsScroll 42s linear infinite;
+  animation:clientsScroll 40s linear infinite;
 }
 .clients-marquee:hover .clients-track,
 .clients-marquee:focus-within .clients-track{ animation-play-state:paused; }
 .clients-set{ list-style:none; margin:0; padding:0; display:flex; align-items:center; flex:none; }
-.clients-set li{ display:flex; align-items:center; flex:none; padding-block:clamp(22px, 3vw, 34px); }
+.clients-set li{ display:flex; align-items:center; flex:none; padding-block:clamp(18px, 2.2vw, 24px); }
 .clients-set li::after{
   content:""; flex:none;
-  width:8px; height:8px;
-  margin-inline:clamp(28px, 4vw, 56px);
+  width:4px; height:4px;
+  margin-inline:clamp(26px, 3.4vw, 48px);
   background:var(--warm-dim);
   transform:rotate(45deg);
 }
 .clients-set a,
 .clients-set span{
   font-family:'Space Grotesk','Poppins',sans-serif;
-  font-size:clamp(24px, 3.4vw, 46px);
-  font-weight:600; line-height:1; letter-spacing:-.02em;
+  font-size:clamp(13px, 1.15vw, 15.5px);
+  font-weight:500; line-height:1; letter-spacing:.18em;
   text-transform:uppercase; white-space:nowrap;
-  color:rgba(250,250,250,.38);
+  color:var(--muted);
   transition:color .35s var(--ease);
 }
 .clients-set a::after{
   content:"↗"; display:inline-block; margin-left:.3em;
-  font-size:.45em; vertical-align:super; color:var(--warm);
+  font-size:.8em; letter-spacing:0; color:var(--warm);
   opacity:0; transition:opacity .35s var(--ease);
 }
 .clients-set a:hover, .clients-set a:focus-visible{ color:var(--ink); }
 .clients-set a:hover::after, .clients-set a:focus-visible::after{ opacity:1; }
 @keyframes clientsScroll{
   from{ transform:translateX(0); }
-  to{ transform:translateX(-50%); }
+  to{ transform:translateX(-25%); }
 }
 @media (prefers-reduced-motion: reduce){
   .clients-marquee{ -webkit-mask-image:none; mask-image:none; }
@@ -3215,6 +3215,22 @@ img{ max-width:100%; height:auto; }
           <li><a href="https://solaarrgalaxy.in/" target="_blank" rel="noopener">Solaarr Galaxy</a></li>
           <li><a href="https://sigaramcreative.in/" target="_blank" rel="noopener">Sigaram Digital Marketing Agency</a></li>
           <li><a href="https://afdc.co.in/" target="_blank" rel="noopener">AFDC</a></li>
+          <li><span>Elanthalir Finance</span></li>
+          <li><span>HS Properties</span></li>
+        </ul>
+        <ul class="clients-set" aria-hidden="true">
+          <li><a href="https://ledplanet.in/" target="_blank" rel="noopener" tabindex="-1">LED Planet</a></li>
+          <li><a href="https://solaarrgalaxy.in/" target="_blank" rel="noopener" tabindex="-1">Solaarr Galaxy</a></li>
+          <li><a href="https://sigaramcreative.in/" target="_blank" rel="noopener" tabindex="-1">Sigaram Digital Marketing Agency</a></li>
+          <li><a href="https://afdc.co.in/" target="_blank" rel="noopener" tabindex="-1">AFDC</a></li>
+          <li><span>Elanthalir Finance</span></li>
+          <li><span>HS Properties</span></li>
+        </ul>
+        <ul class="clients-set" aria-hidden="true">
+          <li><a href="https://ledplanet.in/" target="_blank" rel="noopener" tabindex="-1">LED Planet</a></li>
+          <li><a href="https://solaarrgalaxy.in/" target="_blank" rel="noopener" tabindex="-1">Solaarr Galaxy</a></li>
+          <li><a href="https://sigaramcreative.in/" target="_blank" rel="noopener" tabindex="-1">Sigaram Digital Marketing Agency</a></li>
+          <li><a href="https://afdc.co.in/" target="_blank" rel="noopener" tabindex="-1">AFDC</a></li>
           <li><span>Elanthalir Finance</span></li>
           <li><span>HS Properties</span></li>
         </ul>
