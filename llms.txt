@@ -16,7 +16,7 @@ Every product shares one architecture and can run on its own or alongside the ot
 
 ### Finance, Accounting & Financial Services
 
-- [Credixa — Loan & finance management software](https://aalvinai.in/products/credixa/): Enterprise finance management with daybook, ledger, loan processing, KYC, CIF, document management and full audit logging.
+- [Credexia — Loan & finance management software](https://aalvinai.in/products/credexia/): Enterprise finance management with daybook, ledger, loan processing, KYC, CIF, document management and full audit logging.
 - [Vasool — Microfinance collection app](https://aalvinai.in/products/vasool/): Microfinance collection mobile app with customer payment tracking and Bluetooth POS receipt printing in the field.
 - [ChitFlow — Chit fund management software](https://aalvinai.in/products/chitflow/): Chit fund administration, member records, contributions, installments, payment history and reporting.
 - [Billora — Billing & invoicing software](https://aalvinai.in/products/billora/): Billing, quotation creation, invoice generation, customer management and payment tracking.

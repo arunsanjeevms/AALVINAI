@@ -116,14 +116,14 @@ PRODUCTS = [
          features=["Online courses", "Assignments", "Quizzes", "Assessments", "Certificates", "Learning progress", "Instructor-led training"],
          related=["campusos", "edunex", "peoplehub"]),
 
-    dict(slug="credixa", name="Credixa", kicker="Finance Management", cat="finance", icon="ledger",
-         site="https://credixa.aalvinai.in/",
+    dict(slug="credexia", name="Credexia", kicker="Finance Management", cat="finance", icon="ledger",
+         site="https://credexia.aalvinai.in/",
          desc="Enterprise finance management with daybook, ledger, loan processing, KYC, CIF, document management and full audit logging.",
          tags=["Daybook", "Loans", "KYC & CIF"],
-         title="Credixa — Loan & Finance Management Software | AALVINAI",
+         title="Credexia — Loan & Finance Management Software | AALVINAI",
          kw="Loan & finance management software", is_a="loan and finance management software",
          audience="Finance companies and lending institutions",
-         overview=["Credixa is enterprise finance management for lending businesses: daybook and ledger accounting alongside loan processing, KYC and a customer information file (CIF). Documents are managed in the same system, and audit logging keeps a record of activity."],
+         overview=["Credexia is enterprise finance management for lending businesses: daybook and ledger accounting alongside loan processing, KYC and a customer information file (CIF). Documents are managed in the same system, and audit logging keeps a record of activity."],
          features=["Daybook", "Ledger", "Loan processing", "KYC", "Customer information file (CIF)", "Document management", "Audit logging"],
          related=["vasool", "chitflow", "docuflow"]),
     dict(slug="vasool", name="Vasool", kicker="Microfinance Collection App", cat="finance", icon="wallet",
@@ -134,7 +134,7 @@ PRODUCTS = [
          audience="Microfinance field-collection teams",
          overview=["Vasool is a mobile collection app for microfinance field teams. Agents record customer payments as they collect them and print receipts on the spot from a Bluetooth POS printer, while payment tracking keeps each customer’s account up to date."],
          features=["Field collection on mobile", "Customer payment tracking", "Bluetooth POS receipt printing"],
-         related=["credixa", "chitflow", "billora"],
+         related=["credexia", "chitflow", "billora"],
          deploy="Mobile app",
          mobile="Yes — Vasool is a mobile app built for field collection, with Bluetooth POS receipt printing."),
     dict(slug="chitflow", name="ChitFlow", kicker="Chit Fund Management", cat="finance", icon="chit",
@@ -145,7 +145,7 @@ PRODUCTS = [
          audience="Chit fund companies",
          overview=["ChitFlow manages chit fund administration end to end — member records, contributions, installments, payment history and reporting — so every chit group and member account stays accurate and easy to report on."],
          features=["Chit fund administration", "Member records", "Contributions", "Installments", "Payment history", "Reporting"],
-         related=["credixa", "vasool", "billora"]),
+         related=["credexia", "vasool", "billora"]),
     dict(slug="billora", name="Billora", kicker="Billing & Invoicing", cat="finance", icon="invoice",
          desc="Billing, quotation creation, invoice generation, customer management and payment tracking.",
          tags=["Quotations", "Invoices", "Payments"],
@@ -465,7 +465,7 @@ def render(template, **values):
 
 
 def site_host(url):
-    """https://credixa.aalvinai.in/ -> credixa.aalvinai.in"""
+    """https://credexia.aalvinai.in/ -> credexia.aalvinai.in"""
     return url.split("//", 1)[-1].rstrip("/")
 
 
