@@ -68,6 +68,7 @@ CATEGORIES = [
 #   deploy    optional; defaults to "Web · Mobile"
 #   mobile    optional answer to "Is <Name> available on mobile?"
 #   meta      optional hand-written meta description (<= 160 characters)
+#   site      optional URL of the product's own website, linked from its page
 PRODUCTS = [
     dict(slug="campusos", name="CampusOS", kicker="College ERP", cat="education", icon="campus",
          desc="Complete college management covering admissions, student records, academics, examinations, fees, faculty, placements and institutional administration.",
@@ -116,6 +117,7 @@ PRODUCTS = [
          related=["campusos", "edunex", "peoplehub"]),
 
     dict(slug="credixa", name="Credixa", kicker="Finance Management", cat="finance", icon="ledger",
+         site="https://credixa.aalvinai.in/",
          desc="Enterprise finance management with daybook, ledger, loan processing, KYC, CIF, document management and full audit logging.",
          tags=["Daybook", "Loans", "KYC & CIF"],
          title="Credixa — Loan & Finance Management Software | AALVINAI",
@@ -462,6 +464,11 @@ def render(template, **values):
     return out
 
 
+def site_host(url):
+    """https://credixa.aalvinai.in/ -> credixa.aalvinai.in"""
+    return url.split("//", 1)[-1].rstrip("/")
+
+
 def product_url(p):
     return "%s/products/%s/" % (SITE, p["slug"])
 
@@ -767,6 +774,8 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
 .pd-facts div{ display:grid; grid-template-columns:104px 1fr; gap:14px; padding:13px 0; border-top:1px solid var(--line-soft); }
 .pd-facts dt{ padding-top:2px; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--strip); }
 .pd-facts dd{ margin:0; font-size:13.5px; line-height:1.5; color:var(--ink); }
+.pd-site{ border-bottom:1px solid var(--warm-dim); transition:color .25s var(--ease); }
+.pd-site:hover{ color:var(--warm); }
 @media (max-width:900px){ .pd-hero-in{ grid-template-columns:1fr; } }
 
 /* sections */
@@ -1107,7 +1116,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
         <p class="pd-lead rv" style="--d:.1s">@@DESC@@</p>
         <div class="pd-actions rv" style="--d:.15s">
           <button type="button" class="pill" data-modal-open="contactModal">Request a walkthrough <i aria-hidden="true">&#8594;</i></button>
-          <a class="pill pill-ghost" href="../../products.html#@@CAT_SLUG@@">More in @@CAT_SHORT@@</a>
+@@SITE_BUTTON@@          <a class="pill pill-ghost" href="../../products.html#@@CAT_SLUG@@">More in @@CAT_SHORT@@</a>
         </div>
       </div>
       <aside class="pd-card rv" style="--d:.2s" aria-label="@@NAME_ATTR@@ at a glance">
@@ -1121,7 +1130,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
           <div><dt>Built for</dt><dd>@@AUDIENCE@@</dd></div>
           <div><dt>Deployment</dt><dd>@@DEPLOY@@</dd></div>
           <div><dt>Support</dt><dd>In-house team, Tamil Nadu</dd></div>
-        </dl>
+@@SITE_FACT@@        </dl>
       </aside>
     </div>
   </div>
@@ -1365,6 +1374,7 @@ def page_jsonld(num, p, meta):
             "audience": {"@type": "BusinessAudience", "audienceType": p["audience"]},
             "publisher": {"@id": SITE + "/#organization"},
             "provider": {"@id": SITE + "/#organization"},
+            **({"sameAs": [p["site"]]} if p.get("site") else {}),
             "isPartOf": {"@id": SITE + "/products.html#catalogue"},
         },
         ORG,
@@ -1450,6 +1460,10 @@ def build_page(num, p, total):
         TOTAL="%02d" % total,
         AUDIENCE=esc(p["audience"]),
         DEPLOY=esc(p.get("deploy", "Web · Mobile")),
+        SITE_BUTTON=(('          <a class="pill pill-ghost" href="%s" target="_blank" rel="noopener">Visit %s <i aria-hidden="true">&#8599;</i></a>' + chr(10))
+                     % (attr(p["site"]), esc(site_host(p["site"])))) if p.get("site") else "",
+        SITE_FACT=(('          <div><dt>Website</dt><dd><a class="pd-site" href="%s" target="_blank" rel="noopener">%s</a></dd></div>' + chr(10))
+                   % (attr(p["site"]), esc(site_host(p["site"])))) if p.get("site") else "",
         OVERVIEW="\n".join(paras),
         FEATURES=features,
         RELATED="\n".join(related),

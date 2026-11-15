@@ -89,6 +89,9 @@
       "provider": {
         "@id": "https://aalvinai.in/#organization"
       },
+      "sameAs": [
+        "https://credixa.aalvinai.in/"
+      ],
       "isPartOf": {
         "@id": "https://aalvinai.in/products.html#catalogue"
       }
@@ -300,6 +303,8 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
 .pd-facts div{ display:grid; grid-template-columns:104px 1fr; gap:14px; padding:13px 0; border-top:1px solid var(--line-soft); }
 .pd-facts dt{ padding-top:2px; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--strip); }
 .pd-facts dd{ margin:0; font-size:13.5px; line-height:1.5; color:var(--ink); }
+.pd-site{ border-bottom:1px solid var(--warm-dim); transition:color .25s var(--ease); }
+.pd-site:hover{ color:var(--warm); }
 @media (max-width:900px){ .pd-hero-in{ grid-template-columns:1fr; } }
 
 /* sections */
@@ -504,6 +509,7 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
         <p class="pd-lead rv" style="--d:.1s">Enterprise finance management with daybook, ledger, loan processing, KYC, CIF, document management and full audit logging.</p>
         <div class="pd-actions rv" style="--d:.15s">
           <button type="button" class="pill" data-modal-open="contactModal">Request a walkthrough <i aria-hidden="true">&#8594;</i></button>
+          <a class="pill pill-ghost" href="https://credixa.aalvinai.in/" target="_blank" rel="noopener">Visit credixa.aalvinai.in <i aria-hidden="true">&#8599;</i></a>
           <a class="pill pill-ghost" href="../../products.html#finance">More in Finance</a>
         </div>
       </div>
@@ -518,6 +524,7 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
           <div><dt>Built for</dt><dd>Finance companies and lending institutions</dd></div>
           <div><dt>Deployment</dt><dd>Web · Mobile</dd></div>
           <div><dt>Support</dt><dd>In-house team, Tamil Nadu</dd></div>
+          <div><dt>Website</dt><dd><a class="pd-site" href="https://credixa.aalvinai.in/" target="_blank" rel="noopener">credixa.aalvinai.in</a></dd></div>
         </dl>
       </aside>
     </div>
